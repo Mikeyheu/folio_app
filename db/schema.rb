@@ -11,7 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213160446) do
+ActiveRecord::Schema.define(:version => 20121213212632) do
+
+  create_table "galleries", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "site_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "galleries", ["site_id"], :name => "index_galleries_on_site_id"
+
+  create_table "gallery_assignments", :force => true do |t|
+    t.integer  "gallery_id"
+    t.integer  "image_id"
+    t.integer  "position",   :default => 1
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "images", :force => true do |t|
+    t.string   "name"
+    t.string   "caption"
+    t.string   "image_file"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sites", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sites", ["slug"], :name => "index_sites_on_slug", :unique => true
+  add_index "sites", ["user_id"], :name => "index_sites_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

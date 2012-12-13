@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: folio_app_development
   pool: 5
-  username: folio_app
+  username: 
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -38,18 +38,18 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: folio_app_test
-  pool: 5
-  username: folio_app
-  password:
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: folio_app_test
+#   pool: 5
+#   username:
+#   password:
 
 production:
   adapter: postgresql
   encoding: unicode
   database: folio_app_production
   pool: 5
-  username: folio_app
+  username: 
   password:

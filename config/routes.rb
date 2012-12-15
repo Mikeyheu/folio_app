@@ -1,6 +1,9 @@
 FolioApp::Application.routes.draw do
 
-  resources :sites
+  resources :galleries
+  resources :sites do
+    resources :galleries 
+  end
 
   devise_for :users
   match 'users' => 'users#index'

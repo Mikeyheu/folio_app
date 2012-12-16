@@ -1,0 +1,4 @@
+<%= form_for [@site, @image] do |f|%>
+  <%= f.file_field :image_file, multiple: true, name: "image[image_file]" %>
+  <%= hidden_field_tag :gallery_id, @gallery.id %>
+<% end %>

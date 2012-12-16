@@ -35,19 +35,15 @@ class ImagesController < ApplicationController
   end
 
   def create
-
     @image = @site.images.new(params[:image])
+    @gallery = Gallery.find(params[:gallery_id])
 
-    respond_to do |format|
-      if @image.save
-        puts params
-        @gallery = Gallery.find(params[:gallery_id])
-        rel = @gallery.gallery_assignments.new(image_id:@image.id)
-        rel.save
-        format.html { redirect_to site_gallery_path(@site,@gallery), notice: 'Image was successfully created.' }
-      else
-        format.html { render action: "new" }
-      end
+    if @image.save
+      rel = @gallery.gallery_assignments.new(image_id:@image.id)
+      rel.save
+      redirect_to site_gallery_path(@site,@gallery), notice: 'Image was successfully created.'
+    else
+      redirect_to site_gallery_path(@site,@gallery), notice: 'Image was not saved.'
     end
   end
 
@@ -73,6 +69,21 @@ class ImagesController < ApplicationController
       format.html { redirect_to images_url }
       format.json { head :no_content }
     end
+  end
+
+  def sort
+    
+    gallery = Gallery.find(params[:gallery_id])
+    array = params[:images].gsub('image[]=', '').split('&')
+    array.each_with_index do |id, index|
+      image = Image.find(id.to_i)
+      # need to find the relationship
+      gallery_assignment = image.gallery_assignments.where(gallery_id: gallery.id)
+      gallery_assignment[0].position = index
+      gallery_assignment[0].save
+    end
+
+     render :nothing => true
   end
 
   private

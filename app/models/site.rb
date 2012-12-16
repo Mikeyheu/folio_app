@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base
   belongs_to :user
   has_many :galleries, :dependent => :destroy
+  has_many :images, :dependent => :destroy
   
   extend FriendlyId
   friendly_id :name, use: :slugged

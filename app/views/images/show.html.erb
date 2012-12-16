@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @image.image_file_url(:medium).to_s %>
+
+<%= link_to 'Edit', edit_site_image_path(@site, @image) %> |
+<%= link_to 'Back', site_images_path %>

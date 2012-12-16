@@ -1,7 +1,9 @@
 FolioApp::Application.routes.draw do
 
-  resources :galleries
+  
+
   resources :sites do
+    resources :images
     resources :galleries 
   end
 
@@ -9,7 +11,6 @@ FolioApp::Application.routes.draw do
   match 'users' => 'users#index'
   match 'about' => "static_pages#about"
   root :to => "static_pages#home"
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

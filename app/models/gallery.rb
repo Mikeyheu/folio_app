@@ -1,6 +1,6 @@
 class Gallery < ActiveRecord::Base
   belongs_to :site
-  has_many :gallery_assignments
+  has_many :gallery_assignments, :dependent => :destroy
   has_many :images, :through => :gallery_assignments, :order => 'gallery_assignments.position'
 
   extend FriendlyId

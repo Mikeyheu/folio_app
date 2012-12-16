@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<% @images.each do |image| %>
-  <%= image.name %>
-<% end %>
+<%= render 'upload' %>
 
-<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+<ul>
+<% @gallery.images.each do |image| %>
+	<li><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to image.name, edit_site_image_path(@site, image) %></li>
+<% end %>
+</ul>
+<%= link_to 'Edit', edit_site_gallery_path(@site, @gallery) %> |
+<%= link_to 'Back', site_galleries_path %>

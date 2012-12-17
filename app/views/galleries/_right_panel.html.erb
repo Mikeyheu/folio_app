@@ -1,0 +1,67 @@
+<div class="right-panel">
+	<div class="navbar secondary-navbar">
+		<ul class="nav">
+			<li>
+				<a href="#" class="navbutton">
+					<div id="caret" class="nav-button">
+						<div class="icon caret-left"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+		</ul>
+		<div class= "icontext left"> <%= @gallery.name %> </div>
+		<ul class="nav nav-right">
+			<li class="divider-vertical"></li>
+			<li class="dropdown nav-button">
+				<a href="#" class="dropdown-toggle navbutton" data-toggle="dropdown" rel="tooltip" data-original-title="Add Element"><div class="icon add"></div> </a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Text Element</a></li>
+					<li><a href="#">Image Element</a></li>
+				</ul>
+			</li>   
+			<li class="divider-vertical"></li>
+			<li class="divButton">
+
+				<!-- Button to trigger modal -->
+
+				<a data-toggle="modal" href="#myModal">
+					<div id="settings" class="nav-button" rel="tooltip" data-original-title="Settings" >
+						<div class="icon settings"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li>
+				<a href="#" class="navbutton" rel="tooltip" data-original-title="View Site" >
+					<div id="view" class="nav-button" >
+						<div class="icon view"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li>
+				<a href="#" class="navbutton" rel="tooltip" rel="tooltip" data-original-title="Save">
+					<div id="save" class="nav-button" >
+						<div class="icon save"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li>
+				<a href="#" class="navbutton" rel="tooltip" data-original-title="Trash" >
+					<div id="trash" class="nav-button">
+						<div class="icon trash"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="right-inner">
+		<ul id="sortable" class="thumb_grid" data-gallery_id="<%= @gallery.id %>" data-update-url= "<%= sort_site_images_path %>">
+			<% @gallery.images.each do |image| %>
+			<li id="image_<%= image.id %>" class="drop_allowed"><div class="thumbnail"><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to 'Edit', edit_site_image_path(@site, image) %></div></li>
+			<% end %>
+		</ul>
+	</div>
+</div>

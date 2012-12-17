@@ -9,3 +9,4 @@ class Gallery < ActiveRecord::Base
   validates_presence_of :name
   attr_accessible :name, :site_id, :slug
 end
+

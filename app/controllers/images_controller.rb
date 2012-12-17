@@ -39,8 +39,17 @@ class ImagesController < ApplicationController
     @gallery = Gallery.find(params[:gallery_id])
 
     if @image.save
-      rel = @gallery.gallery_assignments.new(image_id:@image.id)
-      rel.save
+
+      # Add 1 to the position of each gallery_assignment of the gallery
+      @gallery.gallery_assignments.each do |gallery_assignment|
+        gallery_assignment.position = gallery_assignment.position + 1
+        gallery_assignment.save
+      end
+
+      # Create new gallery_assignment
+      ga = @gallery.gallery_assignments.new(image_id:@image.id)
+      ga.save
+
       redirect_to site_gallery_path(@site,@gallery), notice: 'Image was successfully created.'
     else
       redirect_to site_gallery_path(@site,@gallery), notice: 'Image was not saved.'
@@ -75,12 +84,12 @@ class ImagesController < ApplicationController
     
     gallery = Gallery.find(params[:gallery_id])
     array = params[:images].gsub('image[]=', '').split('&')
+    
     array.each_with_index do |id, index|
       image = Image.find(id.to_i)
-      # need to find the relationship
-      gallery_assignment = image.gallery_assignments.where(gallery_id: gallery.id)
-      gallery_assignment[0].position = index
-      gallery_assignment[0].save
+      ga = GalleryAssignment.find_by_gallery_id_and_image_id(gallery.id, image.id)
+      ga.position = index
+      ga.save
     end
 
      render :nothing => true

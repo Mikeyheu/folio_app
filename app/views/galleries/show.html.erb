@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'multiupload' %>
-
 <div id="upload_tracker">Upload tracker text</div>
 
-<ul id="sortable" data-gallery_id="<%= @gallery.id %>" data-update-url= "<%= sort_site_images_path %>">
-<% @gallery.images.each do |image| %>
-	<li id="image_<%= image.id %>"><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to 'Edit', edit_site_image_path(@site, image) %></li>
-<% end %>
-</ul>
-<%= link_to 'Edit', edit_site_gallery_path(@site, @gallery) %> |
-<%= link_to 'Back', site_galleries_path %>
+	<div id="content" class="content">
+
+		<%= render 'left_panel' %>
+		<%= render 'right_panel' %>
+
+		<%= link_to 'Edit', edit_site_gallery_path(@site, @gallery) %> |
+		<%= link_to 'Back', site_galleries_path %>
+
+</div>

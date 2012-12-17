@@ -15,4 +15,6 @@
 //= require jquery-ui
 //= require jquery-fileupload/basic
 //= require_tree .
-
+//= require jquery.multisortable
+//= require jquery.mjs.nestedSortable
+//= require bootstrap

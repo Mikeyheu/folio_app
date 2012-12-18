@@ -1,8 +1,8 @@
 <div class="left-panel">
   <div id="secondary-navbar" class="navbar secondary-navbar">
-    <ul class="nav">
-      <li class="dropdown nav-button-text">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon add left"></i><div class="icontext left"> Create <b class="caret"></b></div> </a>
+    <ul class="nav icon_button">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon add left"></i><div class="left secondary-nav-text"> Create <b class="caret"></b></div> </a>
         <ul class="dropdown-menu">
           <li><a href="#">Content Page</a></li>
           <li><a href="#">Gallery</a></li>
@@ -12,12 +12,13 @@
       </li>   
       <li class="divider-vertical"></li>     
     </ul>   
-    <ul class="nav">
+    <ul class="nav icon_button">
       <li>
-        <a href="#">
-          <div class="nav-button-text">
-            <div class="icon upload left"></div>
-            <div class="icontext left"> <%= render 'multiupload' %></div>
+        <a id="input_link_area" href="#">
+          <div class="input_container">
+             <%= render 'multiupload' %> 
+            <i class="icon upload left"></i>
+            <div class="left secondary-nav-text"> Upload</div>
           </div>
         </a>
       </li>

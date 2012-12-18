@@ -1,13 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div id="content" class="content">
 
-<div id="upload_tracker">Upload tracker text</div>
+	<%= render 'left_panel' %>
+	<%= render 'right_panel' %>
 
-	<div id="content" class="content">
-
-		<%= render 'left_panel' %>
-		<%= render 'right_panel' %>
-
-		<%= link_to 'Edit', edit_site_gallery_path(@site, @gallery) %> |
-		<%= link_to 'Back', site_galleries_path %>
+	<%= link_to 'Edit', edit_site_gallery_path(@site, @gallery) %> |
+	<%= link_to 'Back', site_galleries_path %>
 
 </div>

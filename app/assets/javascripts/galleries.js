@@ -17,6 +17,7 @@ jQuery(function() {
   // WINDOW RESIZE 
 
   function resize() {
+
     var primary_nav_height = $('#primary-navbar').height();
     var secondary_nav_height = $('#secondary-navbar').height();
     var tertiary_nav_height = $('#tertiary-navbar').height();
@@ -89,6 +90,16 @@ jQuery(function() {
     $(this).parent().addClass("active");
   });
 
+  // LEFT MENU DRAGGING PANEL PANES
+
+  $('#panes').layout({
+    minSize: 50, 
+    center__paneSelector: ".west-center", 
+    south__paneSelector:  ".west-south",
+    south__size:100
+  });
+
+
   // THUMBNAIL GALLERY SORTABLE CODE
 
   $('#sortable').multisortable({
@@ -140,6 +151,24 @@ jQuery(function() {
       });
     }
   });
+
+  // Click off thumbnail to deselect
+
+  $('.content').on("click", function(event){
+    if (event.target.nodeName != 'IMG') {
+      $('.thumb_grid li').removeClass('selected');
+    }
+  });
+
+  // Click upload link area and fire upload - test this!!!
+  $('#input_link_area').click(function(){
+    $('#image_image_file').click();
+  });
+
+  $('#image_image_file').click(function(e) {
+    e.stopPropagation(); // stop event bubbling
+  });
+
 });
 
 

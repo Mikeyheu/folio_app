@@ -1,49 +1,80 @@
-//@import "bootstrap";
+@import "bootstrap";
 
+/************ General CSS ************/
 
-html,body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size:14px;
-	color:#333;
-	height:100%;
-	width:100%;
-}
+html,body { height:100%; width:100%; }
+a, a:hover { text-decoration: none;}
+li { list-style: none;}
+ul, ol { padding:0; margin:0;}
 
-a {
-	text-decoration: none;
-}
+.left { float:left; }
+.right { float:right; }
 
-li {
-	list-style: none;
-}
+/************ Primary And Secondary Navigation CSS ************/
 
-a.navbutton {
-	display:block;
-	height:36px;
-	width:36px;
-}
-
-.left {
+a.logo, a.logo:hover {
+	margin-top:8px;
+	margin-left:15px;
+	margin-right:20px;
+	font-size:20px;
+	font-weight:bold;
+	color:#FFF;
 	float:left;
+	text-decoration:none;
 }
 
-.right {
-	float:right;
+.navbar {
+	margin-bottom: 0;
 }
 
-.primary-navbar {
-	height:40px;
-	background-color: #1b1b1b;
-	background-image: -moz-linear-gradient(top, #222222, #111111);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
-	background-image: -webkit-linear-gradient(top, #222222, #111111);
-	background-image: -o-linear-gradient(top, #222222, #111111);
-	background-image: linear-gradient(to bottom, #222222, #111111);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
-
+.navbar-inner {
+  min-height: 40px;
+  padding-left: 0px;
+  padding-right: 0px;
+	border: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: 0px;
+  -moz-box-shadow: 0px;
+  box-shadow: 0px;
 }
 
+/* Primary nav text */
+.navbar .nav > li > a {
+  float: none;
+  padding: 10px 15px 10px;
+  color: #999;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+/* Primary nav active text */
+.navbar-inverse .nav .active > a,
+.navbar-inverse .nav .active > a:hover,
+.navbar-inverse .nav .active > a:focus {
+	background-image:url(<%= asset_path 'caret.png' %>);
+	background-position: center bottom;
+	background-repeat: no-repeat;
+  color: #FFF;
+  background-color: #111111;
+}
+
+/* Primary nav dropdown text */
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: transparent;
+  color: #FFF;
+}
+
+/* Primary nav drop down carets */
+.navbar .nav li.dropdown:hover > .dropdown-toggle .caret {
+  border-top-color: #FFF;
+  border-bottom-color: #FFF;
+}
+
+/* Secondary nav background color and height */
 .secondary-navbar {
 	height:36px;
 	background-color: #0099ff;
@@ -56,111 +87,53 @@ a.navbutton {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0099ff', endColorstr='#ff0077dd', GradientType=0);
 }
 
-.tertiary-navbar {
-	/*bottom:0;
-	position:absolute;*/
-	height:36px;
-	background-color: #0099ff;
-	background-image: -moz-linear-gradient(top, #555555, #444444);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#444444));
-	background-image: -webkit-linear-gradient(top, #555555, #444444);
-	background-image: -o-linear-gradient(top, #555555, #444444);
-	background-image: linear-gradient(to bottom, #555555, #444444);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff555555', endColorstr='#ff444444', GradientType=0);
+/* Secondary nav text */
+.secondary-navbar .nav > li > a,
+.secondary-navbar .nav > li > a:hover {
+  float: none;
+  padding: 10px 0 10px;
+  color: #FFF;
+  text-decoration: none;
+  text-shadow: none;
 }
 
-.toolbar {
-	/*bottom:0;
-	position:absolute;*/
-	height:36px;
-	background-color: #0099ff;
-	background-image: -moz-linear-gradient(top, #555555, #444444);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#444444));
-	background-image: -webkit-linear-gradient(top, #555555, #444444);
-	background-image: -o-linear-gradient(top, #555555, #444444);
-	background-image: linear-gradient(to bottom, #555555, #444444);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff555555', endColorstr='#ff444444', GradientType=0);
-}
-
-.logo {
-	margin-top:8px;
-	margin-left:10px;
-	margin-right:44px;
-	font-size:20px;
-	font-weight:bold;
-	color:white;
-	float:left;
-}
-
-.nav {
-	list-style: none;
-	position: relative;
-	display: block;
-	float:left;
-}
-
-.nav-right {
-	float: right;
-}
-
-.nav-button {
-	width:36px;
-	height:36px;
-}
-
-.nav-button-text {
-	width:109px;
-	height:36px;
-}
-
-.icontext {
-	font-weight:normal;
-	font-size:14px;
-	margin-top:11px;
-	margin-left:20px;
-	margin-right:5px;
-	color:white;
-}
-
-.primary-nav > li {
-	height:40px;
-	margin-left:10px;
-	margin-right:10px;
-	float:left;
-}
-
-.active {
-	background-image:url(<%= asset_path 'caret.png' %>);
+/* Secondary nav active text */
+.secondary-navbar .nav .active > a,
+.secondary-navbar .nav .active > a:hover,
+.secondary-navbar .nav .active > a:focus {
+	background-image: none;
 	background-position: center bottom;
 	background-repeat: no-repeat;
+  color: #FFF;
+  background-color: transparent;
 }
 
-.primary-nav > li > a {
-	color:#FFF;
-	font-size:14px;
-	font-weight:normal;
-	text-decoration: none;
-	line-height: 40px;
+/* Secondary nav drop down Carets */
+.secondary-navbar .nav li.dropdown > .dropdown-toggle .caret, 
+.secondary-navbar .nav li.dropdown.open > .dropdown-toggle .caret {
+  border-top-color: #FFF;
+  border-bottom-color: #FFF;
 }
 
-
-.nav > li {
-	color:white;
-	/*	font-size:12px;*/
-	font-weight:normal;
-	float:left;
+/* Secondary nav divider line */
+.navbar .divider-vertical {
+	height: 36px;
+	border-left: 0;
+	margin: 0;
+	border-right: 1px solid #5bbdff;
 }
 
-.nav-text {
-	margin-top:6px;
-	margin-left:10px;
-	margin-right:10px;
-	color:white;
-	font-size:12px;
-	font-weight:normal;
-	float:left;
+.secondary-nav-text {
+	padding: 8px 0 0 10px;
+	color:#FFF
+}
+
+/************ Content and container panels CSS ************/
+
+/* For the left nav scroll pane windows */
+#panes {
+	width:220px;
+	height:100px;
 }
 
 .content {
@@ -190,30 +163,24 @@ a.navbutton {
 .right-inner {
 	position:relative;
 	overflow:scroll;
+	padding-left:20px;
+	padding-right:20px;
+	padding-top:20px;
 	height:100%;
 }
 
-.divider-vertical {
-	height: 36px;
-	border-right: 1px solid #5bbdff;
-}
+/************ Secondary Nav Panel Icons CSS Global ************/
 
-.divider-gray {
-	border-right: 1px solid #999;
+/* Override Bootstrap margins on .nav */
+.secondary-navbar .nav {
+	margin:0;
 }
 
 .icon {
-	position:relative;
-	top:10px;
-	left:10px;
 	height:16px;
 	width:16px;
-	background-image: url(<%= asset_path 'nav-icons.png' %>); /*your location of the image may differ*/
+	background-image: url(<%= asset_path 'nav-icons.png' %>); 
 }
-
-
-
-
 
 .settings {background-position:0px 0px;}
 .view {background-position:0px -16px;}
@@ -224,31 +191,59 @@ a.navbutton {
 .caret-left {background-position:0px -96px;}
 .caret-right {background-position:0px -112px;}
 .stack {background-position:0px -128px;}
-
 .content-page {background-position:-16px 0px;}
 .folder {background-position:-16px -16px;}
+.folder.open {background-position:-16px -64px;}
 .link {background-position:-16px -32px;}
 .gallery {background-position:-16px -48px;}
-
-
-#add-element:hover > .icon {background-position:-16px -80px;}
+#add_element:hover > .icon {background-position:-16px -80px;}
 #settings:hover > .icon {background-position:-16px 0px;}
 #view:hover > .icon {background-position:-16px -16px;}
 #save:hover > .icon {background-position:-16px -32px;}
 #trash:hover > .icon {background-position:-16px -48px;}
 
-#text-object {
-	position:absolute;
-	width:600px;
-	padding:20px;
-	line-height: 1.5em;
+/************ Left Panel Icons CSS ************/
+
+/* Secondary nav icon buttons for left panel */
+.secondary-navbar .nav.icon_button > li > a,
+.secondary-navbar .nav.icon_button > li > a:hover {
+  padding: 0 0 0 15px;
+  width: 94px;
+  height:36px;
+  color: #FFF;
+  text-decoration: none;
+  text-shadow: none;
 }
 
-.hide {
-	display: none;
-	height:0;
+/* Secondary nav icon buttons for left panel icon buttons */
+.secondary-navbar .nav.icon_button > li > a i.icon,
+.secondary-navbar .nav.icon_button > li > a:hover i.icon {
+  margin-top:10px;
 }
 
+/************ Right Panel Icons CSS ************/
+
+/* Make icon buttons 36px wide */
+.secondary-navbar li.icon_button a {
+	width:36px;
+}
+
+/* Move right panel icons over by 10px */
+.secondary-navbar li.icon_button a > div {
+	margin-left:10px;
+}
+
+/************ Left Nav Menu Panel CSS ************/
+
+.menu-title {
+	display: block;
+	padding: 7px 0px 5px 12px;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #999;
+	text-transform: uppercase;
+}
 
 #page-menu {
 	height:400px;
@@ -272,8 +267,6 @@ a.navbutton {
 #page-menu div:hover .folder, #archive-menu div:hover .folder, .menu-hover .folder {background-position:0px -16px;}
 #page-menu div:hover .link, #archive-menu div:hover .link, .menu-hover .link {background-position:0px -32px;}
 #page-menu div:hover .gallery, #archive-menu div:hover .gallery,  .menu-hover .gallery {background-position:0px -48px;}
-
-.folder.open {background-position:-16px -64px;}
 #page-menu div:hover .folder.open, #archive-menu div:hover .folder.open, .menu-hover .folder.open {background-position:0px -64px;}
 
 #panes a  {
@@ -282,16 +275,6 @@ a.navbutton {
 
 #panes div:hover > a {
 	color:#FFF;
-}
-
-.menu-title {
-	display: block;
-	padding: 7px 0px 5px 12px;
-	font-size: 11px;
-	font-weight: bold;
-	line-height: 20px;
-	color: #999;
-	text-transform: uppercase;
 }
 
 #page-menu div.menu-title:hover, #archive-menu div.menu-title:hover {
@@ -329,7 +312,6 @@ ol.sortable {
 
 .sortable li div  {
 	padding:5px 5px 5px 12px;
-	
 }
 
 .mjs-nestedSortable-error {
@@ -339,18 +321,13 @@ ol.sortable {
 
 .icon-nav {
 	display: inline-block;
-	/*	float:left;*/
 	width: 16px;
 	height: 16px;
 	margin-right: 5px;
-	/*	line-height: 16px;*/
 	vertical-align: text-top;
 	background-repeat: no-repeat;
 	background-image:url(<%= asset_path 'menu-icons.png' %>);
 }
-
-
-
 
 .placeholder {
 	border: 1px dashed #4183C4;
@@ -359,266 +336,42 @@ ol.sortable {
 	border-radius: 3px;
 }
 
-#draggable { position:absolute; background-color:#FFF; width: 100px; height: 100px; padding: 0.5em; margin: 10px 10px 10px 0; display: inline-block;}
-#droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
-
-
-.badge {
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 14px;
-	color: #ffffff;
-	vertical-align: baseline;
-	white-space: nowrap;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	background-color: #0099ff;
-	padding: 1px 9px 2px;
-	-webkit-border-radius: 9px;
-	-moz-border-radius: 9px;
-	border-radius: 9px;
-}
-
-#panes {
-	width:220px;
-	height:100px;
-}
-
-#box {
-	top:300px;
-	left:100px;
-	width:100px;
-	height:100px;
-	background: rgba(255, 255, 255, 0.8);
-	padding:0;
-	margin:0;
-	position:absolute;
-}
-
-.handle {
-	opacity:.5;
-}
-
-#n {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-	position:absolute;
-	top:-10px;
-	left:50%;
-	margin-left:-10px;
-
-}
-#ne {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-	position:absolute;
-	top:-10px;
-	right:-10px;
-
-}
-#nw {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-
-	position:absolute;
-	top:-10px;
-	left:-10px;
-
-}
-
-
-
-#e {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-
-	position:absolute;
-	top:50%;
-	margin-top:-10px;
-	right:-10px;
-
-}
-
-#s {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-
-	position:absolute;
-	bottom:-10px;
-	left:50%;
-	margin-left:-10px
-
-}
-
-#se {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-
-	position:absolute;
-	bottom:-10px;
-	right:-10px;
-
-}
-
-#sw {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-
-	position:absolute;
-	bottom:-10px;
-	left:-10px;
-
-}
-
-#w {
-
-	width:20px;
-	height:20px;
-	background:#AA33FF;
-
-	position:absolute;
-	top:50%;
-	margin-top:-10px;
-	left:-10px;
-
-}
-
-.element { 
-	position:absolute; 
-	width: 200px; 
-	height: 200px;
-	top:0;
-	left:0;
-	z-index:0;
-	overflow:hidden;
-	cursor:default;
-}
-
-.element img {
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-}
-
-.lines {
-	opacity:.5;
-	background-color:#AA33FF;
-	position:absolute;
-}
-
-.hline {
-	height:1px!important;
-	width:100%;
-}
-
-.hline.bottom {
-	height:1px!important;
-	bottom:0;
-	width:100%;
-}
-
-.vline {
-	width:1px!important;
-	height:100%;
-}
-
-.vline.right {
-	width:1px!important;
-	right:0px;
-	height:100%;
-}
-
-#bounding-box-border {
-	width:200px;
-	height:200px;
-	position:absolute;
-	top:300px;
-	left:40px;
-}
-
-/* Component containers */
-.ui-widget { font-family: Verdana,Arial,sans-serif; font-size: 1.1em; }
-.ui-widget .ui-widget { font-size: 1em; }
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Verdana,Arial,sans-serif; font-size: 1em; }
-.ui-widget-content { border: 0; background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #222222; }
-.ui-widget-content a { color: #222222; }
-.ui-widget-header { border: 0; background: #cccccc url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; }
-.ui-widget-header a { color: #222222; }
-
-/* Interaction states
-----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 0; background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #555555; }
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #555555; text-decoration: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #999999; background: #dadada url(images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #212121; }
-.ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited { color: #212121; text-decoration: none; }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 0; background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #212121; }
-.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; text-decoration: none; }
-
-.z-top {
-	z-index:10;
-}
-
-/* PORTFOLIO CSS    */
-
-.right-inner {
-	position:relative;
-	padding-left:20px;
-	padding-right:20px;
-	padding-top:20px;
-	height:100%;
-
-}
-
-#grid {
-	position:relative;
-	height:800px;
-	width:1080px;
-	background-color: #FFF;
-
-}
-/* Need to make this universal */
-.grid-background { 
-	background-image: -webkit-linear-gradient(rgba(0, 153, 255, .6) 1px, transparent 1px), -webkit-linear-gradient(0deg,  rgba(0, 153, 255, .6) 1px, transparent 1px), -webkit-linear-gradient(rgba(0, 153, 255, .2) 1px, transparent 1px), -webkit-linear-gradient(0deg, rgba(0, 153, 255, .2) 1px, transparent 1px);
-	background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-	background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
-}
+/************ Thumbnail Grid ************/
 
 .thumb_grid {
 	list-style: none;
-}
-
-.thumb_grid li div {
+	margin: 0; 
 	padding: 0;
 }
 
-
-
-#sortable { list-style-type: none; margin: 0; padding: 0;}
-#sortable li { margin:0px 20px 20px 0px; padding: 0; float: left; width: 120px; height: 120px; }
-/*#sortable li { margin:0; padding: 0; float: left; width: 120px; height: 120px; }*/
-
-#sortable li.selected  {}
+.thumb_grid li { 
+	margin:0px 20px 20px 0px; 
+	padding: 0; 
+	float: left; 
+	width: 120px; 
+	height: 120px; 
+}
 
 .thumbnail {
-	position:relative;
+	display: block;
+	line-height: 20px;
 	margin:0;
+	padding: 0;
+	position:relative;
 	width:120px;
 	height:120px;
 	background-color: #333;
+	border: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 
 li.selected .thumbnail { 
@@ -628,56 +381,35 @@ li.selected .thumbnail {
 	height:110px; 
 }
 
+li.selected .thumbnail img { 
+  max-height:110px;
+}
+
 .thumbnail img {
 	max-width: 100%;
 }
 
 .mh-placeholder {
-	/*border:1px;
-	border-style: dashed;
-	border-color: #0099FF;*/
 	background-color: #AAA;
 	-moz-box-shadow:    inset 0 0 6px #999;
 	-webkit-box-shadow: inset 0 0 6px #999;
 	box-shadow:         inset 0 0 6px #999;
 }
 
-.shadow {
-
+.badge {
+	background-color: #0099ff;
 }
 
-/* Offset the margin css of the li when appending to the content div*/
-/*.content > li.ui-sortable-helper {
-	margin: 20px 10px 0px 10px;
-	}*/
-
-	/* MODAL */
-
-	.divDemoBody p {
-		font-size: 18px;
-		line-height: 140%;
-		padding-top: 12px;
-	}
-
-	.divDialogElements input {
-		font-size: 18px;
-		padding: 3px; 
-		height: 32px; 
-		width: 500px; 
-	}
-
-
-.textarea-toolbar {
-	width:524px;
-	margin-top:20px;
-	resize: none; 
-
+.input_container {
+	overflow:hidden;
+	position:relative;
 }
 
-li [class^="icon-"], li [class*=" icon-"] {
-display: inline-block;
-width: 16px;
-text-align: center;
+.invisible_input {
+  position:absolute;
+	text-align: right;
+	-moz-opacity:0 ;
+	filter:alpha(opacity=0);
+	opacity: 0;
+	z-index: -1;
 }
-
-

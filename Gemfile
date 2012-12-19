@@ -9,6 +9,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'jbuilder'
 gem 'acts_as_list'
+gem 'fog' # today
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -16,6 +17,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-fileupload-rails'
   gem 'bootstrap-sass', '~> 2.2.1.1'
+end
+
+group :production do # today
+  gem 'pg'
+  gem 'thin'
 end
 
 # To use ActiveModel has_secure_password

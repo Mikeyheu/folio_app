@@ -9,7 +9,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'jbuilder'
 gem 'acts_as_list'
-gem 'fog' # today
+gem 'fog'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -19,7 +19,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.2.1.1'
 end
 
-group :production do # today
+group :production do
   gem 'pg'
   gem 'thin'
 end

@@ -1,15 +1,19 @@
 FolioApp::Application.routes.draw do
 
-  
-
-resources :sites do
-  resources :images do
-    collection do
-      post 'sort'
+  namespace :admin do
+    resources :sites do
+      resources :images do
+        collection do
+          post 'sort'
+        end
+      end
+      resources :galleries
     end
   end
-  resources :galleries 
-end
+
+  resources :sites, only: [:show] do
+    resources :galleries, only: [:show] 
+  end
 
   devise_for :users
   match 'users' => 'users#index'

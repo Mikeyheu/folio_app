@@ -1,0 +1,86 @@
+<div class="left-panel">
+  <div id="secondary-navbar" class="navbar secondary-navbar">
+    <ul class="nav icon_button">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon add left"></i><div class="left secondary-nav-text"> Create <b class="caret"></b></div> </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Content Page</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Folder(Group)</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+      </li>   
+      <li class="divider-vertical"></li>     
+    </ul>   
+    <ul class="nav icon_button">
+      <li>
+        <a id="input_link_area" href="#">
+          <div class="input_container">
+             <%= render 'multiupload' %> 
+            <i class="icon upload left"></i>
+            <div class="left secondary-nav-text"> Upload</div>
+          </div>
+        </a>
+      </li>
+      <li class="divider-vertical"></li>        
+    </ul>
+  </div>
+  <div id="panes">
+    <div id="page-menu" class="west-center">
+      <div class="menu-title">Site Pages</div>
+      <ol class="sortable">
+        <li><div><i class="icon-nav content-page"></i><a href="#">Home</a></div></li>
+        <li class="folder">
+          <div><i class="icon-nav folder"></i><a href="#">Portfolios 1</a></div>
+          <ol>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i><a href="#">Fashion</a></div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Models</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Portrait</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Advertising</div></li>
+          </ol>
+        </li>
+        <li class="folder">
+          <div><i class="icon-nav folder"></i><a href="#">Portfolios 2</a></div>
+          <ol>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i><a href="#">Weddings</a></div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Kids</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Nude</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Other</div></li>
+          </ol>
+        </li>
+        <li class="folder">
+          <div><i class="icon-nav folder"></i>About</div>
+          <ol>
+            <li><div><i class="icon-nav content-page"></i>Biography</div></li>
+            <li><div><i class="icon-nav content-page"></i>Seminars</div></li>
+          </ol>
+        </li>
+        <li><div><i class="icon-nav link"></i>Blog</div></li>
+        <li><div><i class="icon-nav content-page"></i>Contact</div></li>
+      </ol>
+    </div>
+    <div id="archive-menu" class="west-south">
+      <div class="menu-title">Galleries</div>
+      <ol class="sortable">
+        <li class="folder">
+          <div><i class="icon-nav folder"></i><a href="#">Recent Uploads</a></div>
+          <ol>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i><a href="#">10-26-2012</a></div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>10-24-2012</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>10-20-2012</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Gap Model Shoot</div></li>
+          </ol>
+        </li>
+        <li class="folder">
+          <div><i class="icon-nav folder"></i><a href="#">My Shots</a></div>
+          <ol>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i><a href="#">Fashion Random</a></div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Random</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Portraits</div></li>
+            <li><div class="dropzone"><i class="icon-nav gallery"></i>Advertising Shots</div></li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

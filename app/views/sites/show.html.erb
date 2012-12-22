@@ -1,17 +1,4 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @site.name %></h1>
 
-<table>
-<% @site.galleries.each do |gallery| %>
-	<tr>
-    <td><%= gallery.name %> | </td>
-    <td><%= link_to 'Show', site_gallery_path(@site, gallery) %></td>
-    <td><%= link_to 'Edit', edit_site_gallery_path(@site, gallery) %></td>
-    <td><%= link_to 'Destroy', site_gallery_path(@site, gallery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+This is the Viewer Site Page
 
-<%= link_to 'New Gallery', new_site_gallery_path(@site) %>
-
-<%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>

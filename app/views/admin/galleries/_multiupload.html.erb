@@ -1,0 +1,6 @@
+<div class="invisible_input">
+<%= form_for [:admin, @site, @image] do |f|%>
+  <%= f.file_field :image_file, multiple: true, name: "image[image_file]" %>
+  <%= hidden_field_tag :gallery_id, @gallery.id %>
+<% end %>
+</div>

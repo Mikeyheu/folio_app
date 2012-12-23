@@ -9,6 +9,7 @@ class Admin::GalleriesController < ApplicationController
 
   def show
     @image = Image.new
+    @pages = @site.pages
     @gallery = @site.galleries.find(params[:id])
   end
 

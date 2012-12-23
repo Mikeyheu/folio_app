@@ -68,7 +68,15 @@ jQuery(function() {
     revert: 250,
     tabSize: 25,
     tolerance: 'pointer',
-    toleranceElement: '> div'
+    toleranceElement: '> div',
+    stop: function(event, ui) {
+      $.ajax({
+        type: 'POST',
+        traditional: true,
+        url: $(this).data('update-url'),
+        data: {pages:$('ol.sortable').nestedSortable('serialize')}
+      });
+    }
   });
 
   $('li.folder ol').hide();

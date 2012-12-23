@@ -1,0 +1,21 @@
+<h1>Listing pages</h1>
+
+<ul>
+  <% @pages.order("position").each do |page| %>
+    <% unless page.parent %>
+      <li><%= page.name %></li>
+      <% unless page.subpages.empty? %>
+        <ul>
+          <% page.subpages.order("position").each do |page| %>
+              <li><%= "#{page.name} : #{page.position} "%></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New Page', new_admin_site_page_path %>
+

@@ -28,7 +28,23 @@
   <div id="panes">
     <div id="page-menu" class="west-center">
       <div class="menu-title">Site Pages</div>
-      <ol class="sortable">
+      <ol class="sortable" data-update-url="<%= sort_admin_site_pages_path %>">
+        <% @pages.order("position").each do |page| %>
+          <% unless page.parent %>
+            <li id="page_<%= page.id %>"><div><i class="icon-nav content-page"></i><a href="#"><%= page.name %></a></div>
+            <% unless page.subpages.empty? %>
+              <ol>
+                <% page.subpages.order("position").each do |page| %>
+                   <li id="page_<%= page.id %>"><div class="dropzone"><i class="icon-nav gallery"></i><a href="#"><%= page.name %></a></div></li>
+                <% end %>
+              </ol>
+            <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ol>
+    </div>
+      <!-- <ol class="sortable">
         <li><div><i class="icon-nav content-page"></i><a href="#">Home</a></div></li>
         <li class="folder">
           <div><i class="icon-nav folder"></i><a href="#">Portfolios 1</a></div>
@@ -57,11 +73,11 @@
         </li>
         <li><div><i class="icon-nav link"></i>Blog</div></li>
         <li><div><i class="icon-nav content-page"></i>Contact</div></li>
-      </ol>
-    </div>
+      </ol> -->
+    
     <div id="archive-menu" class="west-south">
       <div class="menu-title">Galleries</div>
-      <ol class="sortable">
+      <ol class="sortable" data-update-url="<%= sort_admin_site_galleries_path %>">
         <li class="folder">
           <div><i class="icon-nav folder"></i><a href="#">Recent Uploads</a></div>
           <ol>

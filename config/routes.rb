@@ -7,11 +7,21 @@ FolioApp::Application.routes.draw do
           post 'sort'
         end
       end
-      resources :galleries
+      resources :galleries do
+        collection do
+          post 'sort'
+        end
+      end
+      resources :pages do
+        collection do
+          post 'sort'
+        end
+      end
     end
   end
 
   resources :sites, only: [:show] do
+    resources :pages, only: [:index]  
     resources :galleries, only: [:show] 
   end
 

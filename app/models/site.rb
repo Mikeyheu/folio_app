@@ -1,5 +1,6 @@
 class Site < ActiveRecord::Base
   belongs_to :user
+  has_many :nav_items, :dependent => :destroy
   has_many :pages, :dependent => :destroy
   has_many :galleries, :dependent => :destroy
   has_many :images, :dependent => :destroy

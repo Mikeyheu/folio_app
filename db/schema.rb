@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223141244) do
+ActiveRecord::Schema.define(:version => 20121229020446) do
 
   create_table "galleries", :force => true do |t|
     t.string   "name"
@@ -45,14 +45,24 @@ ActiveRecord::Schema.define(:version => 20121223141244) do
 
   add_index "images", ["site_id"], :name => "index_images_on_site_id"
 
+  create_table "nav_items", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "navable_type"
+    t.integer  "navable_id"
+    t.integer  "position",     :default => 0
+    t.integer  "parent_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  add_index "nav_items", ["navable_id", "navable_type", "site_id"], :name => "index_nav_items_on_navable_id_and_navable_type_and_site_id"
+
   create_table "pages", :force => true do |t|
     t.string   "name"
-    t.integer  "position",   :default => 1
     t.integer  "site_id"
     t.string   "slug"
-    t.integer  "parent_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "sites", :force => true do |t|

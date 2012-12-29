@@ -25,6 +25,7 @@ class Admin::PagesController < ApplicationController
     @page = @site.pages.new(params[:page])
 
     if @page.save
+      @site.nav_items.create(navable:@page)
       redirect_to admin_site_pages_path, notice: 'Page was successfully created.'   
     else
       render action: "new" 

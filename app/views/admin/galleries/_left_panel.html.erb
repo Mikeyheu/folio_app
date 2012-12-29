@@ -28,14 +28,14 @@
   <div id="panes">
     <div id="page-menu" class="west-center">
       <div class="menu-title">Site Pages</div>
-      <ol class="sortable" data-update-url="<%= sort_admin_site_pages_path %>">
-        <% @pages.order("position").each do |page| %>
-          <% unless page.parent %>
-            <li id="page_<%= page.id %>"><div><i class="icon-nav content-page"></i><a href="#"><%= page.name %></a></div>
-            <% unless page.subpages.empty? %>
+      <ol class="sortable" data-update-url="<%= sort_admin_site_path %>">
+        <% @site.nav_items.order("position").each do |nav_item| %>
+          <% unless nav_item.parent %>
+            <li id="nav_item_<%= nav_item.id %>"><div><i class="icon-nav content-page"></i><a href="#"><%= nav_item.navable.class.name %><%= nav_item.navable.name %></a></div>
+            <% unless nav_item.children.empty? %>
               <ol>
-                <% page.subpages.order("position").each do |page| %>
-                   <li id="page_<%= page.id %>"><div class="dropzone"><i class="icon-nav gallery"></i><a href="#"><%= page.name %></a></div></li>
+                <% nav_item.children.order("position").each do |page| %>
+                   <li id="nav_item_<%= nav_item.id %>"><div class="dropzone"><i class="icon-nav gallery"></i><a href="#"><%= nav_item.navable.name %></a></div></li>
                 <% end %>
               </ol>
             <% end %>

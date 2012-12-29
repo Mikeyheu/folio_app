@@ -2,6 +2,9 @@ FolioApp::Application.routes.draw do
 
   namespace :admin do
     resources :sites do
+      member do
+        post 'sort'
+      end
       resources :images do
         collection do
           post 'sort'
@@ -12,11 +15,7 @@ FolioApp::Application.routes.draw do
           post 'sort'
         end
       end
-      resources :pages do
-        collection do
-          post 'sort'
-        end
-      end
+      resources :pages 
     end
   end
 

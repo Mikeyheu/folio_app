@@ -74,7 +74,7 @@ jQuery(function() {
         type: 'POST',
         traditional: true,
         url: $(this).data('update-url'),
-        data: {pages:$('ol.sortable').nestedSortable('serialize')}
+        data: {nav_items:$('ol.sortable').nestedSortable('serialize')}
       });
     }
   });

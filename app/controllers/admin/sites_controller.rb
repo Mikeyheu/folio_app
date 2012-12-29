@@ -46,6 +46,24 @@ class Admin::SitesController < ApplicationController
 		redirect_to admin_sites_path
   end
 
+  def sort
+    array = params[:nav_items].gsub('nav_item[', '').gsub(']=', ',').split('&')
+
+    array.each_with_index do |item, index|
+      a = item.split(',')
+      n = NavItem.find(a[0].to_i)
+      if a[1] == "null"
+        n.parent_id = nil
+      else 
+        n.parent_id = a[1].to_i
+      end
+      n.position = index
+      n.save
+    end
+
+    render :nothing => true
+  end
+
   private
 
   # def get_user

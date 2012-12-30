@@ -8,5 +8,5 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :name, :case_sensitive => false
   validates_presence_of :name
 
-  attr_accessible :name, :parent_id, :position, :site_id, :slug
+  attr_accessible :name, :site_id, :slug
 end

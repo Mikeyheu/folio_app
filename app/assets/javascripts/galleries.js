@@ -177,6 +177,16 @@ jQuery(function() {
     e.stopPropagation(); // stop event bubbling
   });
 
+  // Modal behavior
+
+  ($("a[data-toggle=modal]")).click(function() {
+    var target = $(this).attr('data-target');
+    var url = $(this).attr('href');
+    $(target).load(url);
+  });
+
+
+
 });
 
 

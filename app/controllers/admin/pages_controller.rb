@@ -13,6 +13,7 @@ class Admin::PagesController < ApplicationController
 
   def new
     @page = Page.new
+    render :layout => false
   end
 
   def edit
@@ -25,8 +26,15 @@ class Admin::PagesController < ApplicationController
     @page = @site.pages.new(params[:page])
 
     if @page.save
-      @site.nav_items.create(navable:@page)
-      redirect_to admin_site_pages_path, notice: 'Page was successfully created.'   
+      # insert new item after the last top level nav item
+      parents = @site.nav_items.select { |n| n.parent_id == nil }
+      last_nav_item = parents.max {|a,b| a.position <=> b.position }
+      n = @site.nav_items.new(navable:@page)
+      n.position = last_nav_item.position + 1
+      n.save
+
+      redirect_to :back
+      #redirect_to admin_site_pages_path, notice: 'Page was successfully created.'   
     else
       render action: "new" 
     end
@@ -35,7 +43,8 @@ class Admin::PagesController < ApplicationController
   def update
     @page = @site.pages.find(params[:id])
     if @page.update_attributes(params[:Page])
-			redirect_to admin_site_pages_path, notice: 'Page was successfully updated.'
+      redirect_to :back
+			#redirect_to admin_site_pages_path, notice: 'Page was successfully updated.'
     else
 			render action: "edit" 
 		end

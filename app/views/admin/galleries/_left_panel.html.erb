@@ -4,10 +4,10 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon add left"></i><div class="left secondary-nav-text"> Create <b class="caret"></b></div> </a>
         <ul class="dropdown-menu">
-          <li><a href="#">Content Page</a></li>
+          <li><%= link_to 'Page', new_admin_site_page_path, {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
           <li><a href="#">Gallery</a></li>
           <li><a href="#">Folder(Group)</a></li>
-          <li><a href="#">Link</a></li>
+          <li><%= link_to 'Link', new_admin_site_link_path, {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
         </ul>
       </li>   
       <li class="divider-vertical"></li>     

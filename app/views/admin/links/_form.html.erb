@@ -1,37 +1,36 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-  <h3 id="myModalLabel">Page</h3>
+  <h3 id="myModalLabel">Link</h3>
 </div>
 
-<%= form_for [:admin, @site, @page] do |f| %>
+<%= form_for([:admin, @site, @link]) do |f| %>
 <div class="modal-body">
-  <% if @page.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+  <% if @link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
 
-    <ul>
-      <% @page.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      <ul>
+      <% @link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
-    </ul>
-  </div>
+      </ul>
+    </div>
   <% end %>
+
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+
 </div>
 
 <div class="modal-footer">
   <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   <%= f.submit 'Submit', :class => 'btn btn-primary' %>
 </div>
-
 <% end %>
-
-
-
-
-
-
-

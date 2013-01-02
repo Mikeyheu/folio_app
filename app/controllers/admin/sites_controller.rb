@@ -9,6 +9,9 @@ class Admin::SitesController < ApplicationController
 
   def show
     @site = Site.find(params[:id])
+    @page = Page.new
+    @image = Image.new
+    @gallery = @site.galleries.first
   end
 
   def new
@@ -62,6 +65,12 @@ class Admin::SitesController < ApplicationController
     end
 
     render :nothing => true
+  end
+
+  def show_gallery
+    @site = Site.find(params[:id])
+    @gallery = @site.galleries.find(params[:gallery_id])
+    respond_to { |format| format.js }
   end
 
   private

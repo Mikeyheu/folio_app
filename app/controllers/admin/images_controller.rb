@@ -34,9 +34,8 @@ class Admin::ImagesController < ApplicationController
       ga = @gallery.gallery_assignments.new(image_id:@image.id)
       ga.save
 
-      redirect_to admin_site_gallery_path(@site,@gallery), notice: 'Image was successfully created.'
-    else
-      redirect_to admin_site_gallery_path(@site,@gallery), notice: 'Image was not saved.'
+      render :nothing => true
+      
     end
   end
 

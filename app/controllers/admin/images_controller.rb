@@ -70,6 +70,34 @@ class Admin::ImagesController < ApplicationController
      render :nothing => true
   end
 
+  def move_images
+    gallery = Gallery.find(params[:gallery_id].gsub('gallery_', '').to_i)
+    array = params[:images].gsub('image_', '').split('&')
+    array.map! { |id| id.to_i }
+
+    
+    # remove existing images if they already exist
+    array2 = gallery.images.map { |item| item.id }
+    array.keep_if { |n| !array2.include?(n) }
+
+    unless array.length == 0
+      # Add the length of the array to the position of each gallery_assignment of the gallery
+      gallery.gallery_assignments.each do |gallery_assignment|
+        gallery_assignment.position = gallery_assignment.position + array.length
+        gallery_assignment.save
+      end
+
+      array.each_with_index do |id, index|
+        image = Image.find(id.to_i)
+        ga = gallery.gallery_assignments.new(image_id:image.id)
+        ga.position = index
+        ga.save
+      end
+    end
+
+    render :nothing => true
+  end
+
   private
 
   def get_site 

@@ -149,21 +149,22 @@ jQuery(function() {
         opacity:1
       });
       $('#thumb-num').remove();
-      if(dropped_on_menu == true) {
+      if(dropped_on_menu == false) {
+        console.log('sort-images')
+        $.ajax({
+          type: 'POST',
+          traditional: true,
+          url: $('#sortable').data('update-url'),
+          data: {
+           images: $('#sortable').sortable('serialize'), 
+           gallery_id: $('#sortable').data('gallery_id')
+          }
+        });       
+      } else {
         $('#sortable').sortable('cancel');
         dropped_on_menu == false;
       }
       appended = false  
-
-      $.ajax({
-        type: 'POST',
-        traditional: true,
-        url: $('#sortable').data('update-url'),
-        data: {
-         images: $('#sortable').sortable('serialize'), 
-         gallery_id: $('#sortable').data('gallery_id')
-        }
-      });
     }
   });
 
@@ -193,6 +194,38 @@ jQuery(function() {
     $(target).load(url);
   });
 
+  // DRAGGIN BEHAVIOR TEST FOR THUMBS INTO LEFT MENU
+
+  $( ".dropzone" ).droppable({
+    hoverClass: "menu-hover",
+    tolerance: "pointer",
+    accept: '.drop_allowed',
+    over: function(event, ui) {
+    },
+    drop: function( event, ui ) {
+
+      dropped_on_menu = true;
+
+      var array = []
+      $('.selected:not(:hidden)').each(function(){
+        array.push( $(this).attr('id'))
+      });
+      var string = array.join("&");
+      console.log(string)
+
+      $.ajax({
+        type: 'POST',
+        traditional: true,
+        url: $('#sortable').data('move-images-url'),
+        data: {
+         images: string, 
+         gallery_id: $(event.target).parent().attr('id') 
+        }
+      }); 
+
+      // $('#sortable').sortable('cancel');
+    }
+  });
 
 });
 

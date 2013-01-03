@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery-ui-1.9.1.custom-mike
 //= require jquery-fileupload/basic
 //= require_tree .
 //= require jquery.multisortable

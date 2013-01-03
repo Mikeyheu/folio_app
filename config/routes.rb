@@ -9,6 +9,7 @@ FolioApp::Application.routes.draw do
       resources :images do
         collection do
           post 'sort'
+          post 'move_images'
         end
       end
       resources :galleries do

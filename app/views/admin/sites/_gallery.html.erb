@@ -58,7 +58,7 @@
 		</ul>
 	</div>
 	<div class="right-inner">
-		<ul id="sortable" class="thumb_grid" data-gallery-url="<%= show_gallery_admin_site_path(@site) %>" data-gallery_id="<%= @gallery.id %>" data-update-url= "<%= sort_admin_site_images_path(@site) %>">
+		<ul id="sortable" class="thumb_grid" data-move-images-url="<%= move_images_admin_site_images_path(@site) %>" data-gallery-url="<%= show_gallery_admin_site_path(@site) %>" data-gallery_id="<%= @gallery.id %>" data-update-url= "<%= sort_admin_site_images_path(@site) %>">
 			<% @gallery.images.each do |image| %>
 			<li id="image_<%= image.id %>" class="drop_allowed"><div class="thumbnail"><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to 'Edit', edit_admin_site_image_path(@site, image) %></div></li>
 			<% end %>

@@ -188,11 +188,16 @@ jQuery(function() {
 
   // Modal behavior
 
-  ($("a[data-toggle=modal]")).click(function() {
+  $("a[data-target=#myModal]").on('click',function(e) {
+    e.preventDefault();
     var target = $(this).attr('data-target');
     var url = $(this).attr('href');
-    $(target).load(url);
+    $(target).load(url, function(){
+      $("#myModal").modal("show"); 
+    });
   });
+
+
 
   // DRAGGIN BEHAVIOR TEST FOR THUMBS INTO LEFT MENU
 

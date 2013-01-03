@@ -1,4 +1,11 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3 id="myModalLabel"><%= @gallery.name %></h3>
+</div>
+
 <%= form_for [:admin, @site, @gallery] do |f| %>
+<div class="modal-body">
+  <%= @gallery.name %>
   <% if @gallery.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
@@ -19,5 +26,11 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  </div>
+
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+</div>
 <% end %>
 

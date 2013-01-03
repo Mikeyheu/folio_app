@@ -15,10 +15,13 @@ class Admin::GalleriesController < ApplicationController
 
   def new
     @gallery = Gallery.new
+    render :layout => false
   end
 
   def edit
     @gallery = @site.galleries.find(params[:id])
+    puts params
+    render :layout => false
   end
 
   def create

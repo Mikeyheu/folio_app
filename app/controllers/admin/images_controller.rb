@@ -52,7 +52,17 @@ class Admin::ImagesController < ApplicationController
     @image = @site.images.find(params[:id])
     @image.destroy
 
-    redirect_to admin_site_galleries_path(@site)
+    redirect_to :back
+  end
+
+  def remove
+    puts params
+    gallery = Gallery.find(params[:gallery_id])
+    image = @site.images.find(params[:id])
+    ga = GalleryAssignment.find_by_gallery_id_and_image_id(gallery.id, image.id)
+    ga.destroy
+
+    redirect_to :back
   end
 
   def sort

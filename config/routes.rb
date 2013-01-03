@@ -11,6 +11,9 @@ FolioApp::Application.routes.draw do
           post 'sort'
           post 'move_images'
         end
+        member do
+          post 'remove'
+        end
       end
       resources :galleries do
         collection do

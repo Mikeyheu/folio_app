@@ -9,9 +9,10 @@ class Admin::SitesController < ApplicationController
 
   def show
     @site = Site.find(params[:id])
+    @nav_items = @site.nav_items.includes(:navable).pos
     @page = Page.new
     @image = Image.new
-    @gallery = @site.galleries.first
+    @gallery = @site.galleries.first # Need to fix this gallery
   end
 
   def new

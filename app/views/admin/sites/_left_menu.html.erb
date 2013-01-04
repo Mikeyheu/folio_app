@@ -29,7 +29,7 @@
     <div id="page-menu" class="west-center">
       <div class="menu-title">Site Pages</div>
       <ol class="sortable" data-update-url="<%= sort_admin_site_path %>">
-        <% @site.nav_items.order("position").each do |nav_item| %>
+        <% @nav_items.each do |nav_item| %>
           <% unless nav_item.parent %>
             <li id="nav_item_<%= nav_item.id %>"><div><i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i><a href="#"><%= nav_item.navable.name %></a></div>
             <% unless nav_item.children.empty? %>

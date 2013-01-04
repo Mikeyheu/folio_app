@@ -33,11 +33,11 @@
 			</li>
 			<li class="divider-vertical"></li>
 			<li class="icon_button">
-				<a href="#" class="" rel="tooltip" data-original-title="View Site" >
-					<div id="view" class="" >
+				<%= link_to site_gallery_path(@site, @gallery) do %>
+					<div id="view" class="" rel="tooltip" data-original-title="View Site">
 						<div class="icon view"></div>
 					</div>
-				</a>
+				<% end %>
 			</li>
 			<li class="divider-vertical"></li>
 			<li class="icon_button">

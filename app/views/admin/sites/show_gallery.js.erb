@@ -88,14 +88,3 @@ $('input#gallery_id').val('<%= @gallery.id %>');
     $('.left-panel').css({ left:0 });
     resize();
   });
-
-  // Modal behavior
-
-  $("a[data-target=#myModal]").on('click',function(e) {
-    e.preventDefault();
-    var target = $(this).attr('data-target');
-    var url = $(this).attr('href');
-    $(target).load(url, function(){
-      $("#myModal").modal("show"); 
-    });
-  });

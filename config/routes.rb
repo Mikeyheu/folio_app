@@ -4,7 +4,7 @@ FolioApp::Application.routes.draw do
     resources :sites do
       member do
         post 'sort'
-        get 'show_gallery'
+
       end
       resources :images do
         collection do
@@ -26,7 +26,7 @@ FolioApp::Application.routes.draw do
   end
 
   resources :sites, only: [:show] do
-    resources :pages, only: [:index]  
+    resources :pages, only: [:index, :show]  
     resources :galleries, only: [:show] 
   end
 

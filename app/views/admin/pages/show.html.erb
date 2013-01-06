@@ -1,6 +1,63 @@
-<p id="notice"><%= notice %></p>
+<div class="right-panel">
+	<div class="navbar secondary-navbar">
+		<ul class="nav">
+			<li class="icon_button">
+				<a href="#" id="caret">
+					<div>
+						<div class="icon caret-left"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+		</ul>
+		<div class="left secondary-nav-text"> <%= @page.name %></div>
+		<ul class="nav pull-right">
+			<li class="divider-vertical"></li>
+			<li  class="dropdown icon_button">
+				<a href="#" id="add_element" class="dropdown-toggle" data-toggle="dropdown" rel="tooltip" data-original-title="Add Element"><div class="icon add"></div> </a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Text Element</a></li>
+					<li><a href="#">Image Element</a></li>
+				</ul>
+			</li>   
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
 
-<%= @page.name %>
-
-<%= link_to 'Edit', edit_admin_site_page_path(@site, @page) %> |
-<%= link_to 'Back', admin_site_pages_path %>
+				<!-- Button to trigger modal -->
+					
+				<%= link_to(edit_admin_site_page_path(@site, @page), {:remote => true, 'data-target' => "#myModal"}) do %>
+					<div id="settings" class="" rel="tooltip" data-original-title="Settings" >
+						<div class="icon settings"></div>
+					</div>
+				<% end %>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<%= link_to site_page_path(@site, @page) do %>
+					<div id="view" class="" rel="tooltip" data-original-title="View Site">
+						<div class="icon view"></div>
+					</div>
+				<% end %>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<a href="#" class="" rel="tooltip" rel="tooltip" data-original-title="Save">
+					<div id="save" class="" >
+						<div class="icon save"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<a href="#" class="" rel="tooltip" data-original-title="Trash" >
+					<div id="trash" class="">
+						<div class="icon trash"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="right-inner">
+		<h1><%= @page.name %></h1>
+	</div>
+</div>

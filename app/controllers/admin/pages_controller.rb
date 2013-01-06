@@ -8,7 +8,14 @@ class Admin::PagesController < ApplicationController
   end
 
   def show
+    @image = Image.new
+    @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
     @page = @site.pages.find(params[:id])
+    if request.headers['X-PJAX']
+      render :layout => false
+    else 
+      render layout: 'admin_content'
+    end
   end
 
   def new
@@ -18,6 +25,7 @@ class Admin::PagesController < ApplicationController
 
   def edit
     @page = @site.pages.find(params[:id])
+    render :layout => false
   end
 
   def create

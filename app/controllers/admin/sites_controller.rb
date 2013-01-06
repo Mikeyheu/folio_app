@@ -12,7 +12,7 @@ class Admin::SitesController < ApplicationController
     @nav_items = @site.nav_items.includes(:navable).pos
     @page = Page.new
     @image = Image.new
-    @gallery = @site.galleries.first # Need to fix this gallery
+    render layout: 'admin_content'
   end
 
   def new
@@ -66,12 +66,6 @@ class Admin::SitesController < ApplicationController
     end
 
     render :nothing => true
-  end
-
-  def show_gallery
-    @site = Site.find(params[:id])
-    @gallery = @site.galleries.find(params[:gallery_id])
-    respond_to { |format| format.js }
   end
 
   private

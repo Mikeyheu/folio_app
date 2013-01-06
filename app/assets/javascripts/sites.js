@@ -1,20 +1,33 @@
 jQuery(function() {
+
+  // ENABLE PJAX
+  $(document).pjax('a.pjaxified', '#pjax-container');
+
+  $(document).on('pjax:complete', function(event) {
+    resize();
+    if($('#sortable').data('gallery_id')) {
+      $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
+      $('#new_image').fileupload('enable');
+    }
+    event.preventDefault()
+  });
+
   $('#new_image').fileupload({
     dataType: 'json',
     start: function(e) {
     	// $('#upload_tracker').html('Upload in progress. Please wait.');
     },
     stop: function(e) { 
- 
-      $.ajax({
-        type: 'GET',
-        traditional: true,
-        url: $('#sortable').data('gallery-url'),
-        data: {gallery_id: $('input#gallery_id').val()}
-      });
+      $.pjax({url: $('#sortable').data('gallery-url'), container: '#pjax-container'})
     }
   });
 
+  if($('#sortable').data('gallery_id')) {
+    $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
+    $('#new_image').fileupload('enable');
+  } else {
+    $('#new_image').fileupload('disable');
+  }
 
 
    // GLOBAL VARIABLE HERE MIKE BE CAREFUL!!!
@@ -97,13 +110,14 @@ jQuery(function() {
     $(this).parent().find('ol').hide();
   });
 
-  // Stop propagation of nav link if text is clicked
-  $('#page-menu li div a').on("click", function(e) {
-    e.preventDefault;
-    e.stopPropagation();
-    $('#page-menu li div').removeClass("active");
-    $(this).parent().addClass("active");
-  });
+  // THIS CODE BREAKS PJAX - NEED TO FIDDLE WITH IT
+  // // Stop propagation of nav link if text is clicked
+  // $('#page-menu li div a').on("click", function(e) {
+  //   e.preventDefault;
+  //   e.stopPropagation();
+  //   $('#page-menu li div').removeClass("active");
+  //   $(this).parent().addClass("active");
+  // });
 
   // LEFT MENU DRAGGING PANEL PANES
 
@@ -179,7 +193,11 @@ jQuery(function() {
 
   // Click upload link area and fire upload - test this!!!
   $('#input_link_area').click(function(){
-    $('#image_image_file').click();
+    if($('#hidden_field').children().length > 0) {
+      $('#image_image_file').click();
+    } else {
+      alert("Please select or create a gallery first");
+    }
   });
 
   $('#image_image_file').click(function(e) {

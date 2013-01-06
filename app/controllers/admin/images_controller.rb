@@ -20,7 +20,14 @@ class Admin::ImagesController < ApplicationController
 
   def create
     @image = @site.images.new(params[:image])
-    @gallery = Gallery.find(params[:gallery_id])
+    if params[:gallery_id]
+      @gallery = Gallery.find(params[:gallery_id])
+    else
+      @gallery = @site.galleries.first # All Images
+      # t = Time.now
+      # @gallery = @site.galleries.new(name:"Gallery #{t.strftime("%Y-%m-%d-%H:%M")}")
+      # @gallery.save
+    end
 
     if @image.save
 
@@ -34,6 +41,7 @@ class Admin::ImagesController < ApplicationController
       ga = @gallery.gallery_assignments.new(image_id:@image.id)
       ga.save
 
+      # redirect_to admin_site_gallery_path(@site, @gallery)
       render :nothing => true
       
     end

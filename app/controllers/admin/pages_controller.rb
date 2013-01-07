@@ -9,13 +9,15 @@ class Admin::PagesController < ApplicationController
 
   def show
     @image = Image.new
-    @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
     @page = @site.pages.find(params[:id])
+    @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
+    
     if request.headers['X-PJAX']
       render :layout => false
     else 
       render layout: 'admin_content'
     end
+    
   end
 
   def new

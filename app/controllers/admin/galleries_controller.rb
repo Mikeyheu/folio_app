@@ -12,11 +12,13 @@ class Admin::GalleriesController < ApplicationController
     @page = Page.new
     @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
     @gallery = @site.galleries.find(params[:id])
+
     if request.headers['X-PJAX']
       render :layout => false
     else 
       render layout: 'admin_content' 
     end
+    
   end
 
   def new

@@ -101,6 +101,7 @@ jQuery(function() {
     helper: 'clone',
     items: 'li',
     maxLevels: 2,
+    distance: 5,
     opacity: .6,
     placeholder: 'placeholder',
     revert: 250,
@@ -108,6 +109,7 @@ jQuery(function() {
     tolerance: 'pointer',
     toleranceElement: '> div',
     stop: function(event, ui) {
+
       $.ajax({
         type: 'POST',
         traditional: true,
@@ -150,7 +152,7 @@ jQuery(function() {
     scrollSensitivity:70,
     forcePlaceholderSize: true,
     tolerance: "pointer",
-    
+    distance: 5,
     start: function(event, ui) {
       dropped_on_menu = false;
       ui.placeholder.height(120);

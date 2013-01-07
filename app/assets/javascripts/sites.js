@@ -1,54 +1,29 @@
-function resize() {
-  var primary_nav_height = $('#primary-navbar').height();
-  var secondary_nav_height = $('#secondary-navbar').height();
-  var tertiary_nav_height = $('#tertiary-navbar').height();
-  var left_menu_pos = $('.left-panel').position().left;
-  $('.content').height($(window).height() - primary_nav_height);
-  $('.right-inner').css({
-    height: $(window).height() - primary_nav_height - secondary_nav_height - tertiary_nav_height - 20
-  });
-  $('#panes').css({
-    height: $(window).height() - primary_nav_height - secondary_nav_height
-  });
-  $('.right-panel').css({
-    left: left_menu_pos + $('.left-panel').width(),
-    width: $(window).width() - $('.left-panel').width() - left_menu_pos
-  });
-}
-
 jQuery(function() {
 
-  // GLOBAL VARIABLE HERE MIKE BE CAREFUL!!!
+  // GLOBAL VARIABLES
   dropped_on_menu = false;
   appended = false;
 
-  // WINDOW RESIZE 
-  resize();
-
+  // WINDOW BIND RESIZE AND FIRE
   $(window).on("resize", function(){
     resize();
   });
+  resize();
 
-  // HTML5 Push State
-  $(document).on("click", "a.ajax", function(e){
-    e.preventDefault();
-    history.pushState(null, document.title, e.target.href);
-    $("body").addClass("historypushed");
-  });
+  // INITIALIZE GALLERY
+  galleryInit();
 
-  $(window).bind("popstate", function() {
-    if($("body").hasClass("historypushed")) { 
-      $.getScript(location.href);
-    }
-  });
+  // INITIALIZE LEFT MENU
+  leftMenuInit();
 
-  // NEED TO ADD HISTORY FALLBACK TO REMOVE REMOTE TRUE ON LINKS
+  // INITIALIZE PUSHSTATE
+  pushStateInit();
 
-  // UPLOAD BUTTON 
+  // UPLOAD IMAGES BUTTON 
   $('#new_image').fileupload({
     dataType: 'json',
     start: function(e) {
-    	// $('#upload_tracker').html('Upload in progress. Please wait.');
+      // $('#upload_tracker').html('Upload in progress. Please wait.');
     },
     stop: function(e) { 
       
@@ -82,7 +57,117 @@ jQuery(function() {
     e.stopPropagation(); // stop event bubbling
   });
 
-  // LEFT MENU PANEL SORTING
+  // Modal behavior
+
+  $("a[data-target=#myModal]").on('click',function(e) {
+    e.preventDefault();
+    var target = $(this).attr('data-target');
+    var url = $(this).attr('href');
+    $(target).load(url, function(){
+      $("#myModal").modal("show"); 
+    });
+  });
+});
+
+
+//******************* FUNCTIONS BELOW *******************//
+
+function resize() {
+  var primary_nav_height = $('#primary-navbar').height();
+  var secondary_nav_height = $('#secondary-navbar').height();
+  var tertiary_nav_height = $('#tertiary-navbar').height();
+  var left_menu_pos = $('.left-panel').position().left;
+  $('.content').height($(window).height() - primary_nav_height);
+  $('.right-inner').css({
+    height: $(window).height() - primary_nav_height - secondary_nav_height - tertiary_nav_height - 20
+  });
+  $('#panes').css({
+    height: $(window).height() - primary_nav_height - secondary_nav_height
+  });
+  $('.right-panel').css({
+    left: left_menu_pos + $('.left-panel').width(),
+    width: $(window).width() - $('.left-panel').width() - left_menu_pos
+  });
+}
+
+function galleryInit() {
+  // THUMBNAIL GALLERY SORTABLE CODE
+
+  $('#sortable').multisortable({
+    placeholder: "mh-placeholder",
+    helper: 'clone',
+    appendTo: '#content',
+    scrollSensitivity:70,
+    forcePlaceholderSize: true,
+    tolerance: "pointer",
+    distance: 5,
+    start: function(event, ui) {
+      dropped_on_menu = false;
+      ui.placeholder.height(120);
+      ui.placeholder.width(120);
+      var foo = $('<span id="thumb-num" class="badge badge-important"></span>');
+      foo.html($('.selected:not(:hidden)').length);
+      foo.css ({
+        position:'absolute',
+        right:'10px',
+        bottom:'10px'
+      });
+      ui.helper.find('div').css({
+        opacity:.6
+      });
+      ui.helper.append(foo);
+      //$('#sortable').find('li:hidden').show();
+      //$('#sortable').find('li.selected.ui-sortable-helper').show();
+    },
+    stop: function(event, ui) {
+      $('#sortable').find('li.selected').show();
+      $('#sortable').find('li.selected div').css({
+        opacity:1
+      });
+      $('#thumb-num').remove();
+      if(dropped_on_menu == false) {
+        console.log('sort-images')
+        $.ajax({
+          type: 'POST',
+          traditional: true,
+          url: $('#sortable').data('update-url'),
+          data: {
+           images: $('#sortable').sortable('serialize'), 
+           gallery_id: $('#sortable').data('gallery_id')
+          }
+        });       
+      } else {
+        $('#sortable').sortable('cancel');
+        dropped_on_menu == false;
+      }
+      appended = false  
+    }
+  });
+
+  // SLIDING PANEL CODE
+
+  $('#caret').toggle(function(){
+    $('.left-panel').css({ left:-220 });
+    $('#caret .icon').removeClass('caret-left').addClass('caret-right');
+    resize();
+  }, function(){
+    $('#caret .icon').removeClass('caret-right').addClass('caret-left');
+    $('.left-panel').css({ left:0 });
+    resize();
+  });
+
+  // Click off thumbnail to deselect
+
+  $('.content').on("click", function(event){
+    if (event.target.nodeName != 'IMG') {
+      $('.thumb_grid li').removeClass('selected');
+    }
+  });
+}
+
+
+function leftMenuInit() {
+    // LEFT MENU PANEL SORTING
 
   $('ol.sortable').nestedSortable({
     disableNesting: 'no-nest',
@@ -129,18 +214,6 @@ jQuery(function() {
     south__size:100
   });
 
-  // Modal behavior
-
-  $("a[data-target=#myModal]").on('click',function(e) {
-    e.preventDefault();
-    var target = $(this).attr('data-target');
-    var url = $(this).attr('href');
-    $(target).load(url, function(){
-      $("#myModal").modal("show"); 
-    });
-  });
-
-
   // DRAGGIN BEHAVIOR TEST FOR THUMBS INTO LEFT MENU
 
   $( ".dropzone" ).droppable({
@@ -173,7 +246,27 @@ jQuery(function() {
       // $('#sortable').sortable('cancel');
     }
   });
+}
 
-});
+function pushStateInit() {
+
+  // HTML5 PUSH STATE (NEED TO ADD FALLBACK)
+  $(document).on("click", "a.ajax", function(e){
+    e.preventDefault();
+    history.pushState(null, document.title, e.target.href);
+    $("body").addClass("historypushed");
+  });
+
+  $(window).bind("popstate", function() {
+    if($("body").hasClass("historypushed")) { 
+      $.getScript(location.href);
+    }
+  });
+}
+
+
+
+
+
 
 

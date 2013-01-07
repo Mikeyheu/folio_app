@@ -12,6 +12,12 @@ class Admin::PagesController < ApplicationController
     @page = @site.pages.find(params[:id])
     @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
     
+    # if request.headers['X-PJAX']
+    #   render :layout => false
+    # else 
+    #   render layout: 'admin_content'
+    # end
+
     respond_to do |format| 
       format.html { render layout: 'admin_content' }
       format.js {}

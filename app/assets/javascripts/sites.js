@@ -1,18 +1,32 @@
 jQuery(function() {
 
-  alert("this is loaded");
-  // ENABLE PJAX
-  $(document).pjax('a.pjaxified', '#pjax-container');
-  $.pjax.defaults.timeout = false;
 
-  $(document).on('pjax:complete', function(event) {
+  // ENABLE PJAX
+
+  if ($.support.pjax) {
+    $(document).on('click', 'a.pjaxified', function(event) {
+      var container = $(this).closest('[data-pjax-container]')
+      $.pjax.click(event, {container: '#pjax-container'})
+    });
+
+    $(document).on('pjax:complete', function(event) {
     resize();
-    if($('#sortable').data('gallery_id')) {
-      $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
-      $('#new_image').fileupload('enable');
-    }
-    event.preventDefault()
-  });
+      if($('#sortable').data('gallery_id')) {
+        $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
+        $('#new_image').fileupload('enable');
+      }
+      event.preventDefault();
+    });
+  }
+
+
+  //   // Stop propagation of nav link if text is clicked
+  // $('#page-menu li div a').on("click", function(e) {
+  //   // e.preventDefault();
+  //   e.stopPropagation();
+  //   $('#page-menu li div').removeClass("active");
+  //   $(this).parent().addClass("active");
+  // });
 
   $('#new_image').fileupload({
     dataType: 'json',
@@ -20,7 +34,9 @@ jQuery(function() {
     	// $('#upload_tracker').html('Upload in progress. Please wait.');
     },
     stop: function(e) { 
-      $.pjax({url: $('#sortable').data('gallery-url'), container: '#pjax-container'})
+      if ($.support.pjax) {
+        $.pjax({url: $('#sortable').data('gallery-url'), container: '#pjax-container'})
+      }
     }
   });
 
@@ -112,16 +128,8 @@ jQuery(function() {
     $(this).parent().find('ol').hide();
   });
 
-  // THIS CODE BREAKS PJAX - NEED TO FIDDLE WITH IT
 
-  // Not sure why but the live app is caching the js file
-  // // Stop propagation of nav link if text is clicked
-  // $('#page-menu li div a').on("click", function(e) {
-  //   e.preventDefault;
-  //   e.stopPropagation();
-  //   $('#page-menu li div').removeClass("active");
-  //   $(this).parent().addClass("active");
-  // });
+
 
   // LEFT MENU DRAGGING PANEL PANES
 

@@ -42,6 +42,8 @@ jQuery(function() {
     }
   });
 
+  // NEED TO ADD HISTORY FALLBACK TO REMOVE REMOTE TRUE ON LINKS
+
   // UPLOAD BUTTON 
   $('#new_image').fileupload({
     dataType: 'json',

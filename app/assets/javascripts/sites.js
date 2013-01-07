@@ -1,5 +1,6 @@
 jQuery(function() {
 
+  alert("this is loaded");
   // ENABLE PJAX
   $(document).pjax('a.pjaxified', '#pjax-container');
   $.pjax.defaults.timeout = false;

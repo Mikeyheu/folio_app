@@ -61,6 +61,7 @@ class Admin::ImagesController < ApplicationController
     @image.destroy
 
     redirect_to :back
+
   end
 
   def remove

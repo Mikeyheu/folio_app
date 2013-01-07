@@ -1,0 +1,60 @@
+<div class="right-panel">
+	<div class="navbar secondary-navbar">
+		<ul class="nav">
+			<li class="icon_button">
+				<a href="#" id="caret">
+					<div>
+						<div class="icon caret-left"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+		</ul>
+		<div class="left secondary-nav-text"> <%= @gallery.name %></div>
+		<ul class="nav pull-right">
+			<li class="divider-vertical"></li>
+			
+			<li class="icon_button">
+
+				<!-- Button to trigger modal -->
+					
+				<%= link_to(edit_admin_site_gallery_path(@site, @gallery), {:remote => true, 'data-target' => "#myModal"}) do %>
+					<div id="settings" class="" rel="tooltip" data-original-title="Settings" >
+						<div class="icon settings"></div>
+					</div>
+				<% end %>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<%= link_to site_gallery_path(@site, @gallery) do %>
+					<div id="view" class="" rel="tooltip" data-original-title="View Site">
+						<div class="icon view"></div>
+					</div>
+				<% end %>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<a href="#" class="" rel="tooltip" rel="tooltip" data-original-title="Save">
+					<div id="save" class="" >
+						<div class="icon save"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<a href="#" class="" rel="tooltip" data-original-title="Trash" >
+					<div id="trash" class="">
+						<div class="icon trash"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="right-inner">
+		<ul id="sortable" class="thumb_grid" data-move-images-url="<%= move_images_admin_site_images_path(@site) %>" data-gallery-url="<%= admin_site_gallery_path(@site, @gallery) %>" data-gallery_id="<%= @gallery.id %>" data-update-url= "<%= sort_admin_site_images_path(@site) %>">
+			<% @gallery.images.each do |image| %>
+			<li id="image_<%= image.id %>" class="drop_allowed"><div class="thumbnail"><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to 'Edit', edit_admin_site_image_path(@site, image) %> | <%= link_to 'Remove', remove_admin_site_image_path(@site, image, gallery_id:@gallery.id), method: :post %> | <%= link_to 'Delete', admin_site_image_path(@site, image), method: :delete, data: { confirm: 'Are you sure? This will remove the image from all galleries and lightboxes.' } %></div></li>
+			<% end %>
+		</ul>
+	</div>
+</div>

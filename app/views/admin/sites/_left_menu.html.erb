@@ -31,26 +31,16 @@
       <ol class="sortable" data-update-url="<%= sort_admin_site_path %>">
         <% @nav_items.each do |nav_item| %>
           <% unless nav_item.parent %>
-            <li id="nav_item_<%= nav_item.id %>"><div><i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i><%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: 'pjax' %></div>
+            <li id="nav_item_<%= nav_item.id %>"><div><i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i><%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: "ajax", :remote => true %></div>
             <% unless nav_item.children.empty? %>
               <ol>
                 <% nav_item.children.order("position").each do |subnav_item| %>
-                   <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone"><i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i><%= link_to subnav_item.navable.name, admin_site_page_path(@site, subnav_item.navable), class: 'pjax' %></div></li>
+                   <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone"><i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i><%= link_to subnav_item.navable.name, admin_site_page_path(@site, subnav_item.navable), class: "ajax", :remote => true %></div></li>
                 <% end %>
               </ol>
             <% end %>
             </li>
           <% end %>
-        <% end %>
-      </ol>
-      <ol >
-        <% @nav_items.each do |nav_item| %>
-          <li>
-            <div class="dropzone">
-              <i class="icon-nav folder %>"></i>
-              <%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: 'pjax' %>
-          </div>
-        </li>
         <% end %>
       </ol>
     </div>
@@ -64,7 +54,7 @@
           <li id="gallery_<%= gallery.id %>">
             <div class="dropzone">
               <i class="icon-nav gallery %>"></i>
-              <%= link_to gallery.name, admin_site_gallery_path(@site, gallery), class: 'pjax' %>
+              <%= link_to gallery.name, admin_site_gallery_path(@site, gallery), class: "ajax", :remote => true %>
           </div>
         </li>
         <% end %>

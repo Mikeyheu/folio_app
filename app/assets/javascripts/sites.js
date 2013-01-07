@@ -112,6 +112,8 @@ jQuery(function() {
   });
 
   // THIS CODE BREAKS PJAX - NEED TO FIDDLE WITH IT
+
+  // Not sure why but the live app is caching the js file
   // // Stop propagation of nav link if text is clicked
   // $('#page-menu li div a').on("click", function(e) {
   //   e.preventDefault;

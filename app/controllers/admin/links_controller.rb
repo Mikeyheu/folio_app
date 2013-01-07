@@ -20,7 +20,7 @@ class Admin::LinksController < ApplicationController
     if @link.save
       # insert new item after the last top level nav item
       n = @site.nav_items.create(navable:@link)
-      if (@site.nav_items.size > 0
+      if @site.nav_items.size > 0
         parents = @site.nav_items.select { |n| n.parent_id == nil }
         last_nav_item = parents.max {|a,b| a.position <=> b.position }
         n.position = last_nav_item.position + 1

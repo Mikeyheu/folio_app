@@ -2,20 +2,20 @@ jQuery(function() {
 
 
   // ENABLE PJAX
-
   if ($.support.pjax) {
-    $(document).on('click', 'a.pjaxified', function(event) {
-      var container = $(this).closest('[data-pjax-container]')
-      $.pjax.click(event, {container: '#pjax-container'})
-    });
+  $(document).pjax('a.pjax', '#pjax-container', { timeout: 0 });
+  
+    // $(document).on('click', 'a.pjax', function(event) {
+    //   $.pjax.click(event, {container: '#pjax-container'})
+    // });
 
     $(document).on('pjax:complete', function(event) {
     resize();
-      if($('#sortable').data('gallery_id')) {
-        $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
-        $('#new_image').fileupload('enable');
-      }
-      event.preventDefault();
+      // if($('#sortable').data('gallery_id')) {
+      //   $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
+      //   $('#new_image').fileupload('enable');
+      // }
+      // event.preventDefault();
     });
   }
 

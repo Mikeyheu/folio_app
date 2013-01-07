@@ -2,22 +2,31 @@ jQuery(function() {
 
 
   // ENABLE PJAX
-  if ($.support.pjax) {
-  $(document).pjax('a.pjax', '#pjax-container', { timeout: 0 });
-  
-    // $(document).on('click', 'a.pjax', function(event) {
-    //   $.pjax.click(event, {container: '#pjax-container'})
-    // });
 
-    $(document).on('pjax:complete', function(event) {
-    resize();
-      // if($('#sortable').data('gallery_id')) {
-      //   $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
-      //   $('#new_image').fileupload('enable');
-      // }
-      // event.preventDefault();
-    });
-  }
+ $(document).pjax('a.pjax', '#pjax-container');
+ $(document).on('pjax:timeout', function(event) {
+    // Prevent default timeout redirection behavior
+    event.preventDefault()
+  });
+
+ $('body').on('click', 'a.pjax', function(e){
+    console.log(e.target)
+ });
+  // $(document).pjax('a.pjax', '#pjax-container');
+  
+  //   // $(document).on('click', 'a.pjax', function(event) {
+  //   //   $.pjax.click(event, {container: '#pjax-container'})
+  //   // });
+
+  //   $(document).on('pjax:complete', function(event) {
+  //   resize();
+  //     // if($('#sortable').data('gallery_id')) {
+  //     //   $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
+  //     //   $('#new_image').fileupload('enable');
+  //     // }
+  //     // event.preventDefault();
+  //   });
+
 
 
   //   // Stop propagation of nav link if text is clicked

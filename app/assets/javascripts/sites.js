@@ -1,5 +1,13 @@
 jQuery(function() {
 
+  //PJAX
+
+
+  $(document).pjax('a.ajax', '#pjax-container');
+  $(document).on('pjax:complete', function() {
+    resize();
+  })
+
   // GLOBAL VARIABLES
   dropped_on_menu = false;
   appended = false;
@@ -17,7 +25,7 @@ jQuery(function() {
   leftMenuInit();
 
   // INITIALIZE PUSHSTATE
-  pushStateInit();
+  //pushStateInit();
 
   // UPLOAD IMAGES BUTTON 
   $('#new_image').fileupload({
@@ -248,21 +256,21 @@ function leftMenuInit() {
   });
 }
 
-function pushStateInit() {
+// function pushStateInit() {
 
-  // HTML5 PUSH STATE (NEED TO ADD FALLBACK)
-  $(document).on("click", "a.ajax", function(e){
-    e.preventDefault();
-    history.pushState(null, document.title, e.target.href);
-    $("body").addClass("historypushed");
-  });
+//   // HTML5 PUSH STATE (NEED TO ADD FALLBACK)
+//   $(document).on("click", "a.ajax", function(e){
+//     e.preventDefault();
+//     history.pushState(null, document.title, e.target.href);
+//     $("body").addClass("historypushed");
+//   });
 
-  $(window).bind("popstate", function() {
-    if($("body").hasClass("historypushed")) { 
-      $.getScript(location.href);
-    }
-  });
-}
+//   $(window).bind("popstate", function() {
+//     if($("body").hasClass("historypushed")) { 
+//       $.getScript(location.href);
+//     }
+//   });
+// }
 
 
 

@@ -2,6 +2,7 @@ jQuery(function() {
 
   // ENABLE PJAX
   $(document).pjax('a.pjaxified', '#pjax-container');
+  $.pjax.defaults.timeout = false;
 
   $(document).on('pjax:complete', function(event) {
     resize();

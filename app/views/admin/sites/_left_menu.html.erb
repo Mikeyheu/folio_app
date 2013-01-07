@@ -43,6 +43,16 @@
           <% end %>
         <% end %>
       </ol>
+      <ol >
+        <% @nav_items.each do |nav_item| %>
+          <li>
+            <div class="dropzone">
+              <i class="icon-nav folder %>"></i>
+              <%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: 'pjax' %>
+          </div>
+        </li>
+        <% end %>
+      </ol>
     </div>
       
     

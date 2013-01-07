@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-1.9.1.custom-mike
-//= require jquery.pjax
 //= require jquery-fileupload/basic
 //= require_tree .
 //= require jquery.multisortable
 //= require jquery.mjs.nestedSortable
 //= require jquery.layout-latest
 //= require bootstrap
+//= require jquery.pjax

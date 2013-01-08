@@ -1,86 +1,43 @@
 $(function() {
 
-  //PJAX
-
-
-  $(document).pjax('a.ajax', '#pjax-container');
-  $(document).pjax('a[data-pjax]', '#pjax-container');
-  $(document).on('pjax:complete', function() {
-    resize();
-  });
-  $.pjax.defaults.timeout = false;
-
   // GLOBAL VARIABLES
   dropped_on_menu = false;
   appended = false;
 
+  //PJAX INIT
+  pjaxInit();
+
+  // INITIALIZE PUSHSTATE
+  //pushStateInit();
+
   // WINDOW BIND RESIZE AND FIRE
-  $(window).on("resize", function(){
-    resize();
-  });
-  resize();
+  windowInit();
 
   // INITIALIZE GALLERY
   galleryInit();
 
   // INITIALIZE LEFT MENU
   leftMenuInit();
+  
+  // INITIALIZE UPLOAD BUTTON
+  uploadButtonInit();
 
-  // INITIALIZE PUSHSTATE
-  //pushStateInit();
-
-  // UPLOAD IMAGES BUTTON 
-  $('#new_image').fileupload({
-    dataType: 'json',
-    start: function(e) {
-      // $('#upload_tracker').html('Upload in progress. Please wait.');
-    },
-    stop: function(e) { 
-      
-      $.ajax({
-          type: 'GET',
-          traditional: true,
-          url: $('#sortable').data('gallery-url')
-        });   
-      
-    }
-  });
-
-  //  // Upload Button 
-  // if($('#sortable').data('gallery_id')) {
-  //   $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
-  //   $('#new_image').fileupload('enable');
-  // } else {
-  //   $('#new_image').fileupload('disable');
-  // }
-
-    // Click upload link area and fire upload - test this!!!
-  $('#input_link_area').click(function(){
-    if($('#hidden_field').children().length > 0) {
-      $('#image_image_file').click();
-    } else {
-      alert("Please select or create a gallery first");
-    }
-  });
-
-    $('#image_image_file').click(function(e) {
-    e.stopPropagation(); // stop event bubbling
-  });
+  // INITIALIZE UPLOAD
+  uploadInit();
 
   // Modal behavior
-
-  $("a[data-target=#myModal]").on('click',function(e) {
-    e.preventDefault();
-    var target = $(this).attr('data-target');
-    var url = $(this).attr('href');
-    $(target).load(url, function(){
-      $("#myModal").modal("show"); 
-    });
-  });
+  modalInit();
 });
 
 
 //******************* FUNCTIONS BELOW *******************//
+
+function windowInit() {
+  $(window).on("resize", function(){
+    resize();
+  });
+  resize();
+}
 
 function resize() {
   var primary_nav_height = $('#primary-navbar').height();
@@ -177,8 +134,8 @@ function galleryInit() {
 
 
 function leftMenuInit() {
-    // LEFT MENU PANEL SORTING
 
+  // LEFT MENU PANEL SORTING
   $('ol.sortable').nestedSortable({
     disableNesting: 'no-nest',
     forcePlaceholderSize: true,
@@ -203,7 +160,8 @@ function leftMenuInit() {
       });
     }
   });
-
+  
+  // FOLDER BEHAVIOR
   $('li.folder ol').hide();
 
   $('li.folder div:first-child').toggle(function(){
@@ -216,7 +174,6 @@ function leftMenuInit() {
   });
 
   // LEFT MENU DRAGGING PANEL PANES
-
   $('#panes').layout({
     minSize: 50, 
     center__paneSelector: ".west-center", 
@@ -225,7 +182,6 @@ function leftMenuInit() {
   });
 
   // DRAGGIN BEHAVIOR TEST FOR THUMBS INTO LEFT MENU
-
   $( ".dropzone" ).droppable({
     hoverClass: "menu-hover",
     tolerance: "pointer",
@@ -258,21 +214,84 @@ function leftMenuInit() {
   });
 }
 
-// function pushStateInit() {
+function uploadButtonInit() {
+  // FILE UPLOAD BUTTON INIT 
+  $('#new_image').fileupload({
+    dataType: 'json',
+    start: function(e) {
+      // $('#upload_tracker').html('Upload in progress. Please wait.');
+    },
+    stop: function(e) { 
+      $.ajax({
+          type: 'GET',
+          traditional: true,
+          url: $('#sortable').data('gallery-url')
+        });    
+    }
+  });
 
-//   // HTML5 PUSH STATE (NEED TO ADD FALLBACK)
-//   $(document).on("click", "a.ajax", function(e){
-//     e.preventDefault();
-//     history.pushState(null, document.title, e.target.href);
-//     $("body").addClass("historypushed");
-//   });
+  // CLICK UPLOAD LINK AREA TO FIRE UPLOAD OR ALERT ERROR
+  $('#input_link_area').click(function(){
+    if($('#hidden_field').children().length > 0) {
+      $('#image_image_file').click();
+    } else {
+      alert("Please select or create a gallery first");
+    }
+  });
 
-//   $(window).bind("popstate", function() {
-//     if($("body").hasClass("historypushed")) { 
-//       $.getScript(location.href);
-//     }
-//   });
-// }
+    $('#image_image_file').click(function(e) {
+    e.stopPropagation(); // stop event bubbling
+  });
+}
+
+function uploadInit() {
+   // Upload Button 
+  if($('#sortable').data('gallery_id')) {
+    $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
+    $('#new_image').fileupload('enable');
+  } else {
+    $('#new_image').fileupload('disable');
+    $('#hidden_field').empty();
+    
+  }
+}
+
+function pjaxInit() {
+  $(document).pjax('a.ajax', '#pjax-container');
+  $(document).on('pjax:complete', function() {
+    resize();
+    galleryInit();
+    uploadInit();
+  });
+  $.pjax.defaults.timeout = false;
+}
+
+function modalInit() {
+  $("a[data-target=#myModal]").on('click',function(e) {
+    e.preventDefault();
+    var target = $(this).attr('data-target');
+    var url = $(this).attr('href');
+    $(target).load(url, function(){
+      $("#myModal").modal("show"); 
+    });
+  });
+}
+
+function pushStateInit() {
+
+  // HTML5 PUSH STATE (NEED TO ADD FALLBACK)
+  $(document).on("click", "a.ajax", function(e){
+    e.preventDefault();
+    history.pushState(null, document.title, e.target.href);
+    $("body").addClass("historypushed");
+  });
+
+  $(window).bind("popstate", function() {
+    if($("body").hasClass("historypushed")) { 
+      $.getScript(location.href);
+    }
+  });
+}
 
 
 

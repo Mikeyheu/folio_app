@@ -35,7 +35,6 @@ class Admin::GalleriesController < ApplicationController
 
   def edit
     @gallery = @site.galleries.find(params[:id])
-    puts params
     render :layout => false
   end
 

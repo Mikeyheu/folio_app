@@ -5,8 +5,8 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon add left"></i><div class="left secondary-nav-text"> Create <b class="caret"></b></div> </a>
         <ul class="dropdown-menu">
           <li><%= link_to 'Page', new_admin_site_page_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
-          <li><a href="#">Gallery</a></li>
-          <li><a href="#">Folder(Group)</a></li>
+          <li><%= link_to 'Gallery', new_admin_site_gallery_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
+          <li><%= link_to 'Folder', new_admin_site_folder_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
           <li><%= link_to 'Link', new_admin_site_link_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
         </ul>
       </li>   
@@ -31,11 +31,32 @@
       <ol class="sortable" data-update-url="<%= sort_admin_site_path %>">
         <% @nav_items.each do |nav_item| %>
           <% unless nav_item.parent %>
-            <li id="nav_item_<%= nav_item.id %>"><div><i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i><%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), :'data-pjax' => '#pjax-container' %></div>
+
+          <li id="nav_item_<%= nav_item.id %>" class="<%= icon(nav_item.navable.class.name) %>">
+            <div>
+              <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
+              <% if nav_item.navable.class.name == "Page" %>
+                <%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: "ajax" %>
+              <% elsif  nav_item.navable.class.name == "Link" %>
+                <%= nav_item.navable.name %>
+              <% else %>
+                <%= nav_item.navable.name %>
+              <% end %>
+            </div>
             <% unless nav_item.children.empty? %>
               <ol>
                 <% nav_item.children.order("position").each do |subnav_item| %>
-                   <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone"><i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i><%= link_to subnav_item.navable.name, admin_site_page_path(@site, subnav_item.navable), :'data-pjax' => '#pjax-container' %></div></li>
+                  <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone">
+                    <i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i>
+                    <% if subnav_item.navable.class.name == "Page" %>
+                      <%= link_to subnav_item.navable.name, admin_site_page_path(@site, subnav_item.navable), class: "ajax" %>
+                    <% elsif  subnav_item.navable.class.name == "Link" %>
+                      <%= subnav_item.navable.name %>
+                    <% else %>
+                      <%= subnav_item.navable.name %>
+                    <% end %>
+                   </div>
+                 </li>
                 <% end %>
               </ol>
             <% end %>

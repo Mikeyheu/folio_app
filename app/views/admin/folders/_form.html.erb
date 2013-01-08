@@ -1,16 +1,16 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-  <h3 id="myModalLabel">Gallery</h3>
+  <h3 id="myModalLabel">Folder</h3>
 </div>
 
-<%= form_for([:admin, @site, @gallery]) do |f| %>
+<%= form_for([:admin, @site, @folder]) do |f| %>
 <div class="modal-body">
-  <% if @gallery.errors.any? %>
+  <% if @folder.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
 
       <ul>
-      <% @collection.errors.full_messages.each do |msg| %>
+      <% @folder.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -22,11 +22,10 @@
     <%= f.text_field :name %>
   </div>
 
-  </div>
+</div>
 
 <div class="modal-footer">
   <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   <%= f.submit 'Submit', :class => 'btn btn-primary' %>
 </div>
 <% end %>
-

@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function(){
 
   // GLOBAL VARIABLES
   dropped_on_menu = false;
@@ -262,6 +262,11 @@ function pjaxInit() {
     resize();
     galleryInit();
     uploadInit();
+  });
+
+  $(document).on('pjax:beforeSend', function() {
+    console.log('pjax fired this');
+    return false;
   });
   $.pjax.defaults.timeout = false;
 }

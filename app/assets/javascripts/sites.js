@@ -6,7 +6,8 @@ jQuery(function() {
   $(document).pjax('a.ajax', '#pjax-container');
   $(document).on('pjax:complete', function() {
     resize();
-  })
+  });
+  $(document).pjax.defaults.timeout = false;
 
   // GLOBAL VARIABLES
   dropped_on_menu = false;

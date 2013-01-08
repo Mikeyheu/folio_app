@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include ActionView::Helpers::UrlHelper
 
 	def icon(class_name)
 		case class_name
@@ -9,13 +10,14 @@ module ApplicationHelper
 	  end
 	end
 
-	def navlink(item)
+	def navlink(site,item)
 
 		class_name = item.class.name
 
-		case class_name
-      when "Page" then "#{link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: 'ajax'}"
-      else "#{nav_item.navable.name}"
+    if class_name ==  "Page" 
+    	link_to item.name, admin_site_page_path(site, item), class: 'ajax'
+    else 
+      item.name
 	  end
 	end
 

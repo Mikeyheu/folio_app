@@ -35,26 +35,14 @@
           <li id="nav_item_<%= nav_item.id %>" class="<%= icon(nav_item.navable.class.name) %>">
             <div>
               <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
-              <% if nav_item.navable.class.name == "Page" %>
-                <%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: "ajax" %>
-              <% elsif  nav_item.navable.class.name == "Link" %>
-                <%= nav_item.navable.name %>
-              <% else %>
-                <%= nav_item.navable.name %>
-              <% end %>
+              <%=  navlink(@site,nav_item.navable) %>
             </div>
             <% unless nav_item.children.empty? %>
               <ol>
                 <% nav_item.children.order("position").each do |subnav_item| %>
                   <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone">
                     <i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i>
-                    <% if subnav_item.navable.class.name == "Page" %>
-                      <%= link_to subnav_item.navable.name, admin_site_page_path(@site, subnav_item.navable), class: "ajax" %>
-                    <% elsif  subnav_item.navable.class.name == "Link" %>
-                      <%= subnav_item.navable.name %>
-                    <% else %>
-                      <%= subnav_item.navable.name %>
-                    <% end %>
+                    <%=  navlink(@site,subnav_item.navable) %>
                    </div>
                  </li>
                 <% end %>

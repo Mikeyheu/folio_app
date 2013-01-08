@@ -10,8 +10,6 @@ gem 'mini_magick'
 gem 'jbuilder'
 gem 'acts_as_list'
 gem 'fog'
-gem 'paloma'
-
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

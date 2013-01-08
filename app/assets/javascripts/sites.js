@@ -263,11 +263,6 @@ function pjaxInit() {
     galleryInit();
     uploadInit();
   });
-
-  $(document).on('pjax:beforeSend', function() {
-    console.log('pjax fired this');
-    return false;
-  });
   $.pjax.defaults.timeout = false;
 }
 

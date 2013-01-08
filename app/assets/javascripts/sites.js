@@ -4,6 +4,7 @@ $(function() {
 
 
   $(document).pjax('a.ajax', '#pjax-container');
+  $(document).pjax('a[data-pjax]', '#pjax-container');
   $(document).on('pjax:complete', function() {
     resize();
   });

@@ -31,11 +31,11 @@
       <ol class="sortable" data-update-url="<%= sort_admin_site_path %>">
         <% @nav_items.each do |nav_item| %>
           <% unless nav_item.parent %>
-            <li id="nav_item_<%= nav_item.id %>"><div><i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i><%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), class: "ajax" %></div>
+            <li id="nav_item_<%= nav_item.id %>"><div><i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i><%= link_to nav_item.navable.name, admin_site_page_path(@site, nav_item.navable), :'data-pjax' => '#pjax-container' %></div>
             <% unless nav_item.children.empty? %>
               <ol>
                 <% nav_item.children.order("position").each do |subnav_item| %>
-                   <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone"><i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i><%= link_to subnav_item.navable.name, admin_site_page_path(@site, subnav_item.navable), class: "ajax"%></div></li>
+                   <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone"><i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i><%= link_to subnav_item.navable.name, admin_site_page_path(@site, subnav_item.navable), :'data-pjax' => '#pjax-container' %></div></li>
                 <% end %>
               </ol>
             <% end %>

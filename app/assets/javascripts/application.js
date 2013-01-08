@@ -18,5 +18,5 @@
 //= require jquery.multisortable
 //= require jquery.mjs.nestedSortable
 //= require jquery.layout-latest
-//= require bootstrap
+
 //= require jquery.pjax

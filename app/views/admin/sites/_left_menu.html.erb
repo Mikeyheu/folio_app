@@ -41,7 +41,7 @@
             <% unless nav_item.children.empty? %>
               <ol>
                 <% nav_item.children.order("position").each do |subnav_item| %>
-                  <li id="nav_item_<%= subnav_item.id %>"><div class="dropzone">
+                  <li id="nav_item_<%= subnav_item.id %>"><div>
                     <i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i>
                     <%= navlink(@site,subnav_item.navable) %>
                     <a href="#" class="close-button"><i class="icon-nav menu-close"></i></a>

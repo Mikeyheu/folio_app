@@ -163,12 +163,11 @@ function leftMenuInit() {
   // FOLDER BEHAVIOR
   $('li.folder ol').hide();
 
-  $('li.folder div:first-child').toggle(function(){
-    $( this ).find('i').addClass("open");
+  $('li.folder div:first').toggle(function(){
+    $(this).find('i:first').addClass('open');
     $(this).parent().find('ol').show();
   }, function(){
-    console.log("hide");
-    $( this ).find('i').removeClass("open");
+    $(this).find('i:first').removeClass('open');
     $(this).parent().find('ol').hide();
   });
 

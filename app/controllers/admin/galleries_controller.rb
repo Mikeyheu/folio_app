@@ -59,7 +59,7 @@ class Admin::GalleriesController < ApplicationController
   def destroy
     @gallery = @site.galleries.find(params[:id])
     @gallery.destroy
-    redirect_to admin_site_galleries_path 
+    redirect_to admin_site_path(@site)
   end
 
   private

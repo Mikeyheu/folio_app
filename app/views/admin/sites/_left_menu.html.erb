@@ -36,7 +36,8 @@
             <div>
               <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
               <%=  navlink(@site,nav_item.navable) %>
-              <a href="#" class="close-button"><i class="icon-nav menu-close"></i></a>
+              <%= deletelink(@site, nav_item.navable) %>
+              
             </div>
             <% unless nav_item.children.empty? %>
               <ol>
@@ -44,7 +45,7 @@
                   <li id="nav_item_<%= subnav_item.id %>"><div>
                     <i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i>
                     <%= navlink(@site,subnav_item.navable) %>
-                    <a href="#" class="close-button"><i class="icon-nav menu-close"></i></a>
+                    <%= deletelink(@site, subnav_item.navable) %>
                    </div>
                  </li>
                 <% end %>
@@ -68,7 +69,8 @@
               <div class="menu-container">
               <%= link_to gallery.name, admin_site_gallery_path(@site, gallery), class: "ajax" %>
             </div>
-              <a href="#" class="close-button"><i class="icon-nav menu-close"></i></a>
+            <%= deletelink(@site, gallery) %>
+              
           </div>
         </li>
         <% end %>

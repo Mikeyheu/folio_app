@@ -44,7 +44,7 @@ class Admin::FoldersController < ApplicationController
   def destroy
     @folder = @site.folders.find(params[:id])
     @folder.destroy
-    redirect_to admin_site_path
+    redirect_to admin_site_path(@site)
   end
 
   private

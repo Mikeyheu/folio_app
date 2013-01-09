@@ -21,4 +21,19 @@ module ApplicationHelper
 	  end
 	end
 
+  def deletelink(site, item)
+
+    class_name = item.class.name
+
+    if class_name ==  "Page" 
+      link_to '<i class="icon-nav menu-close"></i>'.html_safe, admin_site_page_path(site, item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'close-button'
+    elsif class_name ==  "Link" 
+      link_to '<i class="icon-nav menu-close"></i>'.html_safe, admin_site_link_path(site, item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'close-button'
+    elsif class_name ==  "Folder" 
+      link_to '<i class="icon-nav menu-close"></i>'.html_safe, admin_site_folder_path(site, item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'close-button'
+    elsif class_name ==  "Gallery" 
+      link_to '<i class="icon-nav menu-close"></i>'.html_safe, admin_site_gallery_path(site, item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'close-button'
+    end
+  end
+
 end

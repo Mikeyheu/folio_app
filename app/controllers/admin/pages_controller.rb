@@ -72,7 +72,7 @@ class Admin::PagesController < ApplicationController
   def destroy
     @page = @site.pages.find(params[:id])
     @page.destroy
-		redirect_to admin_site_pages_path
+		redirect_to admin_site_path(@site)
   end
 
 def sort

@@ -47,7 +47,7 @@ class Admin::LinksController < ApplicationController
   def destroy
     @link = @site.links.find(params[:id])
     @link.destroy
-		redirect_to admin_site_path
+		redirect_to admin_site_path(@site)
   end
 
   private

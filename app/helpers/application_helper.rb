@@ -36,4 +36,19 @@ module ApplicationHelper
     end
   end
 
+  def settingslink(site, item)
+
+    class_name = item.class.name
+
+    if class_name ==  "Page" 
+      link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_page_path(site, item), {:remote => true, 'data-target' => "#myModal", class: 'settings-button'}
+    elsif class_name ==  "Link" 
+      link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_link_path(site, item), {:remote => true, 'data-target' => "#myModal", class: 'settings-button'}
+    elsif class_name ==  "Folder" 
+      link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_folder_path(site, item), {:remote => true, 'data-target' => "#myModal", class: 'settings-button'}
+    elsif class_name ==  "Gallery" 
+      link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_gallery_path(site, item), {:remote => true, 'data-target' => "#myModal", class: 'settings-button'}
+    end
+  end
+
 end

@@ -36,6 +36,7 @@
             <div>
               <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
               <%=  navlink(@site,nav_item.navable) %>
+              <%= settingslink(@site, nav_item.navable) %>
               <%= deletelink(@site, nav_item.navable) %>
               
             </div>
@@ -45,7 +46,9 @@
                   <li id="nav_item_<%= subnav_item.id %>"><div>
                     <i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i>
                     <%= navlink(@site,subnav_item.navable) %>
+                    <%= settingslink(@site, subnav_item.navable) %>
                     <%= deletelink(@site, subnav_item.navable) %>
+
                    </div>
                  </li>
                 <% end %>
@@ -69,6 +72,7 @@
               <div class="menu-container">
               <%= link_to gallery.name, admin_site_gallery_path(@site, gallery), class: "ajax" %>
             </div>
+            <%= settingslink(@site, gallery) %>
             <%= deletelink(@site, gallery) %>
               
           </div>

@@ -16,6 +16,7 @@ class Admin::ImagesController < ApplicationController
 
   def edit
     @image = @site.images.find(params[:id])
+    render :layout => false
   end
 
   def create
@@ -50,7 +51,7 @@ class Admin::ImagesController < ApplicationController
   def update
     @image = @site.images.find(params[:id])
       if @image.update_attributes(params[:image])
-        redirect_to admin_site_image_path(@site,@image), notice: 'Image was successfully updated.' 
+        redirect_to admin_site_image_path(@site,@image)#, notice: 'Image was successfully updated.' 
       else
         render action: "edit" 
       end
@@ -65,13 +66,15 @@ class Admin::ImagesController < ApplicationController
   end
 
   def remove
-    puts params
     gallery = Gallery.find(params[:gallery_id])
-    image = @site.images.find(params[:id])
-    ga = GalleryAssignment.find_by_gallery_id_and_image_id(gallery.id, image.id)
+    @image = @site.images.find(params[:id])
+    ga = GalleryAssignment.find_by_gallery_id_and_image_id(gallery.id, @image.id)
     ga.destroy
 
-    redirect_to :back
+    respond_to do |format|
+      format.js {}
+    end
+
   end
 
   def sort

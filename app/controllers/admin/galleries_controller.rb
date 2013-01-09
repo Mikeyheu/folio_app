@@ -41,7 +41,7 @@ class Admin::GalleriesController < ApplicationController
   def create
     @gallery = @site.galleries.new(params[:gallery])
     if @gallery.save
-      redirect_to admin_site_gallery_path(@site,@gallery), notice: 'Gallery was successfully created.' 
+      redirect_to admin_site_gallery_path(@site,@gallery) #, notice: 'Gallery was successfully updated.'
     else
       render action: "new" 
     end
@@ -50,7 +50,7 @@ class Admin::GalleriesController < ApplicationController
   def update
     @gallery = @site.galleries.find(params[:id])
     if @gallery.update_attributes(params[:gallery])
-      redirect_to admin_site_gallery_path(@site,@gallery), notice: 'Gallery was successfully updated.'
+      redirect_to admin_site_gallery_path(@site,@gallery) #, notice: 'Gallery was successfully updated.'
     else
       render action: "edit" 
     end

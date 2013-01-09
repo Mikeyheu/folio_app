@@ -39,10 +39,14 @@ class Admin::FoldersController < ApplicationController
 
   def edit
     @folder = @site.folders.find(params[:id])
+    render :layout => false
   end
 
   def destroy
     @folder = @site.folders.find(params[:id])
+    @folder.nav_items.each do |nav_item|
+      nav_item.parent_id = nil
+    end
     @folder.destroy
     redirect_to admin_site_path(@site)
   end

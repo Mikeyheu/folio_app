@@ -10,6 +10,7 @@ class Admin::LinksController < ApplicationController
 
   def edit
     @link = @site.links.find(params[:id])
+    render :layout => false
   end
 
   def create

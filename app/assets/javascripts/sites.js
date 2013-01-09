@@ -149,8 +149,14 @@ function leftMenuInit() {
     tabSize: 25,
     tolerance: 'pointer',
     toleranceElement: '> div',
+    start: function(event, ui) {
+       if (ui.item.attr('class') == 'folder') {
+        console.log('folder');
+        $('ol.sortable li').addClass('no-nest');
+       }
+    },
     stop: function(event, ui) {
-
+      $('ol.sortable li').removeClass('no-nest');
       $.ajax({
         type: 'POST',
         traditional: true,
@@ -163,20 +169,22 @@ function leftMenuInit() {
   // FOLDER BEHAVIOR
   $('li.folder ol').hide();
 
-  $('li.folder div:first').toggle(function(){
-    $(this).find('i:first').addClass('open');
-    $(this).parent().find('ol').show();
-  }, function(){
-    $(this).find('i:first').removeClass('open');
-    $(this).parent().find('ol').hide();
+  $('li.folder div:first-child').on('click',function(){   
+    if ($(this).find('i:first').hasClass('open')) {
+      $(this).find('i:first').removeClass('open');
+      $(this).parent().find('ol').hide();
+    } else {
+      $(this).find('i:first').addClass('open');
+      $(this).parent().find('ol').show();
+    }
   });
-
+    
   // LEFT MENU DRAGGING PANEL PANES
   $('#panes').layout({
     minSize: 50, 
     center__paneSelector: ".west-center", 
     south__paneSelector:  ".west-south",
-    south__size:100
+    south__size:$('#panes').height()/2
   });
 
   // DRAGGIN BEHAVIOR TEST FOR THUMBS INTO LEFT MENU
@@ -264,7 +272,7 @@ function pjaxInit() {
 }
 
 function modalInit() {
-  $("a[data-target=#myModal]").on('click',function(e) {
+  $(document).on('click','a[data-target=#myModal]',function(e) {
     e.preventDefault();
     var target = $(this).attr('data-target');
     var url = $(this).attr('href');

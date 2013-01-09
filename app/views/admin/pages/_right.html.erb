@@ -22,17 +22,6 @@
 			</li>   
 			<li class="divider-vertical"></li>
 			<li class="icon_button">
-
-				<!-- Button to trigger modal -->
-					
-				<%= link_to(edit_admin_site_page_path(@site, @page), {:remote => true, 'data-target' => "#myModal"}) do %>
-					<div id="settings" class="" rel="tooltip" data-original-title="Settings" >
-						<div class="icon settings"></div>
-					</div>
-				<% end %>
-			</li>
-			<li class="divider-vertical"></li>
-			<li class="icon_button">
 				<%= link_to site_page_path(@site, @page) do %>
 					<div id="view" class="" rel="tooltip" data-original-title="View Site">
 						<div class="icon view"></div>

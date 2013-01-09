@@ -29,7 +29,6 @@ $(document).ready(function(){
   modalInit();
 });
 
-
 //******************* FUNCTIONS BELOW *******************//
 
 function windowInit() {
@@ -208,7 +207,6 @@ function leftMenuInit() {
          gallery_id: $(event.target).parent().attr('id') 
         }
       }); 
-
       // $('#sortable').sortable('cancel');
     }
   });

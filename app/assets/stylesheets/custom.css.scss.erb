@@ -196,6 +196,8 @@ a.logo, a.logo:hover {
 .folder.open {background-position:-16px -64px;}
 .link {background-position:-16px -32px;}
 .gallery {background-position:-16px -48px;}
+.menu-close {background-position:0px -80px;}
+.menu-settings {background-position:0px -96px;}
 #add_element:hover > .icon {background-position:-16px -80px;}
 #settings:hover > .icon {background-position:-16px 0px;}
 #view:hover > .icon {background-position:-16px -16px;}
@@ -251,7 +253,7 @@ a.logo, a.logo:hover {
 	/*overflow:scroll;*/
 }
 
-#page-menu div:hover, #archive-menu div:hover, #page-menu div.active, #archive-menu div.active, .menu-hover {
+#page-menu li > div:hover, #archive-menu li > div:hover, #page-menu li > div.active, #archive-menu li > div.active, .menu-hover {
 	color:#FFF;
 	background-color: #0099ff;
 	background-image: -moz-linear-gradient(top, #0099ff, #0077dd);
@@ -269,13 +271,15 @@ a.logo, a.logo:hover {
 #page-menu div:hover .gallery, #archive-menu div:hover .gallery,  .menu-hover .gallery {background-position:0px -48px;}
 #page-menu div:hover .folder.open, #archive-menu div:hover .folder.open, .menu-hover .folder.open {background-position:0px -64px;}
 
+#panes li div:hover a {
+	color:#FFF;
+}
+
 #panes a  {
 	color:#333;
 }
 
-#panes div:hover > a {
-	color:#FFF;
-}
+
 
 #page-menu div.menu-title:hover, #archive-menu div.menu-title:hover {
 	color:#999;
@@ -327,6 +331,32 @@ ol.sortable {
 	vertical-align: text-top;
 	background-repeat: no-repeat;
 	background-image:url(<%= asset_path 'menu-icons.png' %>);
+}
+
+div.dropzone {
+	position:relative;
+	background:transparent;
+}
+
+.sortable li div.menu-container {
+	position:absolute;
+	overflow:hidden;
+	left:36px;
+	top:6px;
+	width:155px;
+	height:20px;
+	padding: 0;
+	background:transparent;
+}
+
+#page-menu div:hover .close-button, #archive-menu div:hover .close-button, #page-menu div.active .close-button, #archive-menu div.active .close-button, .menu-hover .close-button {
+	display:inline-block;
+}
+
+.close-button {
+	position:absolute;
+	right:5px;
+	display:none;
 }
 
 .placeholder {

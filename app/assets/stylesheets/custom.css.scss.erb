@@ -351,6 +351,44 @@ div.dropzone {
 	background:transparent;
 }
 
+#all_images {
+	display:block;
+	height:20px;
+	width:220px;
+	position:relative;
+	font-size:14px;
+	margin: 0;
+	padding:5px 5px 5px 12px;
+}
+
+#all_images:hover {
+	color:#FFF;
+	background-color: #0099ff;
+	background-image: -moz-linear-gradient(top, #0099ff, #0077dd);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0099ff), to(#0077dd));
+	background-image: -webkit-linear-gradient(top, #0099ff, #0077dd);
+	background-image: -o-linear-gradient(top, #0099ff, #0077dd);
+	background-image: linear-gradient(to bottom, #0099ff, #0077dd);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0099ff', endColorstr='#ff0077dd', GradientType=0);
+}
+
+#all_images:hover a {
+	color:#FFF;
+}
+
+#all_images div.menu-container {
+	position:absolute;
+	overflow:hidden;
+	left:24px;
+	top:1px;
+	width:140px;
+	height:20px;
+	padding: 0;
+	background:transparent;
+}
+
+
 #page-menu div:hover .close-button, #archive-menu div:hover .close-button, #page-menu div.active .close-button, #archive-menu div.active .close-button, .menu-hover .close-button {
 	display:inline-block;
 }

@@ -156,7 +156,7 @@ function leftMenuInit() {
        }
     },
     stop: function(event, ui) {
-      $('ol.sortable li').removeClass('no-nest');
+      $('#page-menu ol.sortable li').removeClass('no-nest');
       $.ajax({
         type: 'POST',
         traditional: true,

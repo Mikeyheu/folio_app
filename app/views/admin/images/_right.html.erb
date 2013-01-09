@@ -1,0 +1,33 @@
+<div class="right-panel">
+	<div class="navbar secondary-navbar">
+		<ul class="nav">
+			<li class="icon_button">
+				<a href="#" id="caret">
+					<div>
+						<div class="icon caret-left"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+		</ul>
+		<div class="left secondary-nav-text"> All Images</div>
+		<ul class="nav pull-right">
+
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<a href="#" class="" rel="tooltip" data-original-title="Trash" >
+					<div id="trash" class="">
+						<div class="icon trash"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="right-inner">
+		<ul id="sortable" class="thumb_grid">
+			<% @images.each do |image| %>
+			<li id="image_<%= image.id %>" class="drop_allowed"><div class="thumbnail"><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to 'Edit', edit_admin_site_image_path(@site, image),:remote => true, 'data-target' => "#myModal" %> | <%= link_to 'Delete', admin_site_image_path(@site, image), method: :delete, data: { confirm: 'Are you sure? This will remove the image from all galleries and lightboxes.' } %></div></li>
+			<% end %>
+		</ul>
+	</div>
+</div>

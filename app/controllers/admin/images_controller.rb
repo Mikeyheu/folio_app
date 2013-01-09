@@ -3,7 +3,20 @@ class Admin::ImagesController < ApplicationController
 	before_filter :get_site
 
   def index
+
     @images = @site.images
+    @image = Image.new
+    @page = Page.new
+    @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
+    
+    if request.headers['X-PJAX']
+      render :layout => false
+    else 
+      respond_to do |format| 
+        format.html { render layout: 'admin_content' }
+        format.js {}
+      end
+    end
   end
 
   def show

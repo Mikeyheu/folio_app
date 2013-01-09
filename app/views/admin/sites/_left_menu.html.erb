@@ -28,7 +28,7 @@
   <div id="panes">
     <div id="page-menu" class="west-center">
       <div class="menu-title">Site Pages</div>
-      <ol class="sortable" data-update-url="<%= sort_admin_site_path %>">
+      <ol class="sortable" data-update-url="<%= sort_admin_site_path(@site) %>">
         <% @nav_items.each do |nav_item| %>
           <% unless nav_item.parent %>
 
@@ -63,12 +63,20 @@
     
     <div id="archive-menu" class="west-south">
       <div class="menu-title">Galleries</div>
-      
+
+        <div id="all_images">
+          <div class="dropzone">
+            <i class="icon-nav gallery"></i>
+            <div class="menu-container">
+            <%= link_to 'All Images', admin_site_images_path(@site), class: "ajax" %>
+            </div>
+          </div>
+        </div>
       <ol class="sortable" data-update-url="<%= sort_admin_site_galleries_path(@site) %>">
         <% @site.galleries.each do |gallery| %>
-          <li id="gallery_<%= gallery.id %>">
+          <li id="gallery_<%= gallery.id %>" class="no-nest">
             <div class="dropzone">
-              <i class="icon-nav gallery %>"></i>
+              <i class="icon-nav gallery"></i>
               <div class="menu-container">
               <%= link_to gallery.name, admin_site_gallery_path(@site, gallery), class: "ajax" %>
             </div>

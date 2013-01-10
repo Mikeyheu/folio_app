@@ -3,30 +3,46 @@
     <div class="navbar-inner">
       <a class="logo" href="#">Portfolio App</a>
       <ul class="nav">
-        <li><%= link_to 'Design' %></li>
-        <li class="active"><%= link_to 'Content' %></li>
-        <li><a href="#"> Settings</a></li>
+        <li class=""><%= link_to 'Design' %></li>
+        <li class="<%= 'active' if current_page?(admin_site_path(@site)) %>"><%= link_to 'Content', admin_site_path(@site) %></li>
+        <li class="<%= 'active' if current_page?(admin_site_setting_path(@site)) %>"> 
+          <%= link_to 'Settings', admin_site_setting_path(@site) %> 
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li class="nav-header">User</li>
-            <li><a href="#">Account Settings</a></li>
-            <li class="divider"></li>
-            <li class="nav-header">Support</li>
-            <li><a href="#">Support Center</a></li>
-            <li><a href="#">User Guide</a></li>
-          </ul>
-        </li>         
-      </ul>
-
-      <ul class="nav pull-right">
-        <% if user_signed_in? %>
+            <% if user_signed_in? %>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
         <li><%= link_to('Edit account', edit_user_registration_path) %></li>
         <% else %>
         <li><%= link_to('Login', new_user_session_path)  %></li>
         <li><%= link_to "Sign up", new_user_registration_path %></li>
         <% end %>
+            <li class="divider"></li>
+            <li class="nav-header">Support</li>
+            <li><a href="#">Support Center</a></li>
+            <li><a href="#">User Guide</a></li>
+          </ul>
+        </li>  
+             
+      </ul>
+
+      <ul class="nav pull-right">
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @site.name %><b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="nav-header">My Sites</li>
+            <% current_user.sites.each do |site| %>
+              <li><%= link_to site.name, admin_site_path(site) %></li>
+            <% end %>
+            <li class="divider"></li>
+            <li class="nav-header">Site Options</li>
+            <li><%= link_to 'New Site', new_admin_site_path %></li>
+            <li><a href="#">Delete Site</a></li>
+          </ul>
+        </li>    
+        
       </ul>
     </div>
   </div>

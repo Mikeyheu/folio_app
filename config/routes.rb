@@ -22,6 +22,7 @@ FolioApp::Application.routes.draw do
       resources :pages 
       resources :links 
       resources :folders
+      resource :setting
     end
   end
 

@@ -1,5 +1,7 @@
 class Site < ActiveRecord::Base
   belongs_to :user
+  has_one :setting
+  accepts_nested_attributes_for :setting
   has_many :nav_items, :dependent => :destroy
   has_many :pages, :dependent => :destroy
   has_many :links, :dependent => :destroy

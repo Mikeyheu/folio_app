@@ -9,6 +9,9 @@ ul, ol { padding:0; margin:0;}
 
 .left { float:left; }
 .right { float:right; }
+.static-container {
+	margin-left:15px;
+}
 
 /************ Primary And Secondary Navigation CSS ************/
 
@@ -96,6 +99,18 @@ a.logo, a.logo:hover {
   text-decoration: none;
   text-shadow: none;
 }
+
+/* Secondary nav text */
+.secondary-navbar.links .nav > li > a,
+.secondary-navbar.links .nav > li > a:hover {
+  float: none;
+  padding: 10px 15px 10px;
+  color: #FFF;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+
 
 /* Secondary nav active text */
 .secondary-navbar .nav .active > a,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108150116) do
+ActiveRecord::Schema.define(:version => 20130110144534) do
 
   create_table "folders", :force => true do |t|
     t.string   "name"
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(:version => 20130108150116) do
     t.string   "slug"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "settings", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "title"
+    t.text     "meta_description"
+    t.text     "meta_keywords"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "sites", :force => true do |t|

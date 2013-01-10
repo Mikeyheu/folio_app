@@ -17,6 +17,7 @@ class Admin::SitesController < ApplicationController
 
   def new
     @site = Site.new
+    render :layout => false
   end
 
   def edit
@@ -24,11 +25,10 @@ class Admin::SitesController < ApplicationController
   end
 
   def create
-    # @site = Site.new(params[:site])
-
     @site = current_user.sites.new(params[:site])
-
     if @site.save
+      # create settings for has_one relationship - need to use @site.create_setting()
+      @setting = @site.create_setting(title:@site.name)
       redirect_to admin_sites_path, notice: 'Site was successfully created.'   
     else
       render action: "new" 

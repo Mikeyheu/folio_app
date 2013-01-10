@@ -8,6 +8,9 @@ class Site < ActiveRecord::Base
   has_many :folders, :dependent => :destroy
   has_many :galleries, :dependent => :destroy
   has_many :images, :dependent => :destroy
+  has_one :site_template
+  has_one :template, :through => :site_template
+
   
   extend FriendlyId
   friendly_id :name, use: :slugged

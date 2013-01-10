@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110144534) do
+ActiveRecord::Schema.define(:version => 20130110220033) do
 
   create_table "folders", :force => true do |t|
     t.string   "name"
@@ -91,6 +91,13 @@ ActiveRecord::Schema.define(:version => 20130110144534) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "site_templates", :force => true do |t|
+    t.integer  "site_id"
+    t.integer  "template_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "sites", :force => true do |t|
     t.string   "name"
     t.string   "slug"
@@ -101,6 +108,12 @@ ActiveRecord::Schema.define(:version => 20130110144534) do
 
   add_index "sites", ["slug"], :name => "index_sites_on_slug", :unique => true
   add_index "sites", ["user_id"], :name => "index_sites_on_user_id"
+
+  create_table "templates", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

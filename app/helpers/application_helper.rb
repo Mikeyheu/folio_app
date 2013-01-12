@@ -10,10 +10,29 @@ module ApplicationHelper
 	  end
 	end
 
+  def designactive?
+    case params[:controller] 
+    when 'admin/templates' then true
+    else false
+    end
+  end
+
+  def contentactive?
+    case params[:controller] 
+    when 'admin/pages','admin/galleries','admin/sites', 'admin/images' then true
+    else false
+    end
+  end
+
+  def settingsactive?
+    case params[:controller] 
+    when 'admin/settings' then true
+    else false
+    end
+  end
+
 	def navlink(site,item)
-
 		class_name = item.class.name
-
     if class_name ==  "Page" 
     	link_to item.name, admin_site_page_path(site, item), class: 'ajax'
     else 
@@ -22,9 +41,7 @@ module ApplicationHelper
 	end
 
   def deletelink(site, item)
-
     class_name = item.class.name
-
     if class_name ==  "Page" 
       link_to '<i class="icon-nav menu-close"></i>'.html_safe, admin_site_page_path(site, item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'close-button'
     elsif class_name ==  "Link" 
@@ -37,9 +54,7 @@ module ApplicationHelper
   end
 
   def settingslink(site, item)
-
     class_name = item.class.name
-
     if class_name ==  "Page" 
       link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_page_path(site, item), {:remote => true, 'data-target' => "#myModal", class: 'settings-button'}
     elsif class_name ==  "Link" 

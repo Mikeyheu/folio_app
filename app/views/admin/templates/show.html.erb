@@ -1,0 +1,14 @@
+<div class="static-container">
+<h1>Template</h1>
+
+Templates:
+<% @templates.each do |template| %>
+	<li>
+		<%= template.name %>
+	</li>
+  
+<% end %>
+
+<br>
+<%= @template.name %> is the current template for the site.
+</div>

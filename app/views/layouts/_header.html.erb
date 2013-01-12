@@ -3,11 +3,9 @@
     <div class="navbar-inner">
       <a class="logo" href="#">Portfolio App</a>
       <ul class="nav">
-        <li class=""><%= link_to 'Design' %></li>
-        <li class="<%= 'active' if current_page?(admin_site_path(@site)) %>"><%= link_to 'Content', admin_site_path(@site) %></li>
-        <li class="<%= 'active' if current_page?(admin_site_setting_path(@site)) %>"> 
-          <%= link_to 'Settings', admin_site_setting_path(@site) %> 
-        </li>
+        <li class="<%= 'active' if designactive? %>"><%= link_to 'Design', admin_site_template_path(@site) %></li>
+        <li class="<%= 'active' if contentactive? %>"><%= link_to 'Content', admin_site_path(@site) %></li>
+        <li class="<%= 'active' if settingsactive? %>"><%= link_to 'Settings', admin_site_setting_path(@site) %> </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">More<b class="caret"></b></a>
           <ul class="dropdown-menu">

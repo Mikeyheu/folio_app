@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110220033) do
+ActiveRecord::Schema.define(:version => 20130119014433) do
+
+  create_table "elements", :force => true do |t|
+    t.integer  "parent_id"
+    t.integer  "position",         :default => 0
+    t.string   "elementable_type"
+    t.integer  "elementable_id"
+    t.integer  "page_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "elements", ["elementable_id", "elementable_type", "page_id"], :name => "element_index", :unique => true
 
   create_table "folders", :force => true do |t|
     t.string   "name"
@@ -40,6 +52,16 @@ ActiveRecord::Schema.define(:version => 20130110220033) do
 
   add_index "gallery_assignments", ["gallery_id"], :name => "index_gallery_assignments_on_gallery_id"
   add_index "gallery_assignments", ["image_id"], :name => "index_gallery_assignments_on_image_id"
+
+  create_table "homepages", :force => true do |t|
+    t.string   "name",       :default => "Home"
+    t.integer  "site_id"
+    t.string   "slug"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "homepages", ["site_id"], :name => "index_homepages_on_site_id"
 
   create_table "images", :force => true do |t|
     t.string   "name"

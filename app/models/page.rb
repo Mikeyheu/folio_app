@@ -1,6 +1,7 @@
 class Page < ActiveRecord::Base
 	belongs_to :site
-	has_many :nav_items, :as =>:navable, :dependent => :destroy
+	has_one :nav_item, :as =>:navable, :dependent => :destroy
+	has_many :elements, :dependent => :destroy
   
   extend FriendlyId
   friendly_id :name, use: :slugged

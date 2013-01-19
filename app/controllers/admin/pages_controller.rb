@@ -61,7 +61,7 @@ class Admin::PagesController < ApplicationController
 
   def update
     @page = @site.pages.find(params[:id])
-    if @page.update_attributes(params[:Page])
+    if @page.update_attributes(params[:page])
       redirect_to :back
 			#redirect_to admin_site_pages_path, notice: 'Page was successfully updated.'
     else

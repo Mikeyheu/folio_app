@@ -23,12 +23,13 @@ FolioApp::Application.routes.draw do
       resources :links 
       resources :folders
       resource :setting
+      resource :homepage
       resource :template
     end
   end
 
-  resources :sites, only: [:show] do
-    resources :pages, only: [:index, :show]  
+  resources :sites, only: [:show], :controller => "homepages" do
+    resources :pages, only: [:show]  
     resources :galleries, only: [:show] 
   end
 

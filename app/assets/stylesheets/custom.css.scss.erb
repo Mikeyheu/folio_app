@@ -213,6 +213,7 @@ a.logo, a.logo:hover {
 .gallery {background-position:-16px -48px;}
 .menu-close {background-position:0px -80px;}
 .menu-settings {background-position:0px -96px;}
+.homepage {background-position:-16px -112px;}
 #add_element:hover > .icon {background-position:-16px -80px;}
 #settings:hover > .icon {background-position:-16px 0px;}
 #view:hover > .icon {background-position:-16px -16px;}
@@ -285,6 +286,9 @@ a.logo, a.logo:hover {
 #page-menu div:hover .link, #archive-menu div:hover .link, .menu-hover .link {background-position:0px -32px;}
 #page-menu div:hover .gallery, #archive-menu div:hover .gallery,  .menu-hover .gallery {background-position:0px -48px;}
 #page-menu div:hover .folder.open, #archive-menu div:hover .folder.open, .menu-hover .folder.open {background-position:0px -64px;}
+
+
+#page-menu div:hover .homepage, #archive-menu div:hover .homepage,  .menu-hover .homepage {background-position:0px -112px;}
 
 #panes li div:hover a {
 	color:#FFF;
@@ -366,7 +370,7 @@ div.dropzone {
 	background:transparent;
 }
 
-#all_images {
+#all_images, #homepage {
 	display:block;
 	height:20px;
 	width:220px;
@@ -376,7 +380,7 @@ div.dropzone {
 	padding:5px 5px 5px 12px;
 }
 
-#all_images:hover {
+#all_images:hover, #homepage:hover {
 	color:#FFF;
 	background-color: #0099ff;
 	background-image: -moz-linear-gradient(top, #0099ff, #0077dd);
@@ -388,11 +392,11 @@ div.dropzone {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0099ff', endColorstr='#ff0077dd', GradientType=0);
 }
 
-#all_images:hover a {
+#all_images:hover a, #homepage:hover a {
 	color:#FFF;
 }
 
-#all_images div.menu-container {
+#all_images div.menu-container, #homepage div.menu-container{
 	position:absolute;
 	overflow:hidden;
 	left:24px;

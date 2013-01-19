@@ -40,6 +40,17 @@ module ApplicationHelper
 	  end
 	end
 
+  def sitelink(site,item)
+    class_name = item.class.name
+    if class_name ==  "Page" 
+      link_to item.name, site_page_path(site, item)
+    elsif class_name ==  "Link"
+      link_to item.name, item.url
+    else  
+      item.name
+    end
+  end
+
   def deletelink(site, item)
     class_name = item.class.name
     if class_name ==  "Page" 

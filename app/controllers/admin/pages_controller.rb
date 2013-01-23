@@ -75,24 +75,6 @@ class Admin::PagesController < ApplicationController
 		redirect_to admin_site_path(@site)
   end
 
-# def sort
-#   array = params[:pages].gsub('page[', '').gsub(']=', ',').split('&')
-
-#   array.each_with_index do |item, index|
-#   	a = item.split(',')
-#   	p = Page.find(a[0].to_i)
-#   	if a[1] == "null"
-#   		p.parent_id = nil
-#   	else 
-#   		p.parent_id = a[1].to_i
-#   	end
-#   	p.position = index
-#   	p.save
-#   end
-
-# 	   render :nothing => true
-# 	end
-
   private
 
   def get_site 

@@ -15,9 +15,9 @@
 			<li class="divider-vertical"></li>
 			<li class="icon_button">
 				<%= link_to site_gallery_path(@site, @gallery) do %>
-					<div id="view" class="" rel="tooltip" data-original-title="View Site">
-						<div class="icon view"></div>
-					</div>
+				<div id="view" class="" rel="tooltip" data-original-title="View Site">
+					<div class="icon view"></div>
+				</div>
 				<% end %>
 			</li>
 			<li class="divider-vertical"></li>
@@ -41,7 +41,19 @@
 	<div class="right-inner">
 		<ul id="sortable" class="thumb_grid" data-move-images-url="<%= move_images_admin_site_images_path(@site) %>" data-gallery-url="<%= admin_site_gallery_path(@site, @gallery) %>" data-gallery_id="<%= @gallery.id %>" data-update-url= "<%= sort_admin_site_images_path(@site) %>">
 			<% @gallery.images.each do |image| %>
-			<li id="image_<%= image.id %>" class="drop_allowed"><div class="thumbnail"><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to 'Edit', edit_admin_site_image_path(@site, image),:remote => true, 'data-target' => "#myModal" %> | <%= link_to 'Remove', remove_admin_site_image_path(@site, image, gallery_id:@gallery.id), method: :post, :remote => true %> | <%= link_to 'Delete', admin_site_image_path(@site, image), method: :delete, data: { confirm: 'Are you sure? This will remove the image from all galleries and lightboxes.' } %></div></li>
+			<li id="image_<%= image.id %>" class="drop_allowed">
+				<div class="thumbnail_border"></div>
+
+				<div class="thumbnail">
+					<%= image_tag image.image_file_url(:thumb).to_s %>
+				</div>
+
+				<div class="image_icons">
+					<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_image_path(@site, image),:remote => true, 'data-target' => "#myModal" %>
+					<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_image_path(@site, image, gallery_id:@gallery.id), method: :post, :remote => true %>
+				</div>
+
+			</li>
 			<% end %>
 		</ul>
 	</div>

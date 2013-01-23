@@ -27,8 +27,16 @@
 		Need to add some sort of sorting feature: date, time, filename, etc.
 		<ul id="sortable" class="thumb_grid">
 			<% @images.each do |image| %>
-			<li id="image_<%= image.id %>" class="drop_allowed"><div class="thumbnail"><%= image_tag image.image_file_url(:thumb).to_s %><%= link_to 'Edit', edit_admin_site_image_path(@site, image),:remote => true, 'data-target' => "#myModal" %> | <%= link_to 'Delete', admin_site_image_path(@site, image), method: :delete, data: { confirm: 'Are you sure? This will remove the image from all galleries and lightboxes.' } %></div></li>
-			<% end %>
-		</ul>
-	</div>
-</div>
+			<li id="image_<%= image.id %>" class="drop_allowed">
+				<div class="thumbnail_border"></div>
+				
+				<div class="thumbnail">
+					<%= image_tag image.image_file_url(:thumb).to_s %>
+				</div>
+				<div class="image_icons">
+					<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_image_path(@site, image),:remote => true, 'data-target' => "#myModal" %>
+					<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, admin_site_image_path(@site, image), method: :delete, data: { confirm: 'Are you sure? This will remove the image from all galleries and lightboxes.' } %></div></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>

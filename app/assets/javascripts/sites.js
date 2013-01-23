@@ -87,7 +87,7 @@ function galleryInit() {
     },
     stop: function(event, ui) {
       $('#sortable').find('li.selected').show();
-      $('#sortable').find('li.selected div').css({
+      $('#sortable').find('li.selected .thumbnail').css({
         opacity:1
       });
       $('#thumb-num').remove();

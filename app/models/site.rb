@@ -5,6 +5,7 @@ class Site < ActiveRecord::Base
   accepts_nested_attributes_for :setting
   has_many :nav_items, :dependent => :destroy
   has_many :pages, :dependent => :destroy
+  has_many :gallery_pages, :dependent => :destroy
   has_many :links, :dependent => :destroy
   has_many :folders, :dependent => :destroy
   has_many :galleries, :dependent => :destroy

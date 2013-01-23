@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119014433) do
+ActiveRecord::Schema.define(:version => 20130123162800) do
 
   create_table "elements", :force => true do |t|
     t.integer  "parent_id"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20130119014433) do
     t.string   "name"
     t.string   "slug"
     t.integer  "site_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "gallery_page_id"
   end
 
   add_index "galleries", ["site_id"], :name => "index_galleries_on_site_id"
@@ -52,6 +53,15 @@ ActiveRecord::Schema.define(:version => 20130119014433) do
 
   add_index "gallery_assignments", ["gallery_id"], :name => "index_gallery_assignments_on_gallery_id"
   add_index "gallery_assignments", ["image_id"], :name => "index_gallery_assignments_on_image_id"
+
+  create_table "gallery_pages", :force => true do |t|
+    t.string   "name"
+    t.integer  "site_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "gallery_pages", ["site_id"], :name => "index_gallery_pages_on_site_id"
 
   create_table "homepages", :force => true do |t|
     t.string   "name",       :default => "Home"

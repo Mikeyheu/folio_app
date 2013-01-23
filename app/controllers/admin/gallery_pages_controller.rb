@@ -1,15 +1,14 @@
-class Admin::PagesController < ApplicationController
-	
+class Admin::GalleryPagesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_site
 
 	def index
-    @pages = @site.pages
+    @gallery_pages = @site.gallery_pages
   end
 
   def show
     @image = Image.new
-    @page = @site.pages.find(params[:id])
+    @gallery_page = @site.gallery_pages.find(params[:id])
     @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
     
     if request.headers['X-PJAX']
@@ -28,23 +27,21 @@ class Admin::PagesController < ApplicationController
   end
 
   def new
-    @page = Page.new
+    @gallery_page = GalleryPage.new
     render :layout => false
   end
 
   def edit
-    @page = @site.pages.find(params[:id])
+    @gallery_page = @site.gallery_pages.find(params[:id])
     render :layout => false
   end
 
   def create
-    # @page = Page.new(params[:Page])
+    @gallery_page = @site.gallery_pages.new(params[:gallery_page])
 
-    @page = @site.pages.new(params[:page])
-
-    if @page.save
+    if @gallery_page.save
       # insert new item after the last top level nav item
-      n = @site.nav_items.new(navable:@page)
+      n = @site.nav_items.new(navable:@gallery_page)
       if @site.nav_items.size > 0
         parents = @site.nav_items.select { |n| n.parent_id == nil }
         last_nav_item = parents.max {|a,b| a.position <=> b.position }
@@ -59,9 +56,9 @@ class Admin::PagesController < ApplicationController
     end
   end
 
-  def update
-    @page = @site.pages.find(params[:id])
-    if @page.update_attributes(params[:page])
+   def update
+    @gallery_page = @site.gallery_pages.find(params[:id])
+    if @gallery_page.update_attributes(params[:gallery_page])
       redirect_to :back
 			#redirect_to admin_site_pages_path, notice: 'Page was successfully updated.'
     else
@@ -70,33 +67,14 @@ class Admin::PagesController < ApplicationController
   end
 
   def destroy
-    @page = @site.pages.find(params[:id])
-    @page.destroy
+    @gallery_page = @site.gallery_pages.find(params[:id])
+    @gallery_page.destroy
 		redirect_to admin_site_path(@site)
   end
 
-# def sort
-#   array = params[:pages].gsub('page[', '').gsub(']=', ',').split('&')
-
-#   array.each_with_index do |item, index|
-#   	a = item.split(',')
-#   	p = Page.find(a[0].to_i)
-#   	if a[1] == "null"
-#   		p.parent_id = nil
-#   	else 
-#   		p.parent_id = a[1].to_i
-#   	end
-#   	p.position = index
-#   	p.save
-#   end
-
-# 	   render :nothing => true
-# 	end
-
-  private
+	private
 
   def get_site 
     @site = Site.find(params[:site_id])
   end
-
 end

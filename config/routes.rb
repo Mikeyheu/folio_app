@@ -19,6 +19,7 @@ FolioApp::Application.routes.draw do
           post 'sort'
         end
       end
+      resources :gallery_pages 
       resources :pages 
       resources :links 
       resources :folders

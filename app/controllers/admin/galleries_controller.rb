@@ -10,7 +10,8 @@ class Admin::GalleriesController < ApplicationController
   def show
     @image = Image.new
     @page = Page.new
-    @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
+    @nav_items = @site.nav_items.includes(:navable).nav_scope
+    @gallery_items = @site.nav_items.includes(:navable).gallery_scope
     @gallery = @site.galleries.find(params[:id])
 
     if request.headers['X-PJAX']
@@ -41,7 +42,16 @@ class Admin::GalleriesController < ApplicationController
   def create
     @gallery = @site.galleries.new(params[:gallery])
     if @gallery.save
-      redirect_to admin_site_gallery_path(@site,@gallery) #, notice: 'Gallery was successfully updated.'
+      # insert new item after the last top level nav item
+      n = @site.nav_items.new(navable:@gallery)
+      n.nav = false
+      if @site.nav_items.gallery_scope.size > 0
+        n.position = @site.nav_items.gallery_scope.last.position + 1
+      end
+      n.save
+
+      redirect_to :back
+      #redirect_to admin_site_pages_path, notice: 'Page was successfully created.'   
     else
       render action: "new" 
     end

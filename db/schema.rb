@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123162800) do
+ActiveRecord::Schema.define(:version => 20130124192142) do
 
   create_table "elements", :force => true do |t|
     t.integer  "parent_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20130123162800) do
     t.integer  "parent_id"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+    t.boolean  "nav"
   end
 
   add_index "nav_items", ["navable_id", "navable_type", "site_id"], :name => "index_nav_items_on_navable_id_and_navable_type_and_site_id"

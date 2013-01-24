@@ -7,7 +7,8 @@ class PagesController < ApplicationController
   def show
   	@page = Page.find(params[:id])
   	@site = Site.find(params[:site_id])
-  	@nav_items = @site.nav_items.pos
+  	@nav_items = @site.nav_items.includes(:navable).nav_scope
+  	
   	render layout: 'site'
   end
   

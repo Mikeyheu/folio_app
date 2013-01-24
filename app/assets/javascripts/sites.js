@@ -134,9 +134,11 @@ function galleryInit() {
 
 function leftMenuInit() {
 
-  // LEFT MENU PANEL SORTING
-  $('ol.sortable').nestedSortable({
+  // PAGE MENU PANEL SORTING
+  $('#sortable1').nestedSortable({
+    appendTo: '#panes',
     disableNesting: 'no-nest',
+    connectWith: ".connected",
     forcePlaceholderSize: true,
     handle: 'div',
     helper: 'clone',
@@ -155,13 +157,55 @@ function leftMenuInit() {
         $('ol.sortable li').addClass('no-nest');
        }
     },
+    remove: function(event, ui){
+      if (ui.item.attr('class') != 'gallery') {
+        console.log("removed non gallery");
+        $('#sortable1').nestedSortable('cancel');
+      }
+    },
     stop: function(event, ui) {
       $('#page-menu ol.sortable li').removeClass('no-nest');
       $.ajax({
         type: 'POST',
         traditional: true,
-        url: $(this).data('update-url'),
-        data: {nav_items:$('ol.sortable').nestedSortable('serialize')}
+        url: $('#sortable1').data('update-url'),
+        data: {
+          nav_items:$('#sortable1').nestedSortable('serialize'),
+          gallery_items:$('#sortable2').nestedSortable('serialize')
+        }
+      });
+    }
+  });
+
+  // ARCHIVE MENU PANEL SORTING
+  $('#sortable2').nestedSortable({
+    appendTo: '#panes',
+    connectWith: ".connected",
+    disableNesting: 'no-nest',
+    forcePlaceholderSize: true,
+    handle: 'div',
+    helper: 'clone',
+    items: 'li',
+    maxLevels: 2,
+    distance: 5,
+    opacity: .6,
+    placeholder: 'placeholder',
+    revert: 250,
+    tabSize: 25,
+    tolerance: 'pointer',
+    toleranceElement: '> div',
+    start: function(event, ui) {
+    },
+    stop: function(event, ui) {
+      $('#page-menu ol.sortable li').removeClass('no-nest');
+      $.ajax({
+        type: 'POST',
+        traditional: true,
+        url: $('#sortable1').data('update-url'),
+        data: {
+          nav_items:$('#sortable1').nestedSortable('serialize'),
+          gallery_items:$('#sortable2').nestedSortable('serialize')
+        }
       });
     }
   });
@@ -211,7 +255,7 @@ function leftMenuInit() {
         url: $('#sortable').data('move-images-url'),
         data: {
          images: string, 
-         gallery_id: $(event.target).parent().attr('id') 
+         gallery_id: $(event.target).parent().data('gallery-id')
         }
       }); 
       // $('#sortable').sortable('cancel');

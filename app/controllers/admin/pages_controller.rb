@@ -10,7 +10,8 @@ class Admin::PagesController < ApplicationController
   def show
     @image = Image.new
     @page = @site.pages.find(params[:id])
-    @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
+    @nav_items = @site.nav_items.includes(:navable).nav_scope
+    @gallery_items = @site.nav_items.includes(:navable).gallery_scope
     
     if request.headers['X-PJAX']
       render :layout => false

@@ -7,8 +7,9 @@ class Admin::ImagesController < ApplicationController
     @images = @site.images
     @image = Image.new
     @page = Page.new
-    @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
-    
+    # @nav_items = @site.nav_items.includes([:navable, :parent, :children]).pos
+    @nav_items = @site.nav_items.includes(:navable).nav_scope
+    @gallery_items = @site.nav_items.includes(:navable).gallery_scope
     if request.headers['X-PJAX']
       render :layout => false
     else 

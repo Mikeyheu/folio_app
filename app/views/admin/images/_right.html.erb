@@ -25,7 +25,7 @@
 	</div>
 	<div class="right-inner">
 		Need to add some sort of sorting feature: date, time, filename, etc.
-		<ul id="sortable" class="thumb_grid">
+		<ul id="sortable" class="thumb_grid" data-move-images-url="<%= move_images_admin_site_images_path(@site) %>">
 			<% @images.each do |image| %>
 			<li id="image_<%= image.id %>" class="drop_allowed">
 				<div class="thumbnail_border"></div>

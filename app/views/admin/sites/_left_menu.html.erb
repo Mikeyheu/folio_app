@@ -4,12 +4,9 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon add left"></i><div class="left secondary-nav-text"> Create <b class="caret"></b></div> </a>
         <ul class="dropdown-menu">
-          <li class="nav-header">Site Pages</li>
           <li><%= link_to 'Content Page', new_admin_site_page_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li> 
-          <li><%= link_to 'Gallery Page', new_admin_site_gallery_page_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li> 
           <li><%= link_to 'Folder', new_admin_site_folder_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
           <li><%= link_to 'Link', new_admin_site_link_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
-          <li class="nav-header">Galleries</li>
           <li><%= link_to 'Gallery', new_admin_site_gallery_path(@site), {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal"} %></li>
         </ul>
       </li>   
@@ -19,87 +16,104 @@
       <li>
         <a id="input_link_area" href="#">
           <div class="input_container">
-             <%= render 'admin/sites/multiupload' %> 
-            <i class="icon upload left"></i>
-            <div class="left secondary-nav-text"> Upload</div>
+           <%= render 'admin/sites/multiupload' %> 
+           <i class="icon upload left"></i>
+           <div class="left secondary-nav-text"> Upload</div>
+         </div>
+       </a>
+     </li>
+     <li class="divider-vertical"></li>        
+   </ul>
+ </div>
+
+
+ <div id="panes">
+  <div id="page-menu" class="west-center">
+    <div class="menu-title">Site Pages</div>
+    <div id="homepage">
+      <div class="nodrop">
+        <i class="icon-nav homepage"></i>
+        <div class="menu-container">
+          <%= link_to 'Home', admin_site_homepage_path(@site), class: "ajax" %>
+        </div>
+      </div>
+    </div>
+
+    <ol id="sortable1" class="sortable connected" data-update-url="<%= sort_admin_site_path(@site) %>">
+      <% @nav_items.each do |nav_item| %>
+      <% unless nav_item.parent %>
+
+      <li id="nav_item_<%= nav_item.id %>" class="<%= icon(nav_item.navable.class.name) %>" 
+        <% if nav_item.navable.class.name == "Gallery" %>
+        <%= "data-gallery-id=#{nav_item.navable.id}" %>
+        <% end %>
+        >
+        <% if nav_item.navable.class.name == "Gallery" %>
+        <div class="dropzone">
+          <% else %>
+          <div>
+            <% end %>
+            <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
+            <%= navlink(@site,nav_item.navable) %>
+            <%= settingslink(@site, nav_item.navable) %>
+            <%= deletelink(@site, nav_item.navable) %>
+
           </div>
-        </a>
-      </li>
-      <li class="divider-vertical"></li>        
-    </ul>
-  </div>
-  <div id="panes">
-    <div id="page-menu" class="west-center">
-      <div class="menu-title">Site Pages</div>
-      <div id="homepage">
-          <div class="dropzone">
-            <i class="icon-nav homepage"></i>
+          <% unless nav_item.children.empty? %>
+          <ol>
+            <% nav_item.children.order("position").each do |nav_item| %>
+            <li id="nav_item_<%= nav_item.id %>" <% if nav_item.navable.class.name == "Gallery" %>
+              <%= "data-gallery-id=#{nav_item.navable.id}" %>
+              <% end %>
+              >
+              <% if nav_item.navable.class.name == "Gallery" %>
+              <div class="dropzone">
+                <% else %>
+                <div>
+                  <% end %>
+                  <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
+                  <%= navlink(@site,nav_item.navable) %>
+                  <%= settingslink(@site, nav_item.navable) %>
+                  <%= deletelink(@site, nav_item.navable) %>
+
+                </div>
+              </li>
+              <% end %>
+            </ol>
+            <% end %>
+          </li>
+          <% end %>
+          <% end %>
+        </ol>
+      </div>
+      
+
+      <div id="archive-menu" class="west-south">
+        <div class="menu-title">Galleries</div>
+
+        <div id="all_images">
+          <div class="nodrop">
+            <i class="icon-nav gallery"></i>
             <div class="menu-container">
-            <%= link_to 'Home', admin_site_homepage_path(@site), class: "ajax" %>
+              <%= link_to 'All Images', admin_site_images_path(@site), class: "ajax" %>
             </div>
           </div>
         </div>
-
-      <ol class="sortable" data-update-url="<%= sort_admin_site_path(@site) %>">
-        <% @nav_items.each do |nav_item| %>
-          <% unless nav_item.parent %>
-
-          <li id="nav_item_<%= nav_item.id %>" class="<%= icon(nav_item.navable.class.name) %>">
-            <div>
-              <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
-              <%=  navlink(@site,nav_item.navable) %>
+        <ol id="sortable2" class="sortable connected" data-update-url="<%= sort_admin_site_galleries_path(@site) %>">
+          <% @gallery_items.each do |nav_item| %>
+          <li id="nav_item_<%= nav_item.id %>" class="no-nest" data-gallery-id="<%= nav_item.navable.id %>">
+            <div class="dropzone">
+              <i class="icon-nav gallery"></i>
+              
+              <%= navlink(@site,nav_item.navable) %>
               <%= settingslink(@site, nav_item.navable) %>
               <%= deletelink(@site, nav_item.navable) %>
               
             </div>
-            <% unless nav_item.children.empty? %>
-              <ol>
-                <% nav_item.children.order("position").each do |subnav_item| %>
-                  <li id="nav_item_<%= subnav_item.id %>"><div>
-                    <i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i>
-                    <%= navlink(@site,subnav_item.navable) %>
-                    <%= settingslink(@site, subnav_item.navable) %>
-                    <%= deletelink(@site, subnav_item.navable) %>
-
-                   </div>
-                 </li>
-                <% end %>
-              </ol>
-            <% end %>
-            </li>
+          </li>
           <% end %>
-        <% end %>
-      </ol>
-    </div>
-      
-    
-    <div id="archive-menu" class="west-south">
-      <div class="menu-title">Galleries</div>
+        </ol>
 
-        <div id="all_images">
-          <div class="dropzone">
-            <i class="icon-nav gallery"></i>
-            <div class="menu-container">
-            <%= link_to 'All Images', admin_site_images_path(@site), class: "ajax" %>
-            </div>
-          </div>
-        </div>
-      <ol class="sortable" data-update-url="<%= sort_admin_site_galleries_path(@site) %>">
-        <% @site.galleries.each do |gallery| %>
-          <li id="gallery_<%= gallery.id %>" class="no-nest">
-            <div class="dropzone">
-              <i class="icon-nav gallery"></i>
-              <div class="menu-container">
-              <%= link_to gallery.name, admin_site_gallery_path(@site, gallery), class: "ajax" %>
-            </div>
-            <%= settingslink(@site, gallery) %>
-            <%= deletelink(@site, gallery) %>
-              
-          </div>
-        </li>
-        <% end %>
-      </ol>
-      
+      </div>
     </div>
   </div>
-</div>

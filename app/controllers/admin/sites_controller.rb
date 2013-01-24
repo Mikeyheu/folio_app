@@ -9,7 +9,8 @@ class Admin::SitesController < ApplicationController
 
   def show
     @site = Site.find(params[:id])
-    @nav_items = @site.nav_items.includes(:navable).pos
+    @nav_items = @site.nav_items.includes(:navable).nav_scope
+    @gallery_items = @site.nav_items.includes(:navable).gallery_scope
     @page = Page.new
     @image = Image.new
     render layout: 'admin_content'
@@ -51,9 +52,10 @@ class Admin::SitesController < ApplicationController
   end
 
   def sort
-    array = params[:nav_items].gsub('nav_item[', '').gsub(']=', ',').split('&')
-
-    array.each_with_index do |item, index|
+    array1 = params[:nav_items].gsub('nav_item[', '').gsub(']=', ',').split('&')
+    array2 = params[:gallery_items].gsub('nav_item[', '').gsub(']=', ',').split('&')
+ 
+    array1.each_with_index do |item, index|
       a = item.split(',')
       n = NavItem.find(a[0].to_i)
       if a[1] == "null"
@@ -62,6 +64,20 @@ class Admin::SitesController < ApplicationController
         n.parent_id = a[1].to_i
       end
       n.position = index
+      n.nav = true
+      n.save
+    end
+
+    array2.each_with_index do |item, index|
+      a = item.split(',')
+      n = NavItem.find(a[0].to_i)
+      if a[1] == "null"
+        n.parent_id = nil
+      else 
+        n.parent_id = a[1].to_i
+      end
+      n.position = index
+      n.nav = false
       n.save
     end
 

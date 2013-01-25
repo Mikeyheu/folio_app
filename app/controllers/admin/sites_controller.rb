@@ -30,6 +30,7 @@ class Admin::SitesController < ApplicationController
     if @site.save
       # create settings for has_one relationship - need to use @site.create_setting()
       @setting = @site.create_setting(title:@site.name)
+      @homepage = @site.create_homepage
       redirect_to admin_sites_path, notice: 'Site was successfully created.'   
     else
       render action: "new" 

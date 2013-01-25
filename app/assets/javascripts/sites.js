@@ -1,32 +1,35 @@
 $(document).ready(function(){
 
-  // GLOBAL VARIABLES
-  dropped_on_menu = false;
-  appended = false;
+  if ($('body').hasClass('admin')) {
+    // GLOBAL VARIABLES 
+    dropped_on_menu = false;
+    appended = false;
 
-  //PJAX INIT
-  pjaxInit();
+    //PJAX INIT
+    pjaxInit();
 
-  // INITIALIZE PUSHSTATE
-  //pushStateInit();
+    // INITIALIZE PUSHSTATE
+    //pushStateInit();
 
-  // WINDOW BIND RESIZE AND FIRE
-  windowInit();
+    // WINDOW BIND RESIZE AND FIRE
+    windowInit();
 
-  // INITIALIZE GALLERY
-  galleryInit();
+    // INITIALIZE GALLERY
+    galleryInit();
 
-  // INITIALIZE LEFT MENU
-  leftMenuInit();
-  
-  // INITIALIZE UPLOAD BUTTON
-  uploadButtonInit();
+    // INITIALIZE LEFT MENU
+    leftMenuInit();
+    
+    // INITIALIZE UPLOAD BUTTON
+    uploadButtonInit();
 
-  // INITIALIZE UPLOAD
-  uploadInit();
+    // INITIALIZE UPLOAD
+    uploadInit();
 
-  // Modal behavior
-  modalInit();
+    // Modal behavior
+    modalInit();
+  }
+
 });
 
 //******************* FUNCTIONS BELOW *******************//
@@ -186,7 +189,7 @@ function leftMenuInit() {
     handle: 'div',
     helper: 'clone',
     items: 'li',
-    maxLevels: 2,
+    maxLevels: 1,
     distance: 5,
     opacity: .6,
     placeholder: 'placeholder',

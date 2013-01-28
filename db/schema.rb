@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124192142) do
+ActiveRecord::Schema.define(:version => 20130128170310) do
 
   create_table "elements", :force => true do |t|
     t.integer  "parent_id"
@@ -19,8 +19,12 @@ ActiveRecord::Schema.define(:version => 20130124192142) do
     t.string   "elementable_type"
     t.integer  "elementable_id"
     t.integer  "page_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "width",            :default => 300
+    t.integer  "height",           :default => 300
+    t.integer  "left",             :default => 0
+    t.integer  "top",              :default => 0
   end
 
   add_index "elements", ["elementable_id", "elementable_type", "page_id"], :name => "element_index", :unique => true
@@ -106,6 +110,12 @@ ActiveRecord::Schema.define(:version => 20130124192142) do
   end
 
   add_index "nav_items", ["navable_id", "navable_type", "site_id"], :name => "index_nav_items_on_navable_id_and_navable_type_and_site_id"
+
+  create_table "page_texts", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "name"

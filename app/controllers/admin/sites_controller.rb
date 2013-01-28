@@ -52,6 +52,23 @@ class Admin::SitesController < ApplicationController
 		redirect_to admin_sites_path
   end
 
+  def update_elements
+
+    # "&element_2,20,20&element_3,21,252&element_1,342,20"
+    array = params[:page_elements].gsub('element_', '').split('&')
+    array.each do |element|
+      mini_array = element.split(',')
+      e = Element.find(mini_array[0].to_i)
+      e.left = mini_array[1].to_i
+      e.top = mini_array[2].to_i
+      e.save
+    end
+
+
+
+    render :nothing => true
+  end
+
   def sort
     array1 = params[:nav_items].gsub('nav_item[', '').gsub(']=', ',').split('&')
     array2 = params[:gallery_items].gsub('nav_item[', '').gsub(']=', ',').split('&')

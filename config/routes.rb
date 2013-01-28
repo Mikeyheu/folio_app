@@ -4,6 +4,7 @@ FolioApp::Application.routes.draw do
     resources :sites do
       member do
         post 'sort'
+        post 'update_elements'
       end
       resources :images do
         collection do

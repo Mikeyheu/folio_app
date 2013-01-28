@@ -5,6 +5,7 @@ $(document).ready(function(){
     dropped_on_menu = false;
     appended = false;
 
+
     //PJAX INIT
     pjaxInit();
 
@@ -28,6 +29,9 @@ $(document).ready(function(){
 
     // Modal behavior
     modalInit();
+
+    // Draggable elements
+    elementInit();
   }
 
 });
@@ -342,6 +346,34 @@ function pushStateInit() {
     if($("body").hasClass("historypushed")) { 
       $.getScript(location.href);
     }
+  });
+}
+
+function elementInit() {
+  $('.element').draggable();
+  $('.save-button').on('click', function(){
+
+    var element_string = ""
+    $('.element').each(function(){
+      var mini_string = "";
+      mini_string += $(this).attr('id');
+      mini_string += ("," + $(this).position().left);
+      mini_string += ("," + $(this).position().top);
+      if (element_string!="") {
+        element_string += ("&" + mini_string);
+      } else {
+        element_string += (mini_string);
+      }
+    })
+
+    $.ajax({
+        type: 'POST',
+        traditional: true,
+        url: $('#page_elements').data('elements-url'),
+        data: {
+          page_elements: element_string
+        }
+      });
   });
 }
 

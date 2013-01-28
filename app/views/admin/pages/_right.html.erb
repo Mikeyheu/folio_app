@@ -30,7 +30,7 @@
 			</li>
 			<li class="divider-vertical"></li>
 			<li class="icon_button">
-				<a href="#" class="" rel="tooltip" rel="tooltip" data-original-title="Save">
+				<a href="#" class="save-button" rel="tooltip" rel="tooltip" data-original-title="Save">
 					<div id="save" class="" >
 						<div class="icon save"></div>
 					</div>
@@ -47,6 +47,23 @@
 		</ul>
 	</div>
 	<div class="right-inner">
-		<h1><%= @page.name %></h1>
+		<ul id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
+			<% @page.elements.each do |element| %>
+			  <% e = element.elementable %>
+			  <li>
+			    <div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
+			      	<% if e.class.name == "Image" %>
+			          <%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+			        <% elsif e.class.name == "PageText" %>
+			          <%= e.content.html_safe %>
+			        <% end %>
+			    </div>
+			  </li>
+			<% end %>
+		</ul>
+
+
+
+
 	</div>
 </div>

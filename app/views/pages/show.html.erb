@@ -1,1 +1,16 @@
-This is a site page for <%= @page.name %>
+<div class="page">
+	<ul>
+		<% @page.elements.each do |element| %>
+		<% e = element.elementable %>
+		<li>
+			<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
+				<% if e.class.name == "Image" %>
+				<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+				<% elsif e.class.name == "PageText" %>
+				<%= e.content.html_safe %>
+				<% end %>
+			</div>
+		</li>
+		<% end %>
+	</ul>
+<div>

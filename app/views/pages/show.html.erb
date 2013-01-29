@@ -3,12 +3,14 @@
 		<% @page.elements.each do |element| %>
 		<% e = element.elementable %>
 		<li>
-			<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
+			<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
+				<div class="element-container">
 				<% if e.class.name == "Image" %>
 				<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
 				<% elsif e.class.name == "PageText" %>
 				<%= e.content.html_safe %>
 				<% end %>
+				</div>
 			</div>
 		</li>
 		<% end %>

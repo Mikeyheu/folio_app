@@ -22,11 +22,6 @@ class Admin::GalleriesController < ApplicationController
         format.js {}
       end
     end
-    
-    # respond_to do |format|
-    #   format.html { render layout: 'admin_content' }
-    #   format.js {}
-    # end
   end
 
   def new

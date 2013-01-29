@@ -7,7 +7,7 @@
 		<%= csrf_meta_tags %>
 		<%= render 'layouts/shim' %>
 	</head>
-	<body class="<%= params[:controller].split("/").first %>">
+	<body class="<%= params[:controller].gsub('/', " ") %>">
 		<%= render 'layouts/site_header' %>
 		<%= yield %>
 

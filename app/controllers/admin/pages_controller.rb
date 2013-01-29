@@ -21,11 +21,6 @@ class Admin::PagesController < ApplicationController
         format.js {}
       end
     end
-
-    # respond_to do |format| 
-    #   format.html { render layout: 'admin_content' }
-    #   format.js {}
-    # end
   end
 
   def new
@@ -74,6 +69,20 @@ class Admin::PagesController < ApplicationController
     @page = @site.pages.find(params[:id])
     @page.destroy
 		redirect_to admin_site_path(@site)
+  end
+
+  def add_text_element
+    @page = @site.pages.find(params[:id])
+    text = PageText.create(content:"<p>This is a new text element</p>")
+    @page.elements.create(elementable:text, top:100, left:100, width:200, height:30)
+    redirect_to :back
+  end
+
+  def add_image_element
+    @page = @site.pages.find(params[:id])
+    image = PageText.create(content:"<p>This is a new text element</p>")
+    @page.elements.create(elementable:text, top:100, left:100, width:200, height:30)
+    redirect_to :back
   end
 
   private

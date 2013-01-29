@@ -26,6 +26,9 @@ class Admin::ImagesController < ApplicationController
 
   def new
     @image = Image.new
+    if params[:page_id]
+      @page_id = params[:page_id]
+    end
   end
 
   def edit
@@ -34,6 +37,7 @@ class Admin::ImagesController < ApplicationController
   end
 
   def create
+    puts params
     @image = @site.images.new(params[:image])
     
     if @image.save
@@ -47,6 +51,8 @@ class Admin::ImagesController < ApplicationController
         # Create new gallery_assignment
         ga = @gallery.gallery_assignments.new(image_id:@image.id)
         ga.save
+      elsif params[:page_id]
+        puts "awesomeness"
       end
       render :nothing => true
     end

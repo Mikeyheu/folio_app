@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
   if ($('body').hasClass('admin')) {
+
     // GLOBAL VARIABLES 
     dropped_on_menu = false;
     appended = false;
-
 
     //PJAX INIT
     pjaxInit();
@@ -30,7 +30,7 @@ $(document).ready(function(){
     // Modal behavior
     modalInit();
 
-    // Draggable elements
+    // Draggable and Resizable elements
     elementInit();
   }
 
@@ -52,7 +52,7 @@ function resize() {
   var left_menu_pos = $('.left-panel').position().left;
   $('.content').height($(window).height() - primary_nav_height);
   $('.right-inner').css({
-    height: $(window).height() - primary_nav_height - secondary_nav_height - tertiary_nav_height - 20
+    height: $(window).height() - primary_nav_height - secondary_nav_height - tertiary_nav_height
   });
   $('#panes').css({
     height: $(window).height() - primary_nav_height - secondary_nav_height
@@ -107,8 +107,8 @@ function galleryInit() {
           data: {
            images: $('#sortable').sortable('serialize'), 
            gallery_id: $('#sortable').data('gallery_id')
-          }
-        });       
+         }
+       });       
       } else {
         $('#sortable').sortable('cancel');
         dropped_on_menu == false;
@@ -159,30 +159,30 @@ function leftMenuInit() {
     tolerance: 'pointer',
     toleranceElement: '> div',
     start: function(event, ui) {
-       if (ui.item.attr('class') == 'folder') {
-        console.log('folder');
-        $('ol.sortable li').addClass('no-nest');
-       }
-    },
-    remove: function(event, ui){
-      if (ui.item.attr('class') != 'gallery') {
-        console.log("removed non gallery");
-        $('#sortable1').nestedSortable('cancel');
-      }
-    },
-    stop: function(event, ui) {
-      $('#page-menu ol.sortable li').removeClass('no-nest');
-      $.ajax({
-        type: 'POST',
-        traditional: true,
-        url: $('#sortable1').data('update-url'),
-        data: {
-          nav_items:$('#sortable1').nestedSortable('serialize'),
-          gallery_items:$('#sortable2').nestedSortable('serialize')
-        }
-      });
+     if (ui.item.attr('class') == 'folder') {
+      console.log('folder');
+      $('ol.sortable li').addClass('no-nest');
     }
-  });
+  },
+  remove: function(event, ui){
+    if (ui.item.attr('class') != 'gallery') {
+      console.log("removed non gallery");
+      $('#sortable1').nestedSortable('cancel');
+    }
+  },
+  stop: function(event, ui) {
+    $('#page-menu ol.sortable li').removeClass('no-nest');
+    $.ajax({
+      type: 'POST',
+      traditional: true,
+      url: $('#sortable1').data('update-url'),
+      data: {
+        nav_items:$('#sortable1').nestedSortable('serialize'),
+        gallery_items:$('#sortable2').nestedSortable('serialize')
+      }
+    });
+  }
+});
 
   // ARCHIVE MENU PANEL SORTING
   $('#sortable2').nestedSortable({
@@ -229,7 +229,7 @@ function leftMenuInit() {
       $(this).parent().find('ol').show();
     }
   });
-    
+
   // LEFT MENU DRAGGING PANEL PANES
   $('#panes').layout({
     minSize: 50, 
@@ -263,8 +263,8 @@ function leftMenuInit() {
         data: {
          images: string, 
          gallery_id: $(event.target).parent().data('gallery-id')
-        }
-      }); 
+       }
+     }); 
       // $('#sortable').sortable('cancel');
     }
   });
@@ -279,10 +279,10 @@ function uploadButtonInit() {
     },
     stop: function(e) { 
       $.ajax({
-          type: 'GET',
-          traditional: true,
-          url: $('#sortable').data('gallery-url')
-        });    
+        type: 'GET',
+        traditional: true,
+        url: $('#sortable').data('gallery-url')
+      });    
     }
   });
 
@@ -295,14 +295,14 @@ function uploadButtonInit() {
     }
   });
 
-    $('#image_image_file').click(function(e) {
+  $('#image_image_file').click(function(e) {
     e.stopPropagation(); // stop event bubbling
   });
 }
 
 function uploadInit() {
    // Upload Button 
-  if($('#sortable').data('gallery_id')) {
+   if($('#sortable').data('gallery_id')) {
     $('#hidden_field').html('<input id="gallery_id" name="gallery_id" type="hidden" value="' + $('#sortable').data('gallery_id') + '">');
     $('#new_image').fileupload('enable');
   } else {
@@ -315,9 +315,13 @@ function uploadInit() {
 function pjaxInit() {
   $(document).pjax('a.ajax', '#pjax-container');
   $(document).on('pjax:complete', function() {
-    resize();
-    galleryInit();
-    uploadInit();
+
+    if ($('body').hasClass('admin')) {
+      resize();
+      galleryInit();
+      elementInit();
+      uploadInit();
+    }
   });
   $.pjax.defaults.timeout = false;
 }
@@ -350,7 +354,14 @@ function pushStateInit() {
 }
 
 function elementInit() {
-  $('.element').draggable();
+  $('.element').click(function(event){
+     $('.element').find('.resizing-box').hide();
+     $(this).find('.resizing-box').show();
+ });
+
+  $('.element').draggable({
+    containment: ".canvas"
+  });
   $('.save-button').on('click', function(){
 
     var element_string = ""
@@ -359,6 +370,8 @@ function elementInit() {
       mini_string += $(this).attr('id');
       mini_string += ("," + $(this).position().left);
       mini_string += ("," + $(this).position().top);
+      mini_string += ("," + $(this).width());
+      mini_string += ("," + $(this).height());
       if (element_string!="") {
         element_string += ("&" + mini_string);
       } else {
@@ -367,13 +380,35 @@ function elementInit() {
     })
 
     $.ajax({
-        type: 'POST',
-        traditional: true,
-        url: $('#page_elements').data('elements-url'),
-        data: {
-          page_elements: element_string
-        }
-      });
+      type: 'POST',
+      traditional: true,
+      url: $('#page_elements').data('elements-url'),
+      data: {
+        page_elements: element_string
+      }
+    });
+  });
+
+  $('.element').resizable({
+    handles: {
+      n: '.n', 
+      e: '.e', 
+      s: '.s', 
+      w: '.w', 
+      ne: '.ne', 
+      se: '.se', 
+      nw: '.nw', 
+      sw: '.sw'
+    }
+  });
+
+  // Click off thumbnail to deselect
+
+  $('.canvas').on("click", function(event){
+    var t = $(event.target)
+    if (t.hasClass('canvas')) {
+      $('.element').find('.resizing-box').hide();
+    }
   });
 }
 

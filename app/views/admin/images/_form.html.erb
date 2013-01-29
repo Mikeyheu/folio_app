@@ -31,6 +31,10 @@
     <%= f.label :image_file %><br />
     <%= f.file_field :image_file %>
   </div>
+
+  <% if @page_id %>
+    <%= hidden_field_tag :page_id, @page_id %>
+  <% end %>
 </div>
 
 <div class="modal-footer">

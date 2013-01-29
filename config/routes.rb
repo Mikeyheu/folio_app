@@ -21,7 +21,11 @@ FolioApp::Application.routes.draw do
         end
       end
       resources :gallery_pages 
-      resources :pages 
+      resources :pages do
+        member do
+          post 'add_text_element'
+        end
+      end
       resources :links 
       resources :folders
       resource :setting

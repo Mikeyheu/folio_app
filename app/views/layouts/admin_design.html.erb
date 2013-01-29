@@ -7,7 +7,7 @@
 		<%= csrf_meta_tags %>
 		<%= render 'layouts/shim' %>
 	</head>
-	<body class="<%= params[:controller].split("/").first %>">
+	<body class="<%= params[:controller].gsub('/', " ") %>">
 		
 		<% flash.each do |key, value| %>
 		  <div class="alert alert-<%= key %>"><%= value %></div>

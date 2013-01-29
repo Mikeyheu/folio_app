@@ -7,7 +7,9 @@ class Admin::HomepagesController < ApplicationController
     @homepage = @site.homepage
     @nav_items = @site.nav_items.includes(:navable).nav_scope
     @gallery_items = @site.nav_items.includes(:navable).gallery_scope
+    
     if request.headers['X-PJAX']
+      puts "pjax hit"
       render :layout => false
     else 
       respond_to do |format| 

@@ -16,16 +16,17 @@
 			<li  class="dropdown icon_button">
 				<a href="#" id="add_element" class="dropdown-toggle" data-toggle="dropdown" rel="tooltip" data-original-title="Add Element"><div class="icon add"></div> </a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Text Element</a></li>
-					<li><a href="#">Image Element</a></li>
+					<li><%= link_to "Text Element", add_text_element_admin_site_page_path, method: :post, remote: true %></li>
+					<li><%= link_to 'Image Element', {controller: 'admin/images', action:'new', page_id:@page.id}, {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal" } %></li> 
 				</ul>
+
 			</li>   
 			<li class="divider-vertical"></li>
 			<li class="icon_button">
 				<%= link_to site_page_path(@site, @page) do %>
-					<div id="view" class="" rel="tooltip" data-original-title="View Site">
-						<div class="icon view"></div>
-					</div>
+				<div id="view" class="" rel="tooltip" data-original-title="View Site">
+					<div class="icon view"></div>
+				</div>
 				<% end %>
 			</li>
 			<li class="divider-vertical"></li>
@@ -47,21 +48,44 @@
 		</ul>
 	</div>
 	<div class="right-inner">
-		<ul id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
-			<% @page.elements.each do |element| %>
-			  <% e = element.elementable %>
-			  <li>
-			    <div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
-			      	<% if e.class.name == "Image" %>
-			          <%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
-			        <% elsif e.class.name == "PageText" %>
-			          <%= e.content.html_safe %>
-			        <% end %>
-			    </div>
-			  </li>
-			<% end %>
-		</ul>
+		<div class="canvas-background"></div>
+		<div class="canvas">
+			<ul id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
+				<% @page.elements.each do |element| %>
+				<% e = element.elementable %>
+				<li>
+					<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
 
+						<div class="element-container">
+							<% if e.class.name == "Image" %>
+							<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+							<% elsif e.class.name == "PageText" %>
+							<%= e.content.html_safe %>
+							<% end %>
+					  </div>
+
+					  <div class="resizing-box" style="display:none;">
+							<div class="lines hline"></div>
+							<div class="lines hline bottom"></div>
+							<div class="lines vline"></div>
+							<div class="lines vline right"></div>
+							<div class="n ui-resizable-handle handle ui-resizable-n"></div>
+							<div class="ne ui-resizable-handle handle ui-resizable-ne"></div>
+							<div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
+							<div class="e ui-resizable-handle handle ui-resizable-e"></div>
+							<div class="s ui-resizable-handle handle ui-resizable-s"></div>
+							<div class="se ui-resizable-handle handle ui-resizable-se"></div>
+							<div class="sw ui-resizable-handle handle ui-resizable-sw"></div>
+							<div class="w ui-resizable-handle handle ui-resizable-w"></div>
+						</div>
+
+
+
+					</div>
+				</li>
+				<% end %>
+			</ul>
+   </div>
 
 
 

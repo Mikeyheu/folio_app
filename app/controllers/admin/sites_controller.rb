@@ -53,7 +53,6 @@ class Admin::SitesController < ApplicationController
   end
 
   def update_elements
-
     # "&element_2,20,20&element_3,21,252&element_1,342,20"
     array = params[:page_elements].gsub('element_', '').split('&')
     array.each do |element|
@@ -61,11 +60,10 @@ class Admin::SitesController < ApplicationController
       e = Element.find(mini_array[0].to_i)
       e.left = mini_array[1].to_i
       e.top = mini_array[2].to_i
+      e.width = mini_array[3].to_i
+      e.height = mini_array[4].to_i
       e.save
     end
-
-
-
     render :nothing => true
   end
 

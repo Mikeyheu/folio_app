@@ -27,6 +27,11 @@ FolioApp::Application.routes.draw do
         end
       end
       resources :links 
+      resources :elements do
+        member do
+          post 'remove'
+        end
+      end
       resources :folders
       resource :setting
       resource :homepage

@@ -78,13 +78,6 @@ class Admin::PagesController < ApplicationController
     redirect_to :back
   end
 
-  def add_image_element
-    @page = @site.pages.find(params[:id])
-    image = PageText.create(content:"<p>This is a new text element</p>")
-    @page.elements.create(elementable:text, top:100, left:100, width:200, height:30)
-    redirect_to :back
-  end
-
   private
 
   def get_site 

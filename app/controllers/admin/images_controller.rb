@@ -37,7 +37,7 @@ class Admin::ImagesController < ApplicationController
   end
 
   def create
-    puts params
+
     @image = @site.images.new(params[:image])
     
     if @image.save
@@ -51,10 +51,14 @@ class Admin::ImagesController < ApplicationController
         # Create new gallery_assignment
         ga = @gallery.gallery_assignments.new(image_id:@image.id)
         ga.save
+
+        render :nothing => true
       elsif params[:page_id]
-        puts "awesomeness"
+        p = Page.find(params[:page_id])       
+        p.elements.create(elementable:@image, top:100, left:100, width:200, height:200) 
+        redirect_to :back
       end
-      render :nothing => true
+      
     end
   end
 

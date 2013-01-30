@@ -354,14 +354,9 @@ function pushStateInit() {
 }
 
 function elementInit() {
-  $('.element').click(function(event){
-     $('.element').find('.resizing-box').hide();
-     $(this).find('.resizing-box').show();
- });
 
-  $('.element').draggable({
-    containment: ".canvas"
-  });
+  // Save button functionality
+
   $('.save-button').on('click', function(){
 
     var element_string = ""
@@ -389,6 +384,12 @@ function elementInit() {
     });
   });
 
+  // Element dragging and resizing
+
+  $('.element').draggable({
+    containment: ".canvas"
+  });
+
   $('.element').resizable({
     handles: {
       n: '.n', 
@@ -402,14 +403,70 @@ function elementInit() {
     }
   });
 
-  // Click off thumbnail to deselect
+  $('.element').click(function(event){
+    $('.element').find('.resizing-box, .resize-border').hide();
+    $(this).find('.resizing-box, .resize-border').show();
+  });
 
-  $('.canvas').on("click", function(event){
-    var t = $(event.target)
-    if (t.hasClass('canvas')) {
-      $('.element').find('.resizing-box').hide();
+  // Image container dragging and resizing
+  $('.image-container').draggable().resizable({
+    handles: {
+      n: '.in', 
+      e: '.ie', 
+      s: '.is', 
+      w: '.iw', 
+      ne: '.ine', 
+      se: '.ise', 
+      nw: '.inw', 
+      sw: '.isw'
     }
   });
+
+  $('.image-container').draggable('disable').resizable('disable');
+
+  
+  $('.crop-button').on('click', function(){
+    var el = $(this).closest('.element');
+    event.stopPropagation();
+    $('.resizing-box, .element_icons').hide();
+    $('.element-container').css('overflow', 'visible');
+    el.find('.image-resize-handles').show();
+    $('.element').draggable('disable');
+    $('.image-container').css({
+      width: $('.image-container img').width(),
+      height: $('.image-container img').height()
+      });
+    $('.image-container img').css({
+      width: '100%',
+      height: '100%',
+      opacity: .5
+      });
+    $('.image-container').draggable('enable').resizable('enable');
+  });
+
+  // $('.crop-button').on('click', function(event){
+  //   var el = $(this).closest('.element');
+  //   event.stopPropagation();
+  //   $('.resizing-box').hide();
+  //   $('.element-container').css('overflow', 'hidden');
+  //   el.find('.element-container').css('overflow', 'visible');
+  //   $('.element').draggable('disable');
+  //   $('image-container').draggable('disable').resizable('disable');
+  //   el.find('.image-container').draggable('enable').resizable('enable');
+
+
+
+  // });
+
+  // // Click off thumbnail to deselect
+  // $('.canvas').on("click", function(event){
+  //   var t = $(event.target)
+  //   if (t.hasClass('canvas')) {
+  //     $('.element').find('.resizing-box').hide();
+  //   }
+  // });
+
+
 }
 
 

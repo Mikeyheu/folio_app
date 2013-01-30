@@ -23,7 +23,7 @@
 			</li>   
 			<li class="divider-vertical"></li>
 			<li class="icon_button">
-				<%= link_to site_page_path(@site, @page) do %>
+				<%= link_to site_page_path(@site, @page),{:target => "_blank"} do %>
 				<div id="view" class="" rel="tooltip" data-original-title="View Site">
 					<div class="icon view"></div>
 				</div>
@@ -55,20 +55,34 @@
 				<% e = element.elementable %>
 				<li>
 					<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
-
 						<div class="element-container">
 							<% if e.class.name == "Image" %>
-							<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+								<div class="image-container">
+									<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+									<div class='image-resize-handles' style="display:none;">
+										<div class="in ui-resizable-handle handle ui-resizable-n"></div>
+										<div class="ine ui-resizable-handle handle ui-resizable-ne"></div>
+										<div class="inw ui-resizable-handle handle ui-resizable-nw"></div>
+										<div class="ie ui-resizable-handle handle ui-resizable-e"></div>
+										<div class="is ui-resizable-handle handle ui-resizable-s"></div>
+										<div class="ise ui-resizable-handle handle ui-resizable-se"></div>
+										<div class="isw ui-resizable-handle handle ui-resizable-sw"></div>
+										<div class="iw ui-resizable-handle handle ui-resizable-w"></div>
+									</div>
+								</div>
 							<% elsif e.class.name == "PageText" %>
-							<%= e.content.html_safe %>
+								<%= e.content.html_safe %>
 							<% end %>
-					  </div>
+						</div>
 
-					  <div class="resizing-box" style="display:none;">
+						<div class="resize-border" style="display:none;">
 							<div class="lines hline"></div>
 							<div class="lines hline bottom"></div>
 							<div class="lines vline"></div>
 							<div class="lines vline right"></div>
+						</div>
+
+						<div class="resizing-box" style="display:none;">	
 							<div class="n ui-resizable-handle handle ui-resizable-n"></div>
 							<div class="ne ui-resizable-handle handle ui-resizable-ne"></div>
 							<div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
@@ -79,13 +93,27 @@
 							<div class="w ui-resizable-handle handle ui-resizable-w"></div>
 						</div>
 
+						<% if e.class.name == "Image" %>
+							<div class="element_icons">
+								<a href="#" class="crop-button"><i class="icon-nav crop"></i></a>
+								<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_image_path(@site, e),:remote => true, 'data-target' => "#myModal" %>
+								<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
+							</div>
+						<% elsif e.class.name == "PageText" %>
+							<div class="element_icons">
+								<%= link_to '<i class="icon-nav pencil"></i>'.html_safe %>
+								<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe %>
+								<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
+							</div>
+						<% end %>
+
 
 
 					</div>
 				</li>
 				<% end %>
 			</ul>
-   </div>
+		</div>
 
 
 

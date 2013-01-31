@@ -50,30 +50,36 @@
 	<div class="right-inner">
 		<div class="canvas-background"></div>
 		<div class="canvas">
-			<ul id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
+
+			<div id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
 				<% @page.elements.each do |element| %>
 				<% e = element.elementable %>
-				<li>
-					<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px;">
-						<div class="element-container">
+			
+					<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
+
+						
 							<% if e.class.name == "Image" %>
-								<div class="image-container">
-									<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
-									<div class='image-resize-handles' style="display:none;">
-										<div class="in ui-resizable-handle handle ui-resizable-n"></div>
-										<div class="ine ui-resizable-handle handle ui-resizable-ne"></div>
-										<div class="inw ui-resizable-handle handle ui-resizable-nw"></div>
-										<div class="ie ui-resizable-handle handle ui-resizable-e"></div>
-										<div class="is ui-resizable-handle handle ui-resizable-s"></div>
-										<div class="ise ui-resizable-handle handle ui-resizable-se"></div>
-										<div class="isw ui-resizable-handle handle ui-resizable-sw"></div>
-										<div class="iw ui-resizable-handle handle ui-resizable-w"></div>
+								<div class="image-holder">
+									<div class="image-container" style="width:<%= element.image_width %>px; height:<%= element.image_height %>px; left:<%= element.image_left %>px; top:<%= element.image_top %>px;">
+										<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+										<div class='image-resize-handles' style="display:none;">
+											<div class="inorth ui-resizable-handle handle ui-resizable-n"></div>
+											<div class="ine ui-resizable-handle handle ui-resizable-ne"></div>
+											<div class="inw ui-resizable-handle handle ui-resizable-nw"></div>
+											<div class="ie ui-resizable-handle handle ui-resizable-e"></div>
+											<div class="is ui-resizable-handle handle ui-resizable-s"></div>
+											<div class="ise ui-resizable-handle handle ui-resizable-se"></div>
+											<div class="isw ui-resizable-handle handle ui-resizable-sw"></div>
+											<div class="iw ui-resizable-handle handle ui-resizable-w"></div>
+										</div>
 									</div>
 								</div>
 							<% elsif e.class.name == "PageText" %>
-								<%= e.content.html_safe %>
+							  <div class="text-container">
+								  <%= e.content.html_safe %>
+							  </div>
 							<% end %>
-						</div>
+						
 
 						<div class="resize-border" style="display:none;">
 							<div class="lines hline"></div>
@@ -110,9 +116,9 @@
 
 
 					</div>
-				</li>
+				
 				<% end %>
-			</ul>
+			</div>
 		</div>
 
 

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: galleries
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  slug            :string(255)
+#  site_id         :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  gallery_page_id :integer
+#
+
 class Gallery < ActiveRecord::Base
   belongs_to :site
   # belongs_to :gallery_page

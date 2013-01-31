@@ -361,12 +361,24 @@ function elementInit() {
 
     var element_string = ""
     $('.element').each(function(){
+      
       var mini_string = "";
       mini_string += $(this).attr('id');
       mini_string += ("," + $(this).position().left);
       mini_string += ("," + $(this).position().top);
       mini_string += ("," + $(this).width());
       mini_string += ("," + $(this).height());
+      if ($(this).find('.image-container').length > 0) {
+        console.log('image_attributes')
+        mini_string += ("," + $(this).find('.image-container').position().left);
+        mini_string += ("," + $(this).find('.image-container').position().top);
+        mini_string += ("," + $(this).find('.image-container').width());
+        mini_string += ("," + $(this).find('.image-container').height());
+      } else {
+        mini_string += ",nil,nil,nil,nil"
+      }
+      mini_string += ("," + $(this).css('z-index'));
+
       if (element_string!="") {
         element_string += ("&" + mini_string);
       } else {
@@ -387,7 +399,8 @@ function elementInit() {
   // Element dragging and resizing
 
   $('.element').draggable({
-    containment: ".canvas"
+    containment: ".canvas",
+        stack: ".element",
   });
 
   $('.element').resizable({
@@ -404,14 +417,18 @@ function elementInit() {
   });
 
   $('.element').click(function(event){
-    $('.element').find('.resizing-box, .resize-border').hide();
+    
+    disableElements();
+    zStack(this);
     $(this).find('.resizing-box, .resize-border').show();
+    
   });
+
 
   // Image container dragging and resizing
   $('.image-container').draggable().resizable({
     handles: {
-      n: '.in', 
+      n: '.inorth', 
       e: '.ie', 
       s: '.is', 
       w: '.iw', 
@@ -419,7 +436,8 @@ function elementInit() {
       se: '.ise', 
       nw: '.inw', 
       sw: '.isw'
-    }
+    },
+    aspectRatio: true
   });
 
   $('.image-container').draggable('disable').resizable('disable');
@@ -428,15 +446,16 @@ function elementInit() {
   $('.crop-button').on('click', function(){
     var el = $(this).closest('.element');
     event.stopPropagation();
+    el.find('.image-container').css({
+      width: el.find('.image-container img').width(),
+      height: el.find('.image-container img').height()
+      });
+    el.find('.image-holder').css('overflow', 'visible');
     $('.resizing-box, .element_icons').hide();
     $('.element-container').css('overflow', 'visible');
-    el.find('.image-resize-handles').show();
+    el.find('.resize-border, .image-resize-handles').show();
     $('.element').draggable('disable');
-    $('.image-container').css({
-      width: $('.image-container img').width(),
-      height: $('.image-container img').height()
-      });
-    $('.image-container img').css({
+    el.find('.image-container img').css({
       width: '100%',
       height: '100%',
       opacity: .5
@@ -444,33 +463,73 @@ function elementInit() {
     $('.image-container').draggable('enable').resizable('enable');
   });
 
-  // $('.crop-button').on('click', function(event){
-  //   var el = $(this).closest('.element');
-  //   event.stopPropagation();
-  //   $('.resizing-box').hide();
-  //   $('.element-container').css('overflow', 'hidden');
-  //   el.find('.element-container').css('overflow', 'visible');
-  //   $('.element').draggable('disable');
-  //   $('image-container').draggable('disable').resizable('disable');
-  //   el.find('.image-container').draggable('enable').resizable('enable');
 
 
-
-  // });
-
-  // // Click off thumbnail to deselect
-  // $('.canvas').on("click", function(event){
-  //   var t = $(event.target)
-  //   if (t.hasClass('canvas')) {
-  //     $('.element').find('.resizing-box').hide();
-  //   }
-  // });
+  // Click off thumbnail to deselect
+  $('.canvas').on("click", function(event){
+    var t = $(event.target)
+    if (t.hasClass('canvas')) {
+      disableElements();
+    }
+  });
 
 
 }
 
 
+function disableElements() {
+  $('.element_icons').show();
+  $('.image-holder').css('overflow', 'hidden');
+  $('.resizing-box, .resize-border, .image-resize-handles').hide();
+  $('.right-inner').height($('.right-inner').height()-1);
+  $('.right-inner').height($('.right-inner').height()+1);
+  $('.image-container').each(function(){
+    $(this).css({
+      width: $(this).width(),
+      height: $(this).height()
+    });
+  });
+  $('.image-container img').each(function(){
+    $(this).css({
+      width: $(this).width(),
+      height: $(this).height(),
+      opacity: 1
+    });
+  $('.image-container').draggable('disable').resizable('disable');
+  $('.element').draggable('enable').resizable('enable');
+  })
 
+}
+
+function zStack(clicked) {
+  // z-index stacking
+    var zmax = 0;
+
+    $('.element').each(function(){
+      var current = parseInt($(this).css('z-index'))
+      zmax = current > zmax ? current : zmax
+    });
+
+    // Set element to highest z-index
+    $(clicked).css({'z-index': zmax + 1})
+
+    // Reset all z-indexs based on 0
+    var blah = $('.element')
+    
+    blah.sort(function(a,b){
+      if (parseInt($(a).css('z-index')) < parseInt($(b).css('z-index'))) {
+        return -1;
+      } 
+      if (parseInt($(a).css('z-index')) > parseInt($(b).css('z-index'))) {
+        return 1;
+      } 
+      return 0;
+    });
+
+    blah.each(function(index,item){
+      $(item).css({ 'z-index': index})
+    })
+}
 
 
 

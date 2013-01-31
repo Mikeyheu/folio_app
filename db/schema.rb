@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128170310) do
+ActiveRecord::Schema.define(:version => 20130131161035) do
 
   create_table "elements", :force => true do |t|
     t.integer  "parent_id"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(:version => 20130128170310) do
     t.integer  "height",           :default => 300
     t.integer  "left",             :default => 0
     t.integer  "top",              :default => 0
+    t.integer  "z_index",          :default => 0
+    t.integer  "image_width"
+    t.integer  "image_height"
+    t.integer  "image_top",        :default => 0
+    t.integer  "image_left",       :default => 0
   end
 
   add_index "elements", ["elementable_id", "elementable_type", "page_id"], :name => "element_index", :unique => true

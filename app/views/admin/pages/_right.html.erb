@@ -95,16 +95,19 @@
 					<% if e.class.name == "Image" %>
 					<div class="image-holder">
 						<div class="image-container" style="width:<%= element.image_width %>px; height:<%= element.image_height %>px; left:<%= element.image_left %>px; top:<%= element.image_top %>px;">
+
+							
 							<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+
+							<div class="image-resize-border" style="display:none;">
+								<div class="lines red hline"></div>
+								<div class="lines red hline bottom"></div>
+								<div class="lines red vline"></div>
+								<div class="lines red vline right"></div>
+							</div>
+
 							<div class='image-resize-handles' style="display:none;">
-								<div class="inorth ui-resizable-handle handle ui-resizable-n"></div>
-								<div class="ine ui-resizable-handle handle ui-resizable-ne"></div>
-								<div class="inw ui-resizable-handle handle ui-resizable-nw"></div>
-								<div class="ie ui-resizable-handle handle ui-resizable-e"></div>
-								<div class="is ui-resizable-handle handle ui-resizable-s"></div>
-								<div class="ise ui-resizable-handle handle ui-resizable-se"></div>
-								<div class="isw ui-resizable-handle handle ui-resizable-sw"></div>
-								<div class="iw ui-resizable-handle handle ui-resizable-w"></div>
+								<div class="ise red ui-resizable-handle handle ui-resizable-se"></div>
 							</div>
 						</div>
 					</div>
@@ -123,14 +126,9 @@
 					</div>
 
 					<div class="resizing-box" style="display:none;">	
-						<div class="n ui-resizable-handle handle ui-resizable-n"></div>
-						<div class="ne ui-resizable-handle handle ui-resizable-ne"></div>
-						<div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
-						<div class="e ui-resizable-handle handle ui-resizable-e"></div>
-						<div class="s ui-resizable-handle handle ui-resizable-s"></div>
+
 						<div class="se ui-resizable-handle handle ui-resizable-se"></div>
-						<div class="sw ui-resizable-handle handle ui-resizable-sw"></div>
-						<div class="w ui-resizable-handle handle ui-resizable-w"></div>
+
 					</div>
 
 					<% if e.class.name == "Image" %>

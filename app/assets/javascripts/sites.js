@@ -429,22 +429,47 @@ function elementInit() {
 
   $('.element').resizable({
     stop: function(e, ui) {
+      // if (snapping == true) {
+      //   var pos = $(".selected-element").position();
+      //   var posleft = pos.left;
+      //   var postop = pos.top;
+      //   var offsetLeft = Math.round(posleft / 20) * 20;
+      //   var offsetTop = Math.round(postop / 20) * 20;
+      //   var width = $(".selected-element").width();
+      //   var height = $(".selected-element").height();
+      //   var offsetWidth = Math.round(width / 20) * 20;
+      //   var offsetHeight = Math.round(height / 20) * 20;
+      //   $(".selected-element").css({
+      //     // left: offsetLeft,
+      //     // top: offsetTop,
+      //     width: offsetWidth,
+      //     height: offsetHeight
+      //   });
+      // }
+
+
       if (snapping == true) {
         var pos = $(".selected-element").position();
-        var posleft = pos.left;
-        var postop = pos.top;
-        var offsetLeft = Math.round(posleft / 20) * 20;
-        var offsetTop = Math.round(postop / 20) * 20;
-        var width = $(".selected-element").width();
-        var height = $(".selected-element").height();
-        var offsetWidth = Math.round(width / 20) * 20;
-        var offsetHeight = Math.round(height / 20) * 20;
+        var posleft = pos.left; // X: 13
+        var postop = pos.top; // 0
+        var width = $(".selected-element").width();  // 200
+        var height = $(".selected-element").height();  // 200
+
+
+
+        // var offsetLeft = Math.round(posleft / 20) * 20;
+        // var offsetTop = Math.round(postop / 20) * 20;
+        
+        var offsetWidth = (Math.round((width + posleft) / 20) * 20) - posleft;
+        var offsetHeight = (Math.round((height + postop) / 20) * 20)  - postop;
+
         $(".selected-element").css({
-          left: offsetLeft,
-          top: offsetTop,
+          left: posleft,
+          top: postop,
           width: offsetWidth,
           height: offsetHeight
         });
+
       }
       $('#x').val($(".selected-element").position().left);
       $('#y').val($(".selected-element").position().top);
@@ -517,7 +542,7 @@ $('.element').click(function(event){
     el.find('.image-holder').css('overflow', 'visible');
     $('.resizing-box, .element_icons').hide();
     $('.element-container').css('overflow', 'visible');
-    el.find('.resize-border, .image-resize-handles').show();
+    el.find('.resize-border, .image-resize-handles, .image-resize-border').show();
     $('.element').draggable('disable');
     el.find('.image-container img').css({
       width: '100%',
@@ -635,7 +660,7 @@ function disableElements() {
   $('.element').removeClass('selected-element');
   $('.element_icons').show();
   $('.image-holder').css('overflow', 'hidden');
-  $('.resizing-box, .resize-border, .image-resize-handles').hide();
+  $('.resizing-box, .resize-border, .image-resize-handles, .image-resize-border').hide();
   $('.right-inner').height($('.right-inner').height()-1);
   $('.right-inner').height($('.right-inner').height()+1);
   $('.image-container').each(function(){

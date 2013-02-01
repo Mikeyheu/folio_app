@@ -436,13 +436,36 @@ function elementInit() {
         var postop = pos.top; // 0
         var width = $(".selected-element").width();  // 200
         var height = $(".selected-element").height();  // 200
+        var offsetWidth = 0;
+        var offsetHeight = 0;
 
-        var offsetWidth = (Math.round((width + posleft) / 20) * 20) - posleft;
-        var offsetHeight = (Math.round((height + postop) / 20) * 20)  - postop;
+        if($(e.srcElement).hasClass('ui-resizable-se')) {
+          offsetLeft = posleft;
+          offsetTop = postop;
+          offsetWidth = (Math.round((width + posleft) / 20) * 20) - posleft;
+          offsetHeight = (Math.round((height + postop) / 20) * 20)  - postop;
+        } else if($(e.srcElement).hasClass('ui-resizable-nw')) {
+          offsetLeft = Math.round(posleft / 20) * 20;
+          offsetTop = Math.round(postop / 20) * 20;
+          offsetWidth = width + (posleft - offsetLeft);
+          offsetHeight = height + (postop - offsetTop);
+        } else if($(e.srcElement).hasClass('ui-resizable-sw')) {
+          offsetLeft = Math.round(posleft / 20) * 20;
+          offsetTop = Math.round(postop / 20) * 20;
+          offsetWidth = width + (posleft - offsetLeft);
+          offsetHeight = (Math.round(height / 20) * 20) + (postop - offsetTop);
+        } else if($(e.srcElement).hasClass('ui-resizable-ne')) {
+          offsetLeft = Math.round(posleft / 20) * 20;
+          offsetTop = Math.round(postop / 20) * 20;
+          offsetWidth = (Math.round(width / 20) * 20) + (posleft - offsetLeft);
+          offsetHeight = height + (postop - offsetTop);
+        }
+
+        
 
         $(".selected-element").css({
-          left: posleft,
-          top: postop,
+          left: offsetLeft,
+          top: offsetTop,
           width: offsetWidth,
           height: offsetHeight
         });

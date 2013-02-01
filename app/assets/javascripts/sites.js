@@ -429,24 +429,6 @@ function elementInit() {
 
   $('.element').resizable({
     stop: function(e, ui) {
-      // if (snapping == true) {
-      //   var pos = $(".selected-element").position();
-      //   var posleft = pos.left;
-      //   var postop = pos.top;
-      //   var offsetLeft = Math.round(posleft / 20) * 20;
-      //   var offsetTop = Math.round(postop / 20) * 20;
-      //   var width = $(".selected-element").width();
-      //   var height = $(".selected-element").height();
-      //   var offsetWidth = Math.round(width / 20) * 20;
-      //   var offsetHeight = Math.round(height / 20) * 20;
-      //   $(".selected-element").css({
-      //     // left: offsetLeft,
-      //     // top: offsetTop,
-      //     width: offsetWidth,
-      //     height: offsetHeight
-      //   });
-      // }
-
 
       if (snapping == true) {
         var pos = $(".selected-element").position();
@@ -455,11 +437,6 @@ function elementInit() {
         var width = $(".selected-element").width();  // 200
         var height = $(".selected-element").height();  // 200
 
-
-
-        // var offsetLeft = Math.round(posleft / 20) * 20;
-        // var offsetTop = Math.round(postop / 20) * 20;
-        
         var offsetWidth = (Math.round((width + posleft) / 20) * 20) - posleft;
         var offsetHeight = (Math.round((height + postop) / 20) * 20)  - postop;
 

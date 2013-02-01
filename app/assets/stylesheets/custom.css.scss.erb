@@ -176,9 +176,10 @@ a.logo, a.logo:hover {
 }
 
 .right-inner {
-	position:relative;
+	position:absolute;
 	overflow:auto;
 	height:100%;
+	width:100%;
 }
 
 .padded {
@@ -733,3 +734,82 @@ div.element:hover .element_icons {
 	right:0px;
 	height:100%;
 }
+
+/************ Tertiary Navigation CSS ************/
+
+.tertiary-navbar {
+	height:36px;
+	background-color: #0099ff;
+	background-image: -moz-linear-gradient(top, #555555, #444444);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#444444));
+	background-image: -webkit-linear-gradient(top, #555555, #444444);
+	background-image: -o-linear-gradient(top, #555555, #444444);
+	background-image: linear-gradient(to bottom, #555555, #444444);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff555555', endColorstr='#ff444444', GradientType=0);
+}
+
+.navbar .nav-text {
+	margin-left:10px;
+	margin-right:10px;
+	color:white;
+	font-size:12px;
+	font-weight:normal;
+	float:left;
+}
+
+.options {
+  float:left;
+  font-size:14px;
+	margin-top:6px;
+	color:white;
+	font-size:12px;
+	font-weight:normal;
+}
+
+.options input.largerCheckbox{
+  margin-left:10px;
+  width: 20px;
+  height: 20px;
+}
+
+
+.element-input {
+  float:left;
+	margin-top:3px;
+}
+
+.tertiary-navbar input {
+  margin-top:5px;
+	width:25px;
+	height:10px;
+}
+
+.navbar .divider-gray {
+	border-right: 1px solid #999;
+}
+
+.navbar .myButton {
+    float:left;
+    line-height:10px;
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:5px;
+    padding:5px;
+    height: 26px;
+}
+
+/* Need to make this universal */
+.grid-background { 
+  width:100%;
+  height:100%;
+	background-image: -webkit-linear-gradient(rgba(0, 153, 255, .6) 1px, transparent 1px), -webkit-linear-gradient(0deg,  rgba(0, 153, 255, .6) 1px, transparent 1px), -webkit-linear-gradient(rgba(0, 153, 255, .2) 1px, transparent 1px), -webkit-linear-gradient(0deg, rgba(0, 153, 255, .2) 1px, transparent 1px);
+	background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+	background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+
+.disappear {
+	display:none;
+	height:0;
+}
+

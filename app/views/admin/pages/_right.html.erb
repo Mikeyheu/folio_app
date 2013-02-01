@@ -47,75 +47,109 @@
 			</li>
 		</ul>
 	</div>
+
+
+	<div id="tertiary-navbar" class="navbar tertiary-navbar">
+		<div class="nav nav-text">
+			<form id="object_form" name="object_form">
+				<div class="element-input">
+
+					X: <input type="text" value ="0" id="x" name="x" maxlength="5" size="4">
+					Y: <input type="text" value ="0" id="y" name="y" maxlength="5" size="4">
+					W: <input type="text" value ="0" id="width" name="width" maxlength="5" size="4">
+					H: <input type="text" value ="0" id="height" name="height" maxlength="5" size="4">
+				</div>
+				<button id="update" class="btn myButton" type="button">Update</button>
+			</form>
+
+		</div>
+		<ul class="nav">
+			<li class="divider-vertical divider-gray"></li>
+			<li class="dropdown nav-button">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><div class="icon settings"></div> </a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Move to top</a></li>
+					<li><a href="#">Move to bottom</a></li>
+				</ul>
+			</li>   
+			<li class="divider-vertical divider-gray"></li>
+    <div class="options">
+    	<input type="checkbox" id="show-grid" class="largerCheckbox" name="option1" value="true" checked> Show Grid
+    	<input type="checkbox" id="snap-grid" class="largerCheckbox" name="option1" value="true" checked> Snap to Grid
+    </div>
+	</div>
+
+
 	<div class="right-inner">
 		<div class="canvas-background"></div>
-		<div class="canvas">
 
+		<div class="canvas">
+      <div class="grid-background"></div>
 			<div id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
 				<% @page.elements.each do |element| %>
 				<% e = element.elementable %>
-			
-					<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
 
-						
-							<% if e.class.name == "Image" %>
-								<div class="image-holder">
-									<div class="image-container" style="width:<%= element.image_width %>px; height:<%= element.image_height %>px; left:<%= element.image_left %>px; top:<%= element.image_top %>px;">
-										<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
-										<div class='image-resize-handles' style="display:none;">
-											<div class="inorth ui-resizable-handle handle ui-resizable-n"></div>
-											<div class="ine ui-resizable-handle handle ui-resizable-ne"></div>
-											<div class="inw ui-resizable-handle handle ui-resizable-nw"></div>
-											<div class="ie ui-resizable-handle handle ui-resizable-e"></div>
-											<div class="is ui-resizable-handle handle ui-resizable-s"></div>
-											<div class="ise ui-resizable-handle handle ui-resizable-se"></div>
-											<div class="isw ui-resizable-handle handle ui-resizable-sw"></div>
-											<div class="iw ui-resizable-handle handle ui-resizable-w"></div>
-										</div>
-									</div>
-								</div>
-							<% elsif e.class.name == "PageText" %>
-							  <div class="text-container">
-								  <%= e.content.html_safe %>
-							  </div>
-							<% end %>
-						
+				<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
 
-						<div class="resize-border" style="display:none;">
-							<div class="lines hline"></div>
-							<div class="lines hline bottom"></div>
-							<div class="lines vline"></div>
-							<div class="lines vline right"></div>
-						</div>
 
-						<div class="resizing-box" style="display:none;">	
-							<div class="n ui-resizable-handle handle ui-resizable-n"></div>
-							<div class="ne ui-resizable-handle handle ui-resizable-ne"></div>
-							<div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
-							<div class="e ui-resizable-handle handle ui-resizable-e"></div>
-							<div class="s ui-resizable-handle handle ui-resizable-s"></div>
-							<div class="se ui-resizable-handle handle ui-resizable-se"></div>
-							<div class="sw ui-resizable-handle handle ui-resizable-sw"></div>
-							<div class="w ui-resizable-handle handle ui-resizable-w"></div>
-						</div>
-
-						<% if e.class.name == "Image" %>
-							<div class="element_icons">
-								<a href="#" class="crop-button"><i class="icon-nav crop"></i></a>
-								<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_image_path(@site, e),:remote => true, 'data-target' => "#myModal" %>
-								<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
+					<% if e.class.name == "Image" %>
+					<div class="image-holder">
+						<div class="image-container" style="width:<%= element.image_width %>px; height:<%= element.image_height %>px; left:<%= element.image_left %>px; top:<%= element.image_top %>px;">
+							<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+							<div class='image-resize-handles' style="display:none;">
+								<div class="inorth ui-resizable-handle handle ui-resizable-n"></div>
+								<div class="ine ui-resizable-handle handle ui-resizable-ne"></div>
+								<div class="inw ui-resizable-handle handle ui-resizable-nw"></div>
+								<div class="ie ui-resizable-handle handle ui-resizable-e"></div>
+								<div class="is ui-resizable-handle handle ui-resizable-s"></div>
+								<div class="ise ui-resizable-handle handle ui-resizable-se"></div>
+								<div class="isw ui-resizable-handle handle ui-resizable-sw"></div>
+								<div class="iw ui-resizable-handle handle ui-resizable-w"></div>
 							</div>
-						<% elsif e.class.name == "PageText" %>
-							<div class="element_icons">
-								<%= link_to '<i class="icon-nav pencil"></i>'.html_safe %>
-								<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe %>
-								<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
-							</div>
-						<% end %>
-
-
-
+						</div>
 					</div>
+					<% elsif e.class.name == "PageText" %>
+					<div class="text-container">
+						<%= e.content.html_safe %>
+					</div>
+					<% end %>
+
+
+					<div class="resize-border" style="display:none;">
+						<div class="lines hline"></div>
+						<div class="lines hline bottom"></div>
+						<div class="lines vline"></div>
+						<div class="lines vline right"></div>
+					</div>
+
+					<div class="resizing-box" style="display:none;">	
+						<div class="n ui-resizable-handle handle ui-resizable-n"></div>
+						<div class="ne ui-resizable-handle handle ui-resizable-ne"></div>
+						<div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
+						<div class="e ui-resizable-handle handle ui-resizable-e"></div>
+						<div class="s ui-resizable-handle handle ui-resizable-s"></div>
+						<div class="se ui-resizable-handle handle ui-resizable-se"></div>
+						<div class="sw ui-resizable-handle handle ui-resizable-sw"></div>
+						<div class="w ui-resizable-handle handle ui-resizable-w"></div>
+					</div>
+
+					<% if e.class.name == "Image" %>
+					<div class="element_icons">
+						<a href="#" class="crop-button"><i class="icon-nav crop"></i></a>
+						<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_image_path(@site, e),:remote => true, 'data-target' => "#myModal" %>
+						<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
+					</div>
+					<% elsif e.class.name == "PageText" %>
+					<div class="element_icons">
+						<%= link_to '<i class="icon-nav pencil"></i>'.html_safe %>
+						<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe %>
+						<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
+					</div>
+					<% end %>
+
+
+
+				</div>
 				
 				<% end %>
 			</div>

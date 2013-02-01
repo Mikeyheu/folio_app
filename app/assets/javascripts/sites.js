@@ -5,6 +5,7 @@ $(document).ready(function(){
     // GLOBAL VARIABLES 
     dropped_on_menu = false;
     appended = false;
+    snapping = true;
 
     //PJAX INIT
     pjaxInit();
@@ -361,7 +362,7 @@ function elementInit() {
 
     var element_string = ""
     $('.element').each(function(){
-      
+
       var mini_string = "";
       mini_string += $(this).attr('id');
       mini_string += ("," + $(this).position().left);
@@ -399,11 +400,63 @@ function elementInit() {
   // Element dragging and resizing
 
   $('.element').draggable({
+    start: function(){
+      disableElements();
+      $(this).addClass('selected-element');
+      $(this).find('.resizing-box, .resize-border').show();
+    },
     containment: ".canvas",
-        stack: ".element",
+    stack: ".element",
+    drag: function(e, ui) {
+      $('#x').val($(".selected-element").position().left);
+      $('#y').val($(".selected-element").position().top);
+    },
+    stop: function(e, ui) {
+      if (snapping == true) {
+        var pos = $(".selected-element").position();
+        var posleft = pos.left;
+        var postop = pos.top;
+        $(".selected-element").css({
+          left: Math.round(posleft / 20) * 20,
+          top: Math.round(postop / 20) * 20
+        });
+      }
+
+      $('#x').val($(".selected-element").position().left);
+      $('#y').val($(".selected-element").position().top);
+    },
   });
 
   $('.element').resizable({
+    stop: function(e, ui) {
+      if (snapping == true) {
+        var pos = $(".selected-element").position();
+        var posleft = pos.left;
+        var postop = pos.top;
+        var offsetLeft = Math.round(posleft / 20) * 20;
+        var offsetTop = Math.round(postop / 20) * 20;
+        var width = $(".selected-element").width();
+        var height = $(".selected-element").height();
+        var offsetWidth = Math.round(width / 20) * 20;
+        var offsetHeight = Math.round(height / 20) * 20;
+        $(".selected-element").css({
+          left: offsetLeft,
+          top: offsetTop,
+          width: offsetWidth,
+          height: offsetHeight
+        });
+      }
+      $('#x').val($(".selected-element").position().left);
+      $('#y').val($(".selected-element").position().top);
+      $('#width').val($(".selected-element").width());
+      $('#height').val($(".selected-element").height());
+    },
+    resize: function(e, ui) {
+      $('#x').val($(".selected-element").position().left);
+      $('#y').val($(".selected-element").position().top);
+      $('#width').val($(".selected-element").width());
+      $('#height').val($(".selected-element").height());
+    },
     handles: {
       n: '.n', 
       e: '.e', 
@@ -416,13 +469,24 @@ function elementInit() {
     }
   });
 
-  $('.element').click(function(event){
-    
-    disableElements();
-    zStack(this);
-    $(this).find('.resizing-box, .resize-border').show();
-    
-  });
+$('.element').click(function(event){
+  if($(this).hasClass("selected-element")){
+    return;
+  }
+
+  // $('#tertiary-navbar').removeClass('disappear');
+  resize();
+
+  disableElements();
+  zStack(this);
+  $(this).addClass('selected-element');
+  $(this).find('.resizing-box, .resize-border').show();
+
+  $('#x').val($(".selected-element").position().left);
+  $('#y').val($(".selected-element").position().top);
+  $('#width').val($(".selected-element").width());
+  $('#height').val($(".selected-element").height());
+});
 
 
   // Image container dragging and resizing
@@ -449,7 +513,7 @@ function elementInit() {
     el.find('.image-container').css({
       width: el.find('.image-container img').width(),
       height: el.find('.image-container img').height()
-      });
+    });
     el.find('.image-holder').css('overflow', 'visible');
     $('.resizing-box, .element_icons').hide();
     $('.element-container').css('overflow', 'visible');
@@ -459,25 +523,116 @@ function elementInit() {
       width: '100%',
       height: '100%',
       opacity: .5
-      });
-    $('.image-container').draggable('enable').resizable('enable');
+    });
+    $('.image-container').draggable('disable').resizable('disable');
+    el.find('.image-container').draggable('enable').resizable('enable');
   });
 
-
-
   // Click off thumbnail to deselect
-  $('.canvas').on("click", function(event){
+  $('.right-inner').on("click", function(event){
     var t = $(event.target)
-    if (t.hasClass('canvas')) {
+    if (t.hasClass('canvas') || t.hasClass('grid-background')|| t.hasClass('canvas-background')|| t.hasClass('right-inner')) {
       disableElements();
+      // $('#tertiary-navbar').addClass('disappear');
+      resize();
     }
   });
 
+  // KEYPRESS
+  $(document).on('keydown', function(e){
+
+    var element = $('.selected-element');
+
+    // if statement to check if the user is currently editing a box
+    if($('.selected-element').length > 0){
+      // e.preventDefault();
+
+      switch (e.which) {
+        case 37:  // left arrow
+        if (e.shiftKey) {
+          element.css('left', parseInt(element.css('left')) - 10);
+        } else {
+          element.css('left', parseInt(element.css('left')) - 1);
+        }
+        if(parseInt(element.css('left')) < 0) {
+          element.css('left', 0);
+        }
+        $('#x').val(parseInt($('.selected-element').css('left')));
+        $('#y').val(parseInt($('.selected-element').css('top')));
+        $('#width').val(parseInt($('.selected-element').css('width')));
+        $('#height').val(parseInt($('.selected-element').css('height')));
+        break;
+        case 38:  // up arrow
+        if (e.shiftKey) {
+          element.css('top', parseInt(element.css('top')) - 10);
+        } else {
+          element.css('top', parseInt(element.css('top')) - 1);
+        }
+        if(parseInt(element.css('top')) < 0) {
+          element.css('top', 0);
+        }
+        $('#x').val(parseInt($('.selected-element').css('left')));
+        $('#y').val(parseInt($('.selected-element').css('top')));
+        $('#width').val(parseInt($('.selected-element').css('width')));
+        $('#height').val(parseInt($('.selected-element').css('height')));
+        break;
+        case 39:  // right arrow
+        if (e.shiftKey) {
+          element.css('left', parseInt(element.css('left')) + 10);
+        } else {
+          element.css('left', parseInt(element.css('left')) + 1);
+
+        }
+        $('#x').val(parseInt($('.selected-element').css('left')));
+        $('#y').val(parseInt($('.selected-element').css('top')));
+        $('#width').val(parseInt($('.selected-element').css('width')));
+        $('#height').val(parseInt($('.selected-element').css('height')));
+        break;
+        case 40:  // down arrow
+        if (e.shiftKey) {
+          element.css('top', parseInt(element.css('top')) + 10);
+        } else {
+          element.css('top', parseInt(element.css('top')) + 1);
+        }
+        $('#x').val(parseInt($('.selected-element').css('left')));
+        $('#y').val(parseInt($('.selected-element').css('top')));
+        $('#width').val(parseInt($('.selected-element').css('width')));
+        $('#height').val(parseInt($('.selected-element').css('height')));
+        break;
+      }
+    }
+  });
+
+  $('#update').on("click", function(){
+    $('.selected-element').css({
+      left: parseInt($('#x').val()),
+      top: parseInt($('#y').val()),
+      width: $('#width').val(),
+      height: $('#height').val()
+    });
+  });
+
+  $('#show-grid').change(function() {
+    if (!this.checked) {
+      $('.grid-background').hide();
+    } else {
+      $('.grid-background').show();
+    }
+  });
+
+  $('#snap-grid').change(function() {
+    if (!this.checked) {
+      snapping = false;
+    } else {
+      snapping = true;
+    }
+  });
 
 }
 
 
 function disableElements() {
+  $('.element').removeClass('selected-element');
   $('.element_icons').show();
   $('.image-holder').css('overflow', 'hidden');
   $('.resizing-box, .resize-border, .image-resize-handles').hide();
@@ -495,20 +650,19 @@ function disableElements() {
       height: $(this).height(),
       opacity: 1
     });
-  $('.image-container').draggable('disable').resizable('disable');
-  $('.element').draggable('enable').resizable('enable');
+    $('.image-container').draggable('disable').resizable('disable');
+    $('.element').draggable('enable').resizable('enable');
   })
-
 }
 
 function zStack(clicked) {
   // z-index stacking
-    var zmax = 0;
+  var zmax = 0;
 
-    $('.element').each(function(){
-      var current = parseInt($(this).css('z-index'))
-      zmax = current > zmax ? current : zmax
-    });
+  $('.element').each(function(){
+    var current = parseInt($(this).css('z-index'))
+    zmax = current > zmax ? current : zmax
+  });
 
     // Set element to highest z-index
     $(clicked).css({'z-index': zmax + 1})
@@ -529,7 +683,7 @@ function zStack(clicked) {
     blah.each(function(index,item){
       $(item).css({ 'z-index': index})
     })
-}
+  }
 
 
 

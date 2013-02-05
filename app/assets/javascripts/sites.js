@@ -680,7 +680,7 @@ $('.element').click(function(event){
     $('#text-toolbar').removeClass('hide');
     $('.element').draggable('disable');
     $('.element_icons').hide();
-    $(this).attr('contenteditable',true);
+    $(this).closest('.element').find('.editable').attr('contenteditable',true);
 
     // current_value = $(this).html();
     // old_value = current_value;

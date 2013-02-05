@@ -360,40 +360,43 @@ function elementInit() {
 
   $('.save-button').on('click', function(){
 
-    var element_string = ""
+    var elements = []
     $('.element').each(function(){
 
-      var mini_string = "";
-      mini_string += $(this).attr('id');
-      mini_string += ("," + $(this).position().left);
-      mini_string += ("," + $(this).position().top);
-      mini_string += ("," + $(this).width());
-      mini_string += ("," + $(this).height());
       if ($(this).find('.image-container').length > 0) {
-        console.log('image_attributes')
-        mini_string += ("," + $(this).find('.image-container').position().left);
-        mini_string += ("," + $(this).find('.image-container').position().top);
-        mini_string += ("," + $(this).find('.image-container').width());
-        mini_string += ("," + $(this).find('.image-container').height());
-      } else {
-        mini_string += ",nil,nil,nil,nil"
+        elements.push({
+          "id": $(this).attr('id'), 
+          "left": $(this).position().left,
+          "top": $(this).position().top,
+          "width": $(this).width(),
+          "height": $(this).height(),
+          "image_left": $(this).find('.image-container').position().left,
+          "image_top": $(this).find('.image-container').position().top,
+          "image_width": $(this).find('.image-container').width(),
+          "image_height": $(this).find('.image-container').height(),
+          "z_index": parseInt($(this).css('z-index'))
+        });
+      } else if ($(this).find('.text-container').length > 0) {
+        elements.push({
+          "id": $(this).attr('id'), 
+          "left": $(this).position().left,
+          "top": $(this).position().top,
+          "width": $(this).width(),
+          "height": $(this).height(),
+          "content": $(this).find('.text-container').html(),
+          "style": $(this).find('.text-container').attr('style'),
+          "z_index": parseInt($(this).css('z-index'))
+        });
       }
-      mini_string += ("," + $(this).css('z-index'));
-
-      if (element_string!="") {
-        element_string += ("&" + mini_string);
-      } else {
-        element_string += (mini_string);
-      }
-    })
+    });
 
     $.ajax({
       type: 'POST',
+      dataType: 'json',
+      contentType: 'application/json',
       traditional: true,
       url: $('#page_elements').data('elements-url'),
-      data: {
-        page_elements: element_string
-      }
+      data : JSON.stringify({"page_elements": elements })
     });
   });
 
@@ -481,6 +484,9 @@ function elementInit() {
       $('#y').val($(".selected-element").position().top);
       $('#width').val($(".selected-element").width());
       $('#height').val($(".selected-element").height());
+
+      $(this).find('#edit_field').width($(this).width())
+      $(this).find('#edit_field').height($(this).height())
     },
     handles: {
       n: '.n', 
@@ -498,15 +504,11 @@ $('.element').click(function(event){
   if($(this).hasClass("selected-element")){
     return;
   }
-
-  // $('#tertiary-navbar').removeClass('disappear');
   resize();
-
   disableElements();
   zStack(this);
   $(this).addClass('selected-element');
   $(this).find('.resizing-box, .resize-border').show();
-
   $('#x').val($(".selected-element").position().left);
   $('#y').val($(".selected-element").position().top);
   $('#width').val($(".selected-element").width());
@@ -531,6 +533,9 @@ $('.element').click(function(event){
 
   $('.image-container').draggable('disable').resizable('disable');
 
+  $('.edit-text-button').on('click', function(){
+    // $('#text-toolbar').removeClass('hide');
+  });
   
   $('.crop-button').on('click', function(){
     var el = $(this).closest('.element');
@@ -571,6 +576,11 @@ $('.element').click(function(event){
     // if statement to check if the user is currently editing a box
     if($('.selected-element').length > 0){
       // e.preventDefault();
+
+      if ($('.selected-element .editable').attr('contenteditable') == true) {
+        return;
+        console.log('fdsfdsd')
+      }
 
       switch (e.which) {
         case 37:  // left arrow
@@ -653,12 +663,75 @@ $('.element').click(function(event){
     }
   });
 
+
+  /// Text Editor
+
+  $('#fontSelect').fontSelector({
+    'hide_fallbacks' : true,
+    'initial' : 'Courier New,Courier New,Courier,monospace',
+    'selected' : function(style) {
+      $('.selected-element .editable').css({
+        'font-family': style
+      })
+    }
+  });
+
+  $(".editable").on("dblclick", replaceHTML);
+
+  function replaceHTML() {
+    $('.element').draggable('disable');
+    $('.element_icons').hide();
+    $(this).attr('contenteditable',true);
+
+    // current_value = $(this).html();
+    // old_value = current_value;
+    // $(this).html('');
+    // $(this).html('<form><textarea id="edit_field">' + current_value + '</textarea></form>');  
+    // $(this).find('#edit_field').width($(this).width())
+    // $(this).find('#edit_field').height($(this).height())
+
+    // $('#edit_field').focus();
+
+    // $('#edit_field').keyup(function(){
+    //   current_value = $(this).val();
+    // });
+
+    // $(document).keypress(function(e) {
+    //   if(e.which == 13 && $("#edit_field").is(":focus")) {
+    //       sendAjax();
+    //   }
+    // });
+
+    // $(document).on("click", function(e){
+    //   if(e.target.id != 'edit_field') {
+    //     sendAjax();
+    //   }
+    // });
+
+    function sendAjax() {
+      if(old_value != current_value) {
+          id = parseInt($('#edit_field').closest('li').attr('id').replace("task_", ""));
+          $.ajax({
+            type: 'POST',
+            url:  '/tasks/' + id,
+            data: {
+              _method:'PUT',
+              content: current_value,
+            }
+          });
+        }
+        $('#edit_field').parent().html('<span class=>' + current_value + '</span>');
+    }
+
+  }
 }
 
 
 function disableElements() {
   $('.element').removeClass('selected-element');
   $('.element_icons').show();
+  // $('#text-toolbar').addClass('hide');
+  $('.editable').attr('contenteditable',false);
   $('.image-holder').css('overflow', 'hidden');
   $('.resizing-box, .resize-border, .image-resize-handles, .image-resize-border').hide();
   $('.right-inner').height($('.right-inner').height()-1);

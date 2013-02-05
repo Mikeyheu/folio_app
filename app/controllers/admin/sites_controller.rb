@@ -53,20 +53,28 @@ class Admin::SitesController < ApplicationController
   end
 
   def update_elements
-    puts params
-    array = params[:page_elements].gsub('element_', '').split('&')
+
+    array = params[:page_elements]   
     array.each do |element|
-      mini_array = element.split(',')
-      e = Element.find(mini_array[0].to_i)
-      e.left = mini_array[1].to_i
-      e.top = mini_array[2].to_i
-      e.width = mini_array[3].to_i
-      e.height = mini_array[4].to_i
-      e.image_left = mini_array[5].to_i
-      e.image_top = mini_array[6].to_i
-      e.image_width = mini_array[7].to_i
-      e.image_height = mini_array[8].to_i
-      e.z_index = mini_array[9].to_i
+      e = Element.find(element[:id].gsub('element_','').to_i)
+      elementable = e.elementable
+
+      e.left = element[:left]
+      e.top = element[:top]
+      e.width = element[:width]
+      e.height = element[:height]
+      e.z_index = element[:z_index]
+
+      if e.elementable.class.name == "Image"
+        e.image_left = element[:image_left]
+        e.image_top = element[:image_top]
+        e.image_width = element[:image_width]
+        e.image_height = element[:image_height]
+      elsif e.elementable.class.name == "PageText"
+        e.elementable.content = element[:content]
+        e.elementable.style = element[:style]
+        e.elementable.save 
+      end
       e.save
     end
     render :nothing => true

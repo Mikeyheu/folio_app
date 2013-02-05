@@ -12,7 +12,7 @@
 			    </div>
 		    </div>
 				<% elsif e.class.name == "PageText" %>
-				<%= e.content.html_safe %>
+				<div class="text-container" style="<%= e.style %>"><%= e.content.html_safe %></div>
 				<% end %>
 				</div>
 			</div>

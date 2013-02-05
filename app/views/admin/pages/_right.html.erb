@@ -73,10 +73,38 @@
 				</ul>
 			</li>   
 			<li class="divider-vertical divider-gray"></li>
-    <div class="options">
-    	<input type="checkbox" id="show-grid" class="largerCheckbox" name="option1" value="true" checked> Show Grid
-    	<input type="checkbox" id="snap-grid" class="largerCheckbox" name="option1" value="true" checked> Snap to Grid
-    </div>
+		</ul>
+		<div class="options">
+			<input type="checkbox" id="show-grid" class="largerCheckbox" name="option1" value="true" checked> Show Grid
+			<input type="checkbox" id="snap-grid" class="largerCheckbox" name="option1" value="true" checked> Snap to Grid
+		</div>
+	</div>
+
+	<div id="text-toolbar" class="navbar tertiary-navbar" style="z-index:100">
+		
+		<div id="fontSelect">
+			<span>Arial</span>
+			<div class="arrow-down"></div>
+
+			<ul>
+				<li>OpenSans-Regular,sans-serif</li>
+				<li>Arial,Arial,Helvetica,sans-serif</li>
+				<li>Arial Black,Arial Black,Gadget,sans-serif</li>
+				<li>Comic Sans MS,Comic Sans MS,cursive</li>
+				<li>Courier New,Courier New,Courier,monospace</li>
+				<li>Georgia,Georgia,serif</li>
+				<li>Impact,Charcoal,sans-serif</li>
+				<li>Lucida Console,Monaco,monospace</li>
+				<li>Lucida Sans Unicode,Lucida Grande,sans-serif</li>
+				<li>Palatino Linotype,Book Antiqua,Palatino,serif</li>
+				<li>Tahoma,Geneva,sans-serif</li>
+				<li>Times New Roman,Times,serif</li>
+				<li>Trebuchet MS,Helvetica,sans-serif</li>
+				<li>Verdana,Geneva,sans-serif</li>
+				<li>Gill Sans,Geneva,sans-serif</li>
+			</ul>
+		</div>
+		
 	</div>
 
 
@@ -84,12 +112,12 @@
 		<div class="canvas-background"></div>
 
 		<div class="canvas">
-      <div class="grid-background"></div>
+			<div class="grid-background"></div>
 			<div id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
 				<% @page.elements.each do |element| %>
 				<% e = element.elementable %>
 
-				<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
+				<div id="element_<%= element.id %>" class="element <%= e.class.name %>" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
 
 
 					<% if e.class.name == "Image" %>
@@ -115,9 +143,7 @@
 						</div>
 					</div>
 					<% elsif e.class.name == "PageText" %>
-					<div class="text-container">
-						<%= e.content.html_safe %>
-					</div>
+					<div class="text-container editable" style="<%= e.style %>"><%= e.content.html_safe %></div>
 					<% end %>
 
 
@@ -131,7 +157,7 @@
 					<div class="resizing-box" style="display:none;">	
 						<div class="sw ui-resizable-handle handle ui-resizable-sw"></div>
 						<div class="ne ui-resizable-handle handle ui-resizable-ne"></div>
-            <div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
+						<div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
 						<div class="se ui-resizable-handle handle ui-resizable-se"></div>
 
 					</div>
@@ -144,7 +170,7 @@
 					</div>
 					<% elsif e.class.name == "PageText" %>
 					<div class="element_icons">
-						<%= link_to '<i class="icon-nav pencil"></i>'.html_safe %>
+						<%= link_to '<i class="icon-nav pencil"></i>'.html_safe, '#', class: "edit-text-button" %>
 						<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe %>
 						<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
 					</div>

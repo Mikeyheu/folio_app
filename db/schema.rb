@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130202015451) do
+ActiveRecord::Schema.define(:version => 20130205194837) do
 
   create_table "elements", :force => true do |t|
     t.integer  "parent_id"
@@ -118,8 +118,9 @@ ActiveRecord::Schema.define(:version => 20130202015451) do
 
   create_table "page_texts", :force => true do |t|
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.text     "style",      :default => ""
   end
 
   create_table "pages", :force => true do |t|

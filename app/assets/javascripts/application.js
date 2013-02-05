@@ -20,3 +20,4 @@
 //= require jquery.layout-latest
 //= require bootstrap
 //= require jquery.pjax
+//= require jquery.fontselector

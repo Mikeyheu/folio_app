@@ -14,6 +14,7 @@ class Admin::FoldersController < ApplicationController
     if @folder.save
       
       n = @site.nav_items.create(navable:@folder)
+      n.nav = true
       if @site.nav_items.size > 0
         parents = @site.nav_items.select { |n| n.parent_id == nil }
         last_nav_item = parents.max {|a,b| a.position <=> b.position }

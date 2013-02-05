@@ -533,9 +533,7 @@ $('.element').click(function(event){
 
   $('.image-container').draggable('disable').resizable('disable');
 
-  $('.edit-text-button').on('click', function(){
-    // $('#text-toolbar').removeClass('hide');
-  });
+
   
   $('.crop-button').on('click', function(){
     var el = $(this).closest('.element');
@@ -676,9 +674,10 @@ $('.element').click(function(event){
     }
   });
 
-  $(".editable").on("dblclick", replaceHTML);
+  $(".edit-text-button").on("click", replaceHTML);
 
   function replaceHTML() {
+    $('#text-toolbar').removeClass('hide');
     $('.element').draggable('disable');
     $('.element_icons').hide();
     $(this).attr('contenteditable',true);
@@ -730,7 +729,7 @@ $('.element').click(function(event){
 function disableElements() {
   $('.element').removeClass('selected-element');
   $('.element_icons').show();
-  // $('#text-toolbar').addClass('hide');
+  $('#text-toolbar').addClass('hide');
   $('.editable').attr('contenteditable',false);
   $('.image-holder').css('overflow', 'hidden');
   $('.resizing-box, .resize-border, .image-resize-handles, .image-resize-border').hide();

@@ -33,6 +33,9 @@ $(document).ready(function(){
 
     // Draggable and Resizable elements
     elementInit();
+
+    // Text Editor Init
+    textEditorInit();
   }
 
 });
@@ -662,21 +665,15 @@ $('.element').click(function(event){
   });
 
 
-  /// Text Editor
 
-  $('#fontSelect').fontSelector({
-    'hide_fallbacks' : true,
-    'initial' : 'Courier New,Courier New,Courier,monospace',
-    'selected' : function(style) {
-      $('.selected-element .editable').css({
-        'font-family': style
-      })
-    }
-  });
+          
+
+
 
   $(".edit-text-button").on("click", replaceHTML);
 
   function replaceHTML() {
+    console.log("clciked edit")
     $('#text-toolbar').removeClass('hide');
     $('.element').draggable('disable');
     $('.element_icons').hide();
@@ -782,6 +779,55 @@ function zStack(clicked) {
     })
   }
 
+function textEditorInit() {
+  
+  // // Font Select drop down
 
+  // $('#fontSelect').fontSelector({
+  //   'hide_fallbacks' : true,
+  //   'initial' : 'Courier New,Courier New,Courier,monospace',
+  //   'selected' : function(style) {
+  //     $('.selected-element .editable').css({
+  //       'font-family': style
+  //     })
+  //   }
+  // });
+
+
+  // // NicEdit
+
+  //   var myNicEditor = new nicEditor({
+  //   iconsPath : "<%= asset_path 'nicEditorIcons.gif' %>"
+  // });
+  // myNicEditor.setPanel('myNicPanel');
+  // $('.text-container').each(function(item){
+  //   myNicEditor.addInstance($(this).attr('id'));
+  // })
+
+
+  // TinyMCE
+
+  tinyMCE.init({
+    mode : "textareas",
+    theme : "advanced",
+
+    editor_css : "<%= asset_path 'tinymce.css' %>",
+    
+            
+    // Theme options - button# indicated the row# only
+    theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,fontselect,fontsizeselect,formatselect,bullist,numlist,|,outdent,indent,link,unlink,code,forecolor",
+    theme_advanced_toolbar_location : "external",
+    theme_advanced_toolbar_align : "left",
+    theme_advanced_statusbar_location : "bottom",
+    theme_advanced_resizing : true,
+    setup : function(editor) { 
+      editor.onInit.add(function(editor, event) { 
+        var toolbar = $('#' + editor.id + '_external');
+        toolbar.appendTo('#text-toolbar');
+        });
+    },
+  });
+
+}
 
 

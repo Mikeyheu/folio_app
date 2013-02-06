@@ -80,39 +80,22 @@
 		</div>
 	</div>
 
-	<div id="text-toolbar" class="navbar tertiary-navbar hide" style="z-index:100">
+<div id="text-toolbar" class="navbar tertiary-navbar" style="z-index:100">
 		
-		<div id="fontSelect">
-			<span>Arial</span>
-			<div class="arrow-down"></div>
-
-			<ul>
-				<li>OpenSans-Regular,sans-serif</li>
-				<li>Arial,Arial,Helvetica,sans-serif</li>
-				<li>Arial Black,Arial Black,Gadget,sans-serif</li>
-				<li>Comic Sans MS,Comic Sans MS,cursive</li>
-				<li>Courier New,Courier New,Courier,monospace</li>
-				<li>Georgia,Georgia,serif</li>
-				<li>Impact,Charcoal,sans-serif</li>
-				<li>Lucida Console,Monaco,monospace</li>
-				<li>Lucida Sans Unicode,Lucida Grande,sans-serif</li>
-				<li>Palatino Linotype,Book Antiqua,Palatino,serif</li>
-				<li>Tahoma,Geneva,sans-serif</li>
-				<li>Times New Roman,Times,serif</li>
-				<li>Trebuchet MS,Helvetica,sans-serif</li>
-				<li>Verdana,Geneva,sans-serif</li>
-				<li>Gill Sans,Geneva,sans-serif</li>
-			</ul>
-		</div>
-		
-	</div>
-
+		<!-- <div id="myNicPanel" style="width: 625px;" unselectable="on"></div> -->
+  </div>
+	
 
 	<div class="right-inner">
+
+		<textarea id="editor" class="mcearea defaultSkin" rows="5" cols="20" name="editor" ></textarea>
 		<div class="canvas-background"></div>
 
 		<div class="canvas">
 			<div class="grid-background"></div>
+
+
+			
 			<div id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
 				<% @page.elements.each do |element| %>
 				<% e = element.elementable %>
@@ -143,7 +126,7 @@
 						</div>
 					</div>
 					<% elsif e.class.name == "PageText" %>
-					<div class="text-container editable" style="<%= e.style %>"><%= e.content.html_safe %></div>
+					<div class="text-container editable" id="text_container_<%= e.id %>" style="<%= e.style %>" contenteditable="true"><%= e.content.html_safe %></div>
 					<% end %>
 
 
@@ -183,8 +166,6 @@
 				<% end %>
 			</div>
 		</div>
-
-
-
 	</div>
 </div>
+

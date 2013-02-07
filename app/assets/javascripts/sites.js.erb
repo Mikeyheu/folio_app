@@ -319,7 +319,7 @@ function uploadInit() {
 function pjaxInit() {
   $(document).pjax('a.ajax', '#pjax-container');
   $(document).on('pjax:complete', function() {
-
+    console.log('pjax completed')
     if ($('body').hasClass('admin')) {
       resize();
       galleryInit();
@@ -676,6 +676,9 @@ $('.element').click(function(event){
   $(".grab").on("dblclick", replaceHTML);
 
   function replaceHTML() {
+    $('.mceExternalToolbar').hide();
+    var ed = $(this).closest('.element').find('.mce_textarea').attr('id')
+    $('#' + ed + '_external').show();
     $('#text-toolbar').removeClass('hide');
     $(this).closest('.element').find('.grab').hide();
     $('.element').draggable('disable');
@@ -812,14 +815,14 @@ function textEditorInit() {
   // TinyMCE
 
   tinyMCE.init({
-    mode : "textareas",
+    mode : "none",
     theme : "advanced",
     content_css : "<%= asset_path 'tinymce_content.css' %>",
     editor_css : "<%= asset_path 'tinymce_editor.css' %>",
     
             
     // Theme options - button# indicated the row# only
-    theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,fontselect,fontsizeselect,formatselect,bullist,numlist,|,outdent,indent,link,unlink,code,forecolor",
+    theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,fontselect,fontsizeselect,formatselect,bullist,numlist,|,outdent,indent,link,unlink,code,forecolor,backcolor",
     theme_advanced_toolbar_location : "external",
     theme_advanced_toolbar_align : "left",
     theme_advanced_statusbar_location : "none",
@@ -843,6 +846,18 @@ function textEditorInit() {
     },
   });
 
+  tinyMCEInit();
+
 }
 
+function tinyMCEInit(){
+
+  $('.mce_textarea').each(function(){
+    tinyMCE.execCommand('mceRemoveControl', false, $(this).attr('id'));
+  })
+
+  $('.mce_textarea').each(function(){
+    tinyMCE.execCommand('mceAddControl', false, $(this).attr('id'));
+  })
+}
 

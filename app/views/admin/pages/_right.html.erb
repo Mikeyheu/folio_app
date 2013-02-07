@@ -126,7 +126,7 @@
 					<% elsif e.class.name == "PageText" %>
 					<div class="text-container editable" id="text_container_<%= e.id %>" style="<%= e.style %>">
             
-					<textarea id="textarea_<%= e.id %>"><%= e.content.html_safe %></textarea></div>
+					<textarea class="mce_textarea" id="textarea_<%= e.id %>"><%= e.content.html_safe %></textarea></div>
 					<div class="grab"></div>
 
 					<% end %>

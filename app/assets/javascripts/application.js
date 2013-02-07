@@ -21,4 +21,4 @@
 //= require bootstrap
 //= require jquery.pjax
 //= require jquery.fontselector
-//= require tinymce-jquery
+//= require tinymce

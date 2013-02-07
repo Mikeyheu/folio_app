@@ -80,15 +80,13 @@
 		</div>
 	</div>
 
-<div id="text-toolbar" class="navbar tertiary-navbar" style="z-index:100">
-		
+  <div id="text-toolbar" class="navbar tertiary-navbar hide" style="z-index:100">
 		<!-- <div id="myNicPanel" style="width: 625px;" unselectable="on"></div> -->
   </div>
 	
 
 	<div class="right-inner">
 
-		<textarea id="editor" class="mcearea defaultSkin" rows="5" cols="20" name="editor" ></textarea>
 		<div class="canvas-background"></div>
 
 		<div class="canvas">
@@ -126,10 +124,14 @@
 						</div>
 					</div>
 					<% elsif e.class.name == "PageText" %>
-					<div class="text-container editable" id="text_container_<%= e.id %>" style="<%= e.style %>" contenteditable="true"><%= e.content.html_safe %></div>
+					<div class="text-container editable" id="text_container_<%= e.id %>" style="<%= e.style %>">
+            
+					<textarea id="textarea_<%= e.id %>"><%= e.content.html_safe %></textarea></div>
+					<div class="grab"></div>
+
 					<% end %>
 
-
+          
 					<div class="resize-border" style="display:none;">
 						<div class="lines hline"></div>
 						<div class="lines hline bottom"></div>

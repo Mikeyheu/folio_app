@@ -363,6 +363,8 @@ function elementInit() {
 
   $('.save-button').on('click', function(){
 
+    tinyMCE.triggerSave();
+
     var elements = []
     $('.element').each(function(){
 
@@ -386,7 +388,7 @@ function elementInit() {
           "top": $(this).position().top,
           "width": $(this).width(),
           "height": $(this).height(),
-          "content": $(this).find('.text-container').html(),
+          "content": tinyMCE.get($(this).find('textarea').attr('id')).getContent(),
           "style": $(this).find('.text-container').attr('style'),
           "z_index": parseInt($(this).css('z-index'))
         });
@@ -539,6 +541,7 @@ $('.element').click(function(event){
 
   
   $('.crop-button').on('click', function(){
+
     var el = $(this).closest('.element');
     event.stopPropagation();
     el.find('.image-container').css({
@@ -670,14 +673,14 @@ $('.element').click(function(event){
 
 
 
-  $(".edit-text-button").on("click", replaceHTML);
+  $(".grab").on("dblclick", replaceHTML);
 
   function replaceHTML() {
-    console.log("clciked edit")
     $('#text-toolbar').removeClass('hide');
+    $(this).closest('.element').find('.grab').hide();
     $('.element').draggable('disable');
     $('.element_icons').hide();
-    $(this).closest('.element').find('.editable').attr('contenteditable',true);
+    // $(this).closest('.element').find('.editable').attr('contenteditable',true);
 
     // current_value = $(this).html();
     // old_value = current_value;
@@ -724,10 +727,11 @@ $('.element').click(function(event){
 
 
 function disableElements() {
+  $('.grab').show();
   $('.element').removeClass('selected-element');
   $('.element_icons').show();
   $('#text-toolbar').addClass('hide');
-  $('.editable').attr('contenteditable',false);
+  // $('.editable').attr('contenteditable',false);
   $('.image-holder').css('overflow', 'hidden');
   $('.resizing-box, .resize-border, .image-resize-handles, .image-resize-border').hide();
   $('.right-inner').height($('.right-inner').height()-1);
@@ -810,20 +814,31 @@ function textEditorInit() {
   tinyMCE.init({
     mode : "textareas",
     theme : "advanced",
-
-    editor_css : "<%= asset_path 'tinymce.css' %>",
+    content_css : "<%= asset_path 'tinymce_content.css' %>",
+    editor_css : "<%= asset_path 'tinymce_editor.css' %>",
     
             
     // Theme options - button# indicated the row# only
     theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,fontselect,fontsizeselect,formatselect,bullist,numlist,|,outdent,indent,link,unlink,code,forecolor",
     theme_advanced_toolbar_location : "external",
     theme_advanced_toolbar_align : "left",
-    theme_advanced_statusbar_location : "bottom",
+    theme_advanced_statusbar_location : "none",
     theme_advanced_resizing : true,
-    setup : function(editor) { 
-      editor.onInit.add(function(editor, event) { 
-        var toolbar = $('#' + editor.id + '_external');
+    setup : function(ed) { 
+      ed.onInit.add(function(ed, event) { 
+        // editor.getBody().setAttribute('contenteditable', false);
+        var toolbar = $('#' + ed.id + '_external');
         toolbar.appendTo('#text-toolbar');
+
+        // adjust table element
+          var elem = document.getElementById(ed.id + '_tbl');
+          elem.style.height = '100%';
+          elem.style.width = '100%';
+
+          // adjust iframe element
+          var iframe = document.getElementById(ed.id + '_ifr');
+          iframe.style.height = '100%';
+          iframe.style.width = '100%';
         });
     },
   });

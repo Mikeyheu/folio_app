@@ -80,7 +80,7 @@
 		</div>
 	</div>
 
-  <div id="text-toolbar" class="navbar tertiary-navbar hide" style="z-index:100">
+  <div id="text-toolbar" class="navbar tertiary-navbar cirkuitSkin hide" style="z-index:100">
 		<!-- <div id="myNicPanel" style="width: 625px;" unselectable="on"></div> -->
   </div>
 	
@@ -155,7 +155,7 @@
 					</div>
 					<% elsif e.class.name == "PageText" %>
 					<div class="element_icons">
-						<%= link_to '<i class="icon-nav pencil"></i>'.html_safe, '#', class: "edit-text-button" %>
+						<!-- <%= link_to '<i class="icon-nav pencil"></i>'.html_safe, '#', class: "edit-text-button" %> -->
 						<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe %>
 						<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
 					</div>

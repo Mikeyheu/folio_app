@@ -1,4 +1,5 @@
 
+	tinyMCERemove();
 	$('#pjax-container').html('<%= escape_javascript(render :partial => "right") %>');
 	document.title = "<%= escape_javascript("#{@page.name}") %>";
 	$('#new_image').fileupload('disable');

@@ -55,7 +55,7 @@ class Admin::ImagesController < ApplicationController
         render :nothing => true
       elsif params[:page_id]
         p = Page.find(params[:page_id])       
-        p.elements.create(elementable:@image, top:100, left:100, width:200, height:200) 
+        p.elements.create(child:@image, top:100, left:100, width:200, height:200) 
         redirect_to :back
       end
       

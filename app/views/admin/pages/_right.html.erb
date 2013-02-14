@@ -96,7 +96,7 @@
 			
 			<div id="page_elements" data-elements-url="<%= update_elements_admin_site_path %>">
 				<% @page.elements.each do |element| %>
-				<% e = element.elementable %>
+				<% e = element.child %>
 
 				<div id="element_<%= element.id %>" class="element <%= e.class.name %>" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
 

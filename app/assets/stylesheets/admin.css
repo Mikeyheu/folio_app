@@ -11,6 +11,6 @@
  *= require bootstrap
  *= require reset
  *= require_self
- *= require ./admin/custom
+ *= require_tree ./admin
  *= require layout-default-latest
  */

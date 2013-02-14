@@ -30,7 +30,8 @@ class Admin::SitesController < ApplicationController
     if @site.save
       # create settings for has_one relationship - need to use @site.create_setting()
       @setting = @site.create_setting(title:@site.name)
-      @homepage = @site.create_homepage
+      @site.create_homepage
+      @site.create_header
       redirect_to admin_sites_path, notice: 'Site was successfully created.'   
     else
       render action: "new" 
@@ -57,7 +58,7 @@ class Admin::SitesController < ApplicationController
     array = params[:page_elements]   
     array.each do |element|
       e = Element.find(element[:id].gsub('element_','').to_i)
-      elementable = e.elementable
+      child = e.child
 
       e.left = element[:left]
       e.top = element[:top]
@@ -65,15 +66,15 @@ class Admin::SitesController < ApplicationController
       e.height = element[:height]
       e.z_index = element[:z_index]
 
-      if e.elementable.class.name == "Image"
+      if child.class.name == "Image"
         e.image_left = element[:image_left]
         e.image_top = element[:image_top]
         e.image_width = element[:image_width]
         e.image_height = element[:image_height]
-      elsif e.elementable.class.name == "PageText"
-        e.elementable.content = element[:content]
-        e.elementable.style = element[:style]
-        e.elementable.save 
+      elsif child.class.name == "PageText"
+        child.content = element[:content]
+        child.style = element[:style]
+        child.save 
       end
       e.save
     end

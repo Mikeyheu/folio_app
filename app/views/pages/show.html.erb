@@ -1,7 +1,7 @@
 <div class="page">
 	<ul>
 		<% @page.elements.each do |element| %>
-		<% e = element.elementable %>
+		<% e = element.child %>
 		<li>
 			<div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
 				<div class="element-container">

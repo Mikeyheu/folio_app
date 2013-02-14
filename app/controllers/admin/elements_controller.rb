@@ -1,7 +1,7 @@
 class Admin::ElementsController < ApplicationController
 	def remove
 		@element = Element.find(params[:id])
-		@element.elementable.destroy
+		@element.child.destroy
 		@element.destroy
 		respond_to do |format|
 			format.js {}

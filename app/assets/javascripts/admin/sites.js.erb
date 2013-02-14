@@ -546,7 +546,7 @@ $('.element').click(function(event){
 
 
   
-  $('.crop-button').on('click', function(){
+  $('.crop-button').on('click', function(event){
 
     var el = $(this).closest('.element');
     event.stopPropagation();
@@ -793,30 +793,6 @@ function zStack(clicked) {
   }
 
 function textEditorInit() {
-  
-  // // Font Select drop down
-
-  // $('#fontSelect').fontSelector({
-  //   'hide_fallbacks' : true,
-  //   'initial' : 'Courier New,Courier New,Courier,monospace',
-  //   'selected' : function(style) {
-  //     $('.selected-element .editable').css({
-  //       'font-family': style
-  //     })
-  //   }
-  // });
-
-
-  // // NicEdit
-
-  //   var myNicEditor = new nicEditor({
-  //   iconsPath : "<%= asset_path 'nicEditorIcons.gif' %>"
-  // });
-  // myNicEditor.setPanel('myNicPanel');
-  // $('.text-container').each(function(item){
-  //   myNicEditor.addInstance($(this).attr('id'));
-  // })
-
 
   // TinyMCE
 
@@ -824,8 +800,28 @@ function textEditorInit() {
     mode : "none",
     theme : "advanced",
     skin: "cirkuit" ,
-    // content_css : "<%= asset_path 'tinymce_content.css' %>",
+    content_css : "<%= asset_path 'tinymce_content.css' %>",
     // editor_css : "<%= asset_path 'tinymce_editor.css' %>",
+
+    theme_advanced_fonts : 
+      "OpenSans=OpenSans-Regular,sans-serif;"+
+      "Andale Mono=andale mono,times;"+
+      "Arial=arial,helvetica,sans-serif;"+
+      "Arial Black=arial black,avant garde;"+
+      "Book Antiqua=book antiqua,palatino;"+
+      "Comic Sans MS=comic sans ms,sans-serif;"+
+      "Courier New=courier new,courier;"+
+      "Georgia=georgia,palatino;"+
+      "Helvetica=helvetica;"+
+      "Impact=impact,chicago;"+
+      "Symbol=symbol;"+
+      "Tahoma=tahoma,arial,helvetica,sans-serif;"+
+      "Terminal=terminal,monaco;"+
+      "Times New Roman=times new roman,times;"+
+      "Trebuchet MS=trebuchet ms,geneva;"+
+      "Verdana=verdana,geneva;"+
+      "Webdings=webdings;"+
+      "Wingdings=wingdings,zapf dingbats",
     
             
     // Theme options - button# indicated the row# only

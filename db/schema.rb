@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205194837) do
+ActiveRecord::Schema.define(:version => 20130213153338) do
 
   create_table "elements", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position",         :default => 0
-    t.string   "elementable_type"
-    t.integer  "elementable_id"
+    t.string   "child_type"
+    t.integer  "child_id"
     t.integer  "page_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
@@ -30,9 +30,13 @@ ActiveRecord::Schema.define(:version => 20130205194837) do
     t.integer  "image_height",     :default => 200
     t.integer  "image_top",        :default => 0
     t.integer  "image_left",       :default => 0
+    t.integer  "header_id"
+    t.integer  "elementable_id"
+    t.string   "elementable_type"
   end
 
-  add_index "elements", ["elementable_id", "elementable_type", "page_id"], :name => "element_index", :unique => true
+  add_index "elements", ["child_id", "child_type", "page_id"], :name => "element_index", :unique => true
+  add_index "elements", ["header_id"], :name => "index_elements_on_header_id"
 
   create_table "folders", :force => true do |t|
     t.string   "name"
@@ -71,6 +75,14 @@ ActiveRecord::Schema.define(:version => 20130205194837) do
   end
 
   add_index "gallery_pages", ["site_id"], :name => "index_gallery_pages_on_site_id"
+
+  create_table "headers", :force => true do |t|
+    t.integer  "site_id"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "homepages", :force => true do |t|
     t.string   "name",       :default => "Home"

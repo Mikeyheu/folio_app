@@ -75,7 +75,7 @@ class Admin::PagesController < ApplicationController
   def add_text_element
     @page = @site.pages.find(params[:id])
     text = PageText.create(content:"Enter your text here.")
-    @page.elements.create(elementable:text, top:0, left:0, width:200, height:30)
+    @page.elements.create(child:text, top:0, left:0, width:200, height:30)
     redirect_to :back
   end
 

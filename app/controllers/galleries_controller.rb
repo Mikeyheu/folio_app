@@ -5,6 +5,7 @@ class GalleriesController < ApplicationController
   def show
   	@nav_items = @site.nav_items.includes(:navable).nav_scope
     @gallery = @site.galleries.find(params[:id])
+    @header = @site.header
     render layout: 'site'
   end
 

@@ -1,0 +1,48 @@
+#header {
+	position:relative;
+}
+
+#navigation {
+	position:relative;
+}
+
+#content {
+	position:relative;
+}
+
+#footer {
+	position:relative;
+}
+
+.page {
+	position:relative;
+}
+
+.element {
+	position:absolute;
+}
+
+.image-holder {
+	position:absolute;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+
+.text-container {
+	position:absolute;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+
+.image-container {
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.image-container img {
+	max-width: 100%;
+	position:absolute;
+}

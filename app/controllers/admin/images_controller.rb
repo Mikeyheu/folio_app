@@ -28,7 +28,10 @@ class Admin::ImagesController < ApplicationController
     @image = Image.new
     if params[:page_id]
       @page_id = params[:page_id]
+    elsif params[:header_id]
+      @header_id = params[:header_id]
     end
+      
   end
 
   def edit
@@ -56,6 +59,11 @@ class Admin::ImagesController < ApplicationController
       elsif params[:page_id]
         p = Page.find(params[:page_id])       
         p.elements.create(child:@image, top:100, left:100, width:200, height:200) 
+        redirect_to :back
+
+      elsif params[:header_id]
+        h = Header.find(params[:header_id])       
+        h.elements.create(child:@image, top:100, left:100, width:200, height:200) 
         redirect_to :back
       end
       
@@ -132,12 +140,6 @@ class Admin::ImagesController < ApplicationController
     end
 
     render :nothing => true
-  end
-
-  private
-
-  def get_site 
-    @site = Site.find(params[:site_id])
   end
 
 end

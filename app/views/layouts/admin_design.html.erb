@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Folio App</title>
-		<%= stylesheet_link_tag    "admin", :media => "all" %>
-		<%= javascript_include_tag "admin" %>
-		<%= csrf_meta_tags %>
-		<%= render 'layouts/shim' %>
-	</head>
-	<body class="<%= params[:controller].gsub('/', " ") %>">
-		
-		<% flash.each do |key, value| %>
-		  <div class="alert alert-<%= key %>"><%= value %></div>
+<head>
+	<title>Folio App</title>
+	<%= stylesheet_link_tag    "admin", :media => "all" %>
+	<%= javascript_include_tag "admin" %>
+	<%= csrf_meta_tags %>
+	<%= render 'layouts/shim' %>
+</head>
+<body class="<%= params[:controller].gsub('/', " ") %>">
+
+	<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
 		<% end %>
-		
+
 		<%= render 'layouts/header' %>
 		<%= render 'layouts/design_nav' %>
 
 		<%= yield %>
-</div>
-
-		
-
-	</body>
+</body>
 </html>

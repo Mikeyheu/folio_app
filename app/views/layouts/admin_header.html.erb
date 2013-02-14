@@ -14,16 +14,10 @@
 	<% end %>
 	
 	<%= render 'layouts/header' %>
-	
 	<div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-	<div id="content" class="content">
-		<%= render 'admin/sites/left_menu' %>
-		<div id="pjax-container">
-			<%= yield %>
-		</div>
+		<div id="content" class="content">
+		<%= yield %>
 	</div>
-
-	
-
+	</div>
 </body>
 </html>

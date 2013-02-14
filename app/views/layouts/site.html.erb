@@ -2,14 +2,26 @@
 <html>
 	<head>
 		<title>My Site Title</title>
-		<%= stylesheet_link_tag    "application", :media => "all" %>
-		<%= javascript_include_tag "application" %>
+		<%= stylesheet_link_tag    "site", :media => "all" %>
+		<%= javascript_include_tag "site" %>
 		<%= csrf_meta_tags %>
 		<%= render 'layouts/shim' %>
 	</head>
 	<body class="<%= params[:controller].gsub('/', " ") %>">
-		<%= render 'layouts/site_header' %>
-		<%= yield %>
-
+		<div id="floater"></div>
+	  <div id="wrapper">
+	  	<div id="background"></div>
+	  	<div id="site">
+	      <%= render 'layouts/site_header' %>
+	      <%= render 'layouts/site_navigation' %>
+	      <div id="content">
+	      	<%= yield %>
+	      </div>
+	      <%= render 'layouts/site_footer' %>
+		  </div>
+   </div>
 	</body>
 </html>
+
+
+

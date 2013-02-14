@@ -8,10 +8,4 @@ class Admin::SettingsController < ApplicationController
 		render layout: 'admin_settings'
 	end
 
-	private
-
-  def get_site 
-    @site = Site.find(params[:site_id])
-  end
-
 end

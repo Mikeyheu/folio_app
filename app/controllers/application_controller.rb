@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
  		admin_sites_path
   end
   
+  def get_site 
+    @site = Site.find(params[:site_id])
+  end
+
 end

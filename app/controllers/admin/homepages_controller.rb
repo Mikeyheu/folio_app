@@ -24,13 +24,4 @@ class Admin::HomepagesController < ApplicationController
     # end
   end
 
-  private
-
-  def get_site 
-    @site = Site.find(params[:site_id])
-  end
-
-
-
-
 end

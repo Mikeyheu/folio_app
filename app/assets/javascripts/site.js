@@ -12,13 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui-1.9.1.custom-mike
-//= require jquery-fileupload/basic
-//= require bootstrap
-//= require tinymce
-//= require_tree ./admin
-//= require jquery.multisortable
-//= require jquery.mjs.nestedSortable
-//= require jquery.layout-latest
 //= require jquery.pjax
-
+//= require_tree ./site

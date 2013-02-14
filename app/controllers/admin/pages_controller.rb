@@ -79,10 +79,4 @@ class Admin::PagesController < ApplicationController
     redirect_to :back
   end
 
-  private
-
-  def get_site 
-    @site = Site.find(params[:site_id])
-  end
-
 end

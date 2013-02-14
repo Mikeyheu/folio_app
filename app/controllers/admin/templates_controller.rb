@@ -10,8 +10,5 @@ class Admin::TemplatesController < ApplicationController
 
 	private
 
-  def get_site 
-    @site = Site.find(params[:site_id])
-  end
 end
 

@@ -33,8 +33,13 @@ FolioApp::Application.routes.draw do
         end
       end
       resources :folders
-      resource :setting
-      resource :homepage
+      resource :setting, only: [:show]
+      resource :header, only: [:show] do
+        member do
+          post 'add_text_element'
+        end
+      end
+      resource :homepage, only: [:show]
       resource :template
     end
   end

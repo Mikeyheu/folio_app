@@ -35,6 +35,10 @@
   <% if @page_id %>
     <%= hidden_field_tag :page_id, @page_id %>
   <% end %>
+
+  <% if @header_id %>
+    <%= hidden_field_tag :header_id, @header_id %>
+  <% end %>
 </div>
 
 <div class="modal-footer">

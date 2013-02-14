@@ -52,10 +52,4 @@ class Admin::LinksController < ApplicationController
 		redirect_to admin_site_path(@site)
   end
 
-  private
-
-  def get_site 
-    @site = Site.find(params[:site_id])
-  end
-
 end

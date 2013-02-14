@@ -31,7 +31,7 @@ class Admin::SitesController < ApplicationController
       # create settings for has_one relationship - need to use @site.create_setting()
       @setting = @site.create_setting(title:@site.name)
       @site.create_homepage
-      @site.create_header
+      @site.create_header(width:960, height:60)
       redirect_to admin_sites_path, notice: 'Site was successfully created.'   
     else
       render action: "new" 
@@ -55,7 +55,7 @@ class Admin::SitesController < ApplicationController
 
   def update_elements
 
-    array = params[:page_elements]   
+    array = params[:elements]   
     array.each do |element|
       e = Element.find(element[:id].gsub('element_','').to_i)
       child = e.child
@@ -113,15 +113,5 @@ class Admin::SitesController < ApplicationController
 
     render :nothing => true
   end
-
-  private
-
-  # def get_user
-  #   if current_user
-  #     @user = current_user
-  #   else
-  #     redirect_to new_user_session_path
-  #   end
-  # end
 
 end

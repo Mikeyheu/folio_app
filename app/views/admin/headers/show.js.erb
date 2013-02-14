@@ -1,0 +1,5 @@
+	tinyMCERemove();
+	$('#content').html('<%= escape_javascript(render :partial => "panel") %>');
+	resize();
+	elementInit();
+	tinyMCEInit();

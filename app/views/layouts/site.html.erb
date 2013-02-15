@@ -4,17 +4,39 @@
 		<title>My Site Title</title>
 		<%= stylesheet_link_tag    "site", :media => "all" %>
 		<%= javascript_include_tag "site" %>
+		<script>
+	    var clickbooq = {
+	      slideshowTransition:"crossfade",
+	      slideshowInterval:4000,
+	      slideshowTransitionSpeed:1000,
+	      slideshowStatus:"off",
+	      slideshowInit:false,
+	      imageSize:"small",
+	      slideIndex:0,
+	      prevSlideIndex:0,
+	      easingType:"easeOutExpo",
+	      transitionSpeed:1000,
+	      slideAnimating:false,
+	      transitionType:"hslide",
+	      totalSlides:0,
+	      thumbOrientation:"horizontal",
+	      thumbAlignment:"bottom",
+	      thumbBehavior:"push",
+	      siteConfiguration:"fixed-top",
+	      navConfiguration:"horizontal"
+	    }
+	  </script>
 		<%= csrf_meta_tags %>
 		<%= render 'layouts/shim' %>
 	</head>
 	<body class="<%= params[:controller].gsub('/', " ") %>">
 		<div id="floater"></div>
-	  <div id="wrapper">
-	  	<div id="background"></div>
-	  	<div id="site">
+	  <div id="wrapper" class="fixed-top">
+	  	<!-- <div id="background" class="fixed-top"></div> -->
+	  	<div id="site" class="fixed-top">
 	      <%= render 'layouts/site_header' %>
 	      <%= render 'layouts/site_navigation' %>
-	      <div id="content">
+	      <div id="content" class="fixed-top">
 	      	<%= yield %>
 	      </div>
 	      <%= render 'layouts/site_footer' %>

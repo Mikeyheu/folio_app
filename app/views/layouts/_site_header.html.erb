@@ -1,5 +1,4 @@
-<div id="header">
-  <%= link_to @site.name, site_path(@site), class: 'logo' %>
+<div id="header" class="fixed-top" style="width: <%= @site.header.width %>px; height: <%= @site.header.height %>px;">
 
   <% @site.header.elements.each do |element| %>
     <% e = element.child %>

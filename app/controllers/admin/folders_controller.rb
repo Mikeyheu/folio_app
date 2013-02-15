@@ -45,7 +45,7 @@ class Admin::FoldersController < ApplicationController
 
   def destroy
     @folder = @site.folders.find(params[:id])
-    @folder.nav_items.each do |nav_item|
+    @folder.nav_item.children.each do |nav_item|
       nav_item.parent_id = nil
     end
     @folder.destroy

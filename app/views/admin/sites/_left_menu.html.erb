@@ -24,71 +24,62 @@
      </li>
      <li class="divider-vertical"></li>        
    </ul>
- </div>
+  </div>
 
 
- <div id="panes">
-  <div id="page-menu" class="west-center">
-    <div class="menu-title">Site Pages</div>
-    <div id="homepage">
-      <div class="nodrop">
-        <i class="icon-nav homepage"></i>
-        <div class="menu-container">
-          <%= link_to 'Home', admin_site_homepage_path(@site), class: "ajax" %>
+  <div id="panes">
+    <div id="page-menu" class="west-center">
+      <div class="menu-title">Site Pages</div>
+      <div id="homepage">
+        <div class="nodrop">
+          <i class="icon-nav homepage"></i>
+          <div class="menu-container">
+            <%= link_to 'Home', admin_site_homepage_path(@site), class: "ajax" %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <ol id="sortable1" class="sortable connected" data-update-url="<%= sort_admin_site_path(@site) %>">
-      <% @nav_items.each do |nav_item| %>
-      <% unless nav_item.parent %>
-
-      <li id="nav_item_<%= nav_item.id %>" class="<%= icon(nav_item.navable.class.name) %>" 
-        <% if nav_item.navable.class.name == "Gallery" %>
-        <%= "data-gallery-id=#{nav_item.navable.id}" %>
-        <% end %>
-        >
-        <% if nav_item.navable.class.name == "Gallery" %>
-        <div class="dropzone">
-          <% else %>
-          <div>
-            <% end %>
-            <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
-            <%= navlink(@site,nav_item.navable) %>
-            <%= settingslink(@site, nav_item.navable) %>
-            <%= deletelink(@site, nav_item.navable) %>
-
-          </div>
-          <% unless nav_item.children.empty? %>
-          <ol>
-            <% nav_item.children.order("position").each do |nav_item| %>
-            <li id="nav_item_<%= nav_item.id %>" <% if nav_item.navable.class.name == "Gallery" %>
-              <%= "data-gallery-id=#{nav_item.navable.id}" %>
-              <% end %>
-              >
+      <ol id="sortable1" class="sortable connected" data-update-url="<%= sort_admin_site_path(@site) %>">
+        <% @nav_items.each do |nav_item| %>
+          <% unless nav_item.parent %>
+            <li id="nav_item_<%= nav_item.id %>" class="<%= icon(nav_item.navable.class.name) %>" <%= "data-gallery-id=#{nav_item.navable.id}" if nav_item.navable.class.name == "Gallery" %> >
               <% if nav_item.navable.class.name == "Gallery" %>
-              <div class="dropzone">
-                <% else %>
+                <div class="dropzone">
+              <% else %>
                 <div>
-                  <% end %>
-                  <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
-                  <%= navlink(@site,nav_item.navable) %>
-                  <%= settingslink(@site, nav_item.navable) %>
-                  <%= deletelink(@site, nav_item.navable) %>
-
-                </div>
-              </li>
               <% end %>
-            </ol>
-            <% end %>
-          </li>
-          <% end %>
-          <% end %>
-        </ol>
-      </div>
-      
+                <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
+                <%= navlink(@site,nav_item.navable) %>
+                <%= settingslink(@site, nav_item.navable) %>
+                <%= deletelink(@site, nav_item.navable) %>
+                </div>
 
-      <div id="archive-menu" class="west-south">
+                <% unless nav_item.children.empty? %>
+                <ol>
+                  <% nav_item.children.order("position").each do |nav_item| %>
+                  <li id="nav_item_<%= nav_item.id %>" <%= "data-gallery-id=#{nav_item.navable.id}" if nav_item.navable.class.name == "Gallery" %> >
+                    <% if nav_item.navable.class.name == "Gallery" %>
+                      <div class="dropzone">
+                    <% else %>
+                      <div>
+                    <% end %>
+                      <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
+                      <%= navlink(@site,nav_item.navable) %>
+                      <%= settingslink(@site, nav_item.navable) %>
+                      <%= deletelink(@site, nav_item.navable) %>
+                      </div>
+                  </li>
+                  <% end %>
+                </ol>
+                <% end %>
+
+            </li>
+          <% end %>
+        <% end %>
+      </ol>
+    </div>
+      
+    <div id="archive-menu" class="west-south">
         <div class="menu-title">Galleries</div>
 
         <div id="all_images">
@@ -113,7 +104,6 @@
           </li>
           <% end %>
         </ol>
-
-      </div>
     </div>
   </div>
+</div>

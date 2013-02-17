@@ -187,27 +187,25 @@ function leftMenuInit() {
     toleranceElement: '> div',
     start: function(event, ui) {
      if (ui.item.attr('class') == 'folder') {
-      console.log('folder');
       $('ol.sortable li').addClass('no-nest');
     }
   },
   remove: function(event, ui){
     if (ui.item.attr('class') != 'gallery') {
-      console.log("removed non gallery");
       $('#sortable1').nestedSortable('cancel');
     }
   },
   stop: function(event, ui) {
     $('#page-menu ol.sortable li').removeClass('no-nest');
-    $.ajax({
-      type: 'POST',
-      traditional: true,
-      url: $('#sortable1').data('update-url'),
-      data: {
-        nav_items:$('#sortable1').nestedSortable('serialize'),
-        gallery_items:$('#sortable2').nestedSortable('serialize')
-      }
-    });
+    // $.ajax({
+    //   type: 'POST',
+    //   traditional: true,
+    //   url: $('#sortable1').data('update-url'),
+    //   data: {
+    //     nav_items:$('#sortable1').nestedSortable('serialize'),
+    //     gallery_items:$('#sortable2').nestedSortable('serialize')
+    //   }
+    // });
   }
 });
 
@@ -220,7 +218,7 @@ function leftMenuInit() {
     handle: 'div',
     helper: 'clone',
     items: 'li',
-    maxLevels: 1,
+    maxLevels: 2,
     distance: 5,
     opacity: .6,
     placeholder: 'placeholder',
@@ -232,15 +230,15 @@ function leftMenuInit() {
     },
     stop: function(event, ui) {
       $('#page-menu ol.sortable li').removeClass('no-nest');
-      $.ajax({
-        type: 'POST',
-        traditional: true,
-        url: $('#sortable1').data('update-url'),
-        data: {
-          nav_items:$('#sortable1').nestedSortable('serialize'),
-          gallery_items:$('#sortable2').nestedSortable('serialize')
-        }
-      });
+      // $.ajax({
+      //   type: 'POST',
+      //   traditional: true,
+      //   url: $('#sortable1').data('update-url'),
+      //   data: {
+      //     nav_items:$('#sortable1').nestedSortable('serialize'),
+      //     gallery_items:$('#sortable2').nestedSortable('serialize')
+      //   }
+      // });
     }
   });
   

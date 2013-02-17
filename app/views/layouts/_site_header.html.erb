@@ -1,6 +1,7 @@
-<div id="header" class="fixed-top" style="width: <%= @site.header.width %>px; height: <%= @site.header.height %>px;">
+<div id="header" style="width: <%= @site.header.width %>px; height: <%= @site.header.height %>px;">
+  <div class="container">
 
-  <% @site.header.elements.each do |element| %>
+    <% @site.header.elements.each do |element| %>
     <% e = element.child %>
     <div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
       <div class="element-container">
@@ -15,7 +16,8 @@
         <% end %>
       </div>
     </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 

@@ -16,9 +16,9 @@
 //= require jquery-fileupload/basic
 //= require bootstrap
 //= require tinymce
-//= require_tree ./admin
 //= require jquery.multisortable
 //= require jquery.mjs.nestedSortable
 //= require jquery.layout-latest
 //= require jquery.pjax
+//= require_tree ./admin
 

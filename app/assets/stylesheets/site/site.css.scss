@@ -39,16 +39,16 @@ html, body {
     clear:both;
 }
 
-#background.fixed-top {
+#wrapper.fixed-top #background {
     position: relative;
 }
 
-#site.fixed-top {
+#wrapper.fixed-top #site {
     position: relative;
     width:960px;    /*layout_general.width*/
 }
 
-#header.fixed-top {
+#wrapper.fixed-top #header {
     background: #fff;
     z-index: 2;
     position:relative;
@@ -56,7 +56,7 @@ html, body {
     // height:40px;
 }
 
-#navigation.fixed-top {
+#wrapper.fixed-top #navigation {
     background: #fff;
     z-index: 3;
     position:relative;
@@ -65,7 +65,7 @@ html, body {
     // top:40px;
 }
 
-#footer.fixed-top {
+#wrapper.fixed-top #footer {
     position:absolute;
     width:960px;    /*layout_general.width*/
     height:23px;
@@ -80,7 +80,7 @@ html, body {
     bottom: 0px;
 }
 
-#content.fixed-top {
+#wrapper.fixed-top #content {
     background: #fff;
     overflow-y: auto;
     z-index: 1;
@@ -108,33 +108,33 @@ html, body {
     clear:both;
 }
 
-#background.fixed-left {
+#wrapper.fixed-left #background {
     position: relative;
 }
 
-#site.fixed-left {
+#wrapper.fixed-left #site {
     position: relative;
     width:960px;    /*layout_general.width*/
 }
 
-#header.fixed-left {
+#wrapper.fixed-left #header{
     background: #fff;
     z-index: 2;
-    position:absolute;
+    position: relative;
     width:960px;    /*layout_general.width*/
     height:40px;
 }
 
-#navigation.fixed-left {
+#wrapper.fixed-left #navigation {
     background: #fff;
     z-index: 3;
-    position:absolute;
+    float:left;
     width:125px;
     height:520px;
-    top:40px;
+    // top:40px;
 }
 
-#footer.fixed-left {
+#wrapper.fixed-left #footer{
     position:absolute;
     width:960px;    /*layout_general.width*/
     height:23px;
@@ -149,14 +149,14 @@ html, body {
     bottom: 0px;
 }
 
-#content.fixed-left {
+#wrapper.fixed-left #content{
     background: #fff;
     overflow-y: auto;
     z-index: 1;
-    position:absolute;
+    position: absolute;
     width:735px;
     height:520px;
-    top:40px;
+    top:60px;
     left:125px;
 }
 
@@ -183,22 +183,22 @@ html, body {
     display: block;
 }
 
-#background.full-top {
+#wrapper.full-top #background {
     position: relative;
 }
 
-#site.full-top {
+#wrapper.full-top #site {
 
 }
 
-#header.full-top {
+#wrapper.full-top #header {
     background: #fff;
     z-index: 2;
     width:100%;
     height:40px;
 }
 
-#navigation.full-top {
+#wrapper.full-top #navigation {
     background: #fff;
     z-index: 3;
     position:absolute;
@@ -206,7 +206,7 @@ html, body {
     height:30px;
 }
 
-#footer.full-top {
+#wrapper.full-top #footer {
     width:100%;
     height:23px;
     position:absolute;
@@ -221,7 +221,7 @@ html, body {
     bottom: 0px;
 }
 
-#content.full-top {
+#wrapper.full-top #content {
     background: #fff;
     overflow-y: auto;
     z-index: 1;
@@ -257,11 +257,11 @@ html, body {
     display: block;
 }
 
-#background.full-left {
+#wrapper.full-left #background{
     position: relative;
 }
 
-#site.full-left {
+#wrapper.full-left #site{
     position:absolute;
     display: block;
     bottom:0;
@@ -271,14 +271,14 @@ html, body {
     height: auto !important;
 }
 
-#header.full-left {
+#wrapper.full-left #header {
     background: #fff;
     z-index: 2;
     width:100%;
     height:40px;
 }
 
-#navigation.full-left {
+#wrapper.full-left #navigation {
     background: #fff;
     z-index: 3;
     position:absolute;
@@ -289,7 +289,7 @@ html, body {
     bottom:23px;
 }
 
-#footer.full-left {
+#wrapper.full-left #footer{
     width:100%;
     height:23px;
     position:absolute;
@@ -298,13 +298,13 @@ html, body {
     z-index: 4;
 }
 
-#footer-right {
+#wrapper.full-left #footer-right {
     position: absolute;
     right: 0px;
     bottom: 0px;
 }
 
-#content.full-left {
+#wrapper.full-left #content{
     background: #fff;
     overflow-y: auto;
     z-index: 1;
@@ -317,100 +317,82 @@ html, body {
 
 /**************** MOBILE CSS ********************/
 
-#wrapper.mobile {
-    position:absolute;
-    background: #fff;
-    width:100%;
-    height: 100%;
-    min-height:0;
-    min-width:0;
-    padding-top:0;
-    padding-bottom:0;
-    padding-left:0;
-    padding-right:0;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    display: block;
-}
+// #wrapper.mobile {
+//     position:absolute;
+//     background: #fff;
+//     width:100%;
+//     height: 100%;
+//     min-height:0;
+//     min-width:0;
+//     padding-top:0;
+//     padding-bottom:0;
+//     padding-left:0;
+//     padding-right:0;
+//     margin-top: 0;
+//     margin-bottom: 0;
+//     margin-left: 0;
+//     margin-right: 0;
+//     top:0;
+//     left:0;
+//     right:0;
+//     bottom:0;
+//     display: block;
+// }
 
-#background.mobile {
-    position: relative;
-}
+// #background.mobile {
+//     position: relative;
+// }
 
-#site.mobile {
-    position:absolute;
-    display: block;
-    bottom:0;
-    top:0;
-    left:0;
-    right:0;
-    width:100%;
-    height:100%
+// #site.mobile {
+//     position:absolute;
+//     display: block;
+//     bottom:0;
+//     top:0;
+//     left:0;
+//     right:0;
+//     width:100%;
+//     height:100%
 
-}
+// }
 
-#header.mobile {
-    position:absolute;
-    width:0;
-    height:0;
-}
+// #header.mobile {
+//     position:absolute;
+//     width:0;
+//     height:0;
+// }
 
-#navigation.mobile {
+// #navigation.mobile {
 
-    position:absolute;
-    width:0;
-    height:0;
-}
+//     position:absolute;
+//     width:0;
+//     height:0;
+// }
 
-#footer.mobile {
-    position:absolute;
-    width:0;
-    height:0;
+// #footer.mobile {
+//     position:absolute;
+//     width:0;
+//     height:0;
 
-}
+// }
 
-#footer-right {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-}
+// #footer-right {
+//     position: absolute;
+//     right: 0px;
+//     bottom: 0px;
+// }
 
-#content.mobile {
-    width:100%;
-    height:100%;
-    background: #fff;
-    overflow-y: auto;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-/**************** CONTENT PAGES ********************/
-
-#text_object_1 {
-    text-align: left;
-    position: absolute;
-    left: 300px;
-
-    font-family: 'OpenSans-Regular', Helvetica, sans-serif;
-    font-size: 12px;
-    color: gray;
-}
-
-#image_object_1 img {
-    position: absolute;
-    width: 260px;
-}
-
+// #content.mobile {
+//     width:100%;
+//     height:100%;
+//     background: #fff;
+//     overflow-y: auto;
+//     z-index: 1;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+// }
 
 /**************** HORIZONTAL NAVIGATION ********************/
 
@@ -423,7 +405,7 @@ html, body {
 }
 
 /* remove the list style */
-#navigation_list.horizontal {
+#navigation.horizontal .navigation_list {
     position:relative;
     /*margin: 0;
     width: 100%;*/      /* ISSUES WITH CENTER VS LEFT VS RIGHT ALIGNMENT  */
@@ -438,7 +420,7 @@ html, body {
 /* make the LI display inline */
 /* it's position relative so that position absolute */
 /* can be used in submenu */
-#navigation_list.horizontal li {
+#navigation.horizontal .navigation_list li {
     float: left;
     display: block;
     /*background:#ccc;*/
@@ -448,7 +430,7 @@ html, body {
 }
 
 /* this is the parent menu */
-#navigation_list.horizontal li a {
+#navigation.horizontal .navigation_list li a {
     font-family: 'OpenSans-Regular', Helvetica, sans-serif;
     font-size: 13px;
     display: block;
@@ -459,17 +441,17 @@ html, body {
     color: #333;
 }
 
-#navigation_list.horizontal li a:hover {
+#navigation.horizontal .navigation_list li a:hover {
     color: red;
 }
 
 /* you can make a different style for default selected value */
-#navigation_list.horizontal a.selected {
+#navigation.horizontal .navigation_list a.selected {
     color: red;
 }
 
 /* submenu, it's hidden by default */
-#navigation_list.horizontal ul {
+#navigation.horizontal .navigation_list ul {
     position: absolute;
     left: 0;
     display: none;
@@ -480,12 +462,12 @@ html, body {
     white-space: nowrap;
 }
 
-#navigation_list.horizontal ul li {
+#navigation.horizontal .navigation_list ul li {
     float: left;
     width: auto;
 }
 
-#navigation_list.horizontal li ul li {
+#navigation.horizontal .navigation_list li ul li {
     float: none;
     display: block;
     background: #fff;
@@ -494,13 +476,13 @@ html, body {
 }
 
 /* display block will make the link fill the whole area of LI */
-#navigation_list.horizontal ul a {
+#navigation.horizontal .navigation_list ul a {
     height: auto;
     padding: 8px;
     color: #666;
 }
 
-#navigation_list ul a:hover {
+.navigation_list ul a:hover {
 
 }
 
@@ -545,7 +527,7 @@ html, body {
     color: darkgray;
 }
 
-#navigation_list.vertical li a:hover {
+#navigation.vertical .navigation_list li a:hover {
     color: red;
 }
 

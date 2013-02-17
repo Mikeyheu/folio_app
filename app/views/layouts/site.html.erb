@@ -31,12 +31,12 @@
 	</head>
 	<body class="<%= params[:controller].gsub('/', " ") %>">
 		<div id="floater"></div>
-	  <div id="wrapper" class="fixed-top">
-	  	<!-- <div id="background" class="fixed-top"></div> -->
-	  	<div id="site" class="fixed-top">
+	  <div id="wrapper">
+	  	<!-- <div id="background"></div> -->
+	  	<div id="site">
 	      <%= render 'layouts/site_header' %>
 	      <%= render 'layouts/site_navigation' %>
-	      <div id="content" class="fixed-top">
+	      <div id="content">
 	      	<%= yield %>
 	      </div>
 	      <%= render 'layouts/site_footer' %>

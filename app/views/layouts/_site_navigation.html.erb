@@ -1,6 +1,6 @@
-<div id="navigation" class="fixed-top horizontal">
-  <div id="navigation_container">
-    <ul id="navigation_list" class="horizontal">
+<div id="navigation">
+  <div class="container">
+    <ul class="navigation_list">
       <% @nav_items.includes(:navable).each do |nav_item| %>
         <% unless nav_item.parent %>
           <% if nav_item.navable.class.name == "Folder" %>

@@ -56,17 +56,17 @@
 
                 <% unless nav_item.children.empty? %>
                 <ol>
-                  <% nav_item.children.order("position").each do |nav_item| %>
-                  <li id="nav_item_<%= nav_item.id %>" <%= "data-gallery-id=#{nav_item.navable.id}" if nav_item.navable.class.name == "Gallery" %> >
-                    <% if nav_item.navable.class.name == "Gallery" %>
+                  <% nav_item.children.order("position").each do |subnav_item| %>
+                  <li id="nav_item_<%= subnav_item.id %>" class="<%= icon(subnav_item.navable.class.name) %>" <%= "data-gallery-id=#{subnav_item.navable.id}" if subnav_item.navable.class.name == "Gallery" %> >
+                    <% if subnav_item.navable.class.name == "Gallery" %>
                       <div class="dropzone">
                     <% else %>
                       <div>
                     <% end %>
-                      <i class="icon-nav <%= icon(nav_item.navable.class.name) %>"></i>
-                      <%= navlink(@site,nav_item.navable) %>
-                      <%= settingslink(@site, nav_item.navable) %>
-                      <%= deletelink(@site, nav_item.navable) %>
+                      <i class="icon-nav <%= icon(subnav_item.navable.class.name) %>"></i>
+                      <%= navlink(@site,subnav_item.navable) %>
+                      <%= settingslink(@site, subnav_item.navable) %>
+                      <%= deletelink(@site, subnav_item.navable) %>
                       </div>
                   </li>
                   <% end %>
@@ -92,7 +92,7 @@
         </div>
         <ol id="sortable2" class="sortable connected" data-update-url="<%= sort_admin_site_galleries_path(@site) %>">
           <% @gallery_items.each do |nav_item| %>
-          <li id="nav_item_<%= nav_item.id %>" class="no-nest" data-gallery-id="<%= nav_item.navable.id %>">
+          <li id="nav_item_<%= nav_item.id %>" class="no-nest <%= icon(nav_item.navable.class.name) %>" data-gallery-id="<%= nav_item.navable.id %>">
             <div class="dropzone">
               <i class="icon-nav gallery"></i>
               

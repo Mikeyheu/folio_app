@@ -14,6 +14,12 @@ html, body {
     // background:url(../images/tile.png);
 }
 
+.container {
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
 #floater {
     width: 1px;
     height: 50%;
@@ -509,7 +515,7 @@ html, body {
     font-family: 'OpenSans-Regular', Helvetica, sans-serif;
     font-size: 13px;
     text-decoration: none;
-    color: darkgray;
+    color: blue;
 }
 
 #navigation.vertical ul li ul {

@@ -3,7 +3,7 @@ function leftMenuInit() {
   // PAGE MENU PANEL SORTING
   $('#sortable1').nestedSortable({
     appendTo: '#panes',
-    connectWith: [".connected"],
+    connectWith: ".connected",
     disableNesting: 'no-nest',
     forcePlaceholderSize: true,
     handle: 'div',
@@ -44,7 +44,7 @@ function leftMenuInit() {
   // ARCHIVE MENU PANEL SORTING
   $('#sortable2').nestedSortable({
     appendTo: '#panes',
-    connectWith: [".connected"],
+    connectWith: ".connected",
     disableNesting: 'no-nest',
     forcePlaceholderSize: true,
     handle: 'div',

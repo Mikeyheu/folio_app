@@ -5,9 +5,9 @@
         <% unless nav_item.parent %>
           <% if nav_item.navable.class.name == "Folder" %>
             <li class="dropdown">
-              <%= link_to "#{nav_item.navable.name}<b class='caret'></b>".html_safe, '#', class: "dropdown-toggle", 'data-toggle' => 'dropdown' %>
+              <%= link_to nav_item.navable.name, '' %>
               <% if nav_item.children %>
-                <ul class='dropdown-menu'>
+                <ul>
                   <% nav_item.children.each do |subnav_item| %>
                     <li><%= sitelink(@site,subnav_item.navable) %></li>
                   <% end %>

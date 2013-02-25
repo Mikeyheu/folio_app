@@ -1,14 +1,22 @@
 <div class="static-container">
 <h1>Template</h1>
-
-Templates:
-<% @templates.each do |template| %>
-	<li>
-		<%= template.name %>
-	</li>
-  
-<% end %>
-
-<br>
-<%= @template.name %> is the current template for the site.
 </div>
+
+<ul id="templates" class="template_grid" data-update-url="<%= update_template_admin_site_template_path %>">
+<% @templates.each do |template| %>
+	<li id="template_<%= template.id %>" class="template <%= 'selected' if @template.name == template.name %>">
+		
+		<div class="template_image">
+			<%= image_tag template.image_url %>
+		</div>
+		<div class="template_border"></div>
+
+		<div class="template_title"><%= template.name %></div>
+	</li>  
+<% end %>
+</ul>
+
+
+
+
+				

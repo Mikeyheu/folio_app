@@ -8,6 +8,13 @@ class Admin::TemplatesController < ApplicationController
 		render layout: 'admin_design'
 	end
 
+	def update_template
+		id = params[:template].gsub('template_','').to_i
+    if @site.site_template.update_attributes(template_id:id)
+    	redirect_to :back
+    end
+	end
+
 	private
 
 end

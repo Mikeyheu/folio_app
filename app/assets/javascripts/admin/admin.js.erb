@@ -53,6 +53,10 @@ $(document).ready(function(){
     textEditorInit();
   }
 
+  if ($('body').hasClass('templates')) {
+    templateInit();
+  }
+
 });
 
 //******************* FUNCTIONS BELOW *******************//
@@ -758,5 +762,20 @@ function tinyMCEInit(){
   $('.mce_textarea').each(function(){
     tinyMCE.execCommand('mceAddControl', false, $(this).attr('id'));
   })
+}
+
+function templateInit() {
+  $('.template_grid li.template').on("click",function(event){
+    $('.template_grid li.template').removeClass('selected');
+    $(this).addClass('selected');
+    $.ajax({
+      type: 'POST',
+      url:  $('#templates').data('update-url'),
+      data: {
+        _method:'POST',
+        template: $(this).attr('id'),
+      }
+    });
+  });
 }
 

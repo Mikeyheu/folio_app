@@ -95,23 +95,20 @@ a.logo, a.logo:hover {
 .secondary-navbar .nav > li > a,
 .secondary-navbar .nav > li > a:hover {
   float: none;
+  padding: 8px 15px 6px;
+  color: #FFF;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.secondary-navbar li.icon_button > a,
+.secondary-navbar li.icon_button > a:hover {
+  float: none;
   padding: 10px 0 10px;
   color: #FFF;
   text-decoration: none;
   text-shadow: none;
 }
-
-/* Secondary nav text */
-.links.nav > li > a,
-.links.nav > li > a:hover {
-  float: none;
-  padding: 10px 15px 0px;
-  color: #FFF;
-  text-decoration: none;
-  text-shadow: none;
-}
-
-
 
 /* Secondary nav active text */
 .secondary-navbar .nav .active > a,
@@ -748,3 +745,64 @@ div.element:hover .element_icons {
 .element textarea {
 	background-color: transparent;
 }
+
+/************ Template Grid ************/
+
+.template_grid {
+position:relative;
+	list-style: none;
+	margin-top: 20px;
+	margin-left: 20px; 
+	padding: 0;
+}
+
+.template_grid li.template { 
+	margin:0px 20px 20px 0px; 
+	padding: 0; 
+	float: left; 
+	position:relative;
+
+}
+
+.template {
+	display: block;
+	line-height:0px;
+	margin:0;
+	padding: 0;
+	position:relative;
+	width: 240px; 
+	height: 160px; 
+	background-color: #333;
+	border: none;
+}
+
+.template_image {
+	position:relative;
+  top:0;
+  left:0;
+	width: 240px; 
+	height: 160px;
+}
+
+.template_border {
+	display:none;
+  position:absolute;
+  top:0;
+  left:0;
+	border:5px solid;
+	border-color:#0099FF;
+	width: 230px; 
+	height: 150px;
+}
+
+.template_title {
+  position:absolute;
+  top:170px;
+  left:0;
+}
+
+li.template:hover .template_border, li.template.selected .template_border {
+  display:block;
+}
+
+

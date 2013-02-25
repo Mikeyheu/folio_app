@@ -40,7 +40,11 @@ FolioApp::Application.routes.draw do
         end
       end
       resource :homepage, only: [:show]
-      resource :template
+      resource :template do
+        collection do
+          post 'update_template'
+        end
+      end
     end
   end
 

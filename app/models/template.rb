@@ -11,5 +11,6 @@
 class Template < ActiveRecord::Base
 	has_many :site_templates
 	has_many :sites, through: :site_templates
-  attr_accessible :name, :image_url
+  attr_accessible :name, :image_url, :settings
+  serialize :settings, Hash
 end

@@ -1,6 +1,6 @@
 function navInit() {
 
-  if (clickbooq.siteConfiguration == "fixed-top" || clickbooq.siteConfiguration == "full-top") {
+  if ($('#navigation').hasClass("horizontal")) {
     $('#navigation .container li').hover(
       function () {
         //show its submenu
@@ -14,7 +14,7 @@ function navInit() {
     );
   }
 
-  if (clickbooq.siteConfiguration == "fixed-left" || clickbooq.siteConfiguration == "full-left") {
+  if ($('#navigation').hasClass("vertical")) {
     $('li.dropdown').on('click', function(e){
       if ($(this).hasClass('open')){
         $(this).removeClass('open');

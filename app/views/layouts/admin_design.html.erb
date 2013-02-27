@@ -12,10 +12,12 @@
 	<% flash.each do |key, value| %>
 	<div class="alert alert-<%= key %>"><%= value %></div>
 		<% end %>
-
 		<%= render 'layouts/header' %>
-		<%= render 'layouts/design_nav' %>
-
+		<div id="content" class="content">
+		<%= render 'layouts/design/design_left_panel' %>
+		<div id="pjax-container">
 		<%= yield %>
+		</div>
+	</div>
 </body>
 </html>

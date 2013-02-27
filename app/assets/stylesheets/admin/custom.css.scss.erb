@@ -80,7 +80,7 @@ a.logo, a.logo:hover {
 
 /* Secondary nav background color and height */
 .secondary-navbar {
-	height:36px;
+	height:32px;
 	background-color: #0099ff;
 	background-image: -moz-linear-gradient(top, #0099ff, #0077dd);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0099ff), to(#0077dd));
@@ -104,7 +104,7 @@ a.logo, a.logo:hover {
 .secondary-navbar li.icon_button > a,
 .secondary-navbar li.icon_button > a:hover {
   float: none;
-  padding: 10px 0 10px;
+  padding: 8px 0 8px;
   color: #FFF;
   text-decoration: none;
   text-shadow: none;
@@ -130,7 +130,7 @@ a.logo, a.logo:hover {
 
 /* Secondary nav divider line */
 .navbar .divider-vertical {
-	height: 36px;
+	height: 32px;
 	border-left: 0;
 	margin: 0;
 	border-right: 1px solid #5bbdff;
@@ -199,7 +199,7 @@ a.logo, a.logo:hover {
 }
 
 .settings {background-position:0px 0px;}
-.view {background-position:0px -16px;}
+.view {background-position:0px -15px;}
 .save {background-position:0px -32px;}
 .trash {background-position:0px -48px;}
 .upload {background-position:0px -64px;}
@@ -230,7 +230,7 @@ a.logo, a.logo:hover {
 .secondary-navbar .nav.icon_button > li > a:hover {
   padding: 0 0 0 15px;
   width: 94px;
-  height:36px;
+  height:32px;
   color: #FFF;
   text-decoration: none;
   text-shadow: none;
@@ -244,14 +244,14 @@ a.logo, a.logo:hover {
 
 /************ Right Panel Icons CSS ************/
 
-/* Make icon buttons 36px wide */
+/* Make icon buttons 32px wide */
 .secondary-navbar li.icon_button > a {
-	width:36px;
+	width:32px;
 }
 
 /* Move right panel icons over by 10px */
 .secondary-navbar li.icon_button a > div {
-	margin-left:10px;
+	margin-left:8px;
 }
 
 /************ Thumbnail Grid ************/
@@ -554,7 +554,7 @@ div.element:hover .element_icons {
 /************ Tertiary Navigation CSS ************/
 
 .tertiary-navbar {
-	height:36px;
+	height:32px;
 	background-color: #0099ff;
 	background-image: -moz-linear-gradient(top, #555555, #444444);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#444444));
@@ -634,7 +634,7 @@ div.element:hover .element_icons {
 
 #text-toolbar {
 	position:absolute;
-  top:36px;
+  top:32px;
   width:100%;
 }
 
@@ -806,3 +806,48 @@ li.template:hover .template_border, li.template.selected .template_border {
 }
 
 
+/* Secondary nav background color and height */
+h3.accordion {
+  position:relative;
+  margin:0;
+  line-height:normal;
+	height:32px;
+	color: #FFF;
+	background-color: #0099ff;
+	background-image: -moz-linear-gradient(top, #0099ff, #0077dd);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0099ff), to(#0077dd));
+	background-image: -webkit-linear-gradient(top, #0099ff, #0077dd);
+	background-image: -o-linear-gradient(top, #0099ff, #0077dd);
+	background-image: linear-gradient(to bottom, #0099ff, #0077dd);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0099ff', endColorstr='#ff0077dd', GradientType=0);
+}
+
+
+/* Secondary nav text */
+#accordion h3 > a {
+  position:absolute;
+  font-weight: normal;
+  left:15px;
+  top:8px;
+  font-size: 14px;
+  color: #FFF;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+#accordion > div {
+	padding:15px;
+	font-size: 14px;
+}
+
+/* Secondary nav divider line */
+.accordion-divider-vertical {
+  z-index: 5;
+  position:absolute;
+  right:0;
+	height: 32px;
+	border-left: 0;
+	margin: 0;
+	border-right: 1px solid #5bbdff;
+}

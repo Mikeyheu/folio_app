@@ -25,6 +25,7 @@ class Site < ActiveRecord::Base
   has_many :images, :dependent => :destroy
   has_one :site_template
   has_one :template, :through => :site_template
+  has_many :site_layouts
 
   
   extend FriendlyId

@@ -22,8 +22,6 @@
 	      // thumbOrientation:"horizontal",
 	      // thumbAlignment:"bottom",
 	      // thumbBehavior:"push",
-	      siteConfiguration:"fixed-top",
-	      navConfiguration:"horizontal"
 	    }
 	  </script>
 		<%= csrf_meta_tags %>
@@ -31,15 +29,15 @@
 	</head>
 	<body class="<%= params[:controller].gsub('/', " ") %>">
 		<div id="floater"></div>
-	  <div id="wrapper">
+	  <div id="wrapper" class="<%= @site.template.settings[:site_configuration] %>">
 	  	<!-- <div id="background"></div> -->
 	  	<div id="site">
-	      <%= render 'layouts/site_header' %>
-	      <%= render 'layouts/site_navigation' %>
+	      <%= render 'layouts/site/site_header' %>
+	      <%= render 'layouts/site/site_navigation' %>
 	      <div id="content">
 	      	<%= yield %>
 	      </div>
-	      <%= render 'layouts/site_footer' %>
+	      <%= render 'layouts/site/site_footer' %>
 		  </div>
    </div>
 	</body>

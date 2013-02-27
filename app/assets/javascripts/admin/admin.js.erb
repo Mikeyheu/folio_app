@@ -5,6 +5,20 @@ $(document).ready(function(){
     appended = false;
     snapping = true;
 
+
+     // SLIDING PANEL CODE
+
+  $('#caret').toggle(function(){
+    $('.left-panel').css({ left:-220 });
+    $('#caret .icon').removeClass('caret-left').addClass('caret-right');
+    resize();
+  }, function(){
+    $('#caret .icon').removeClass('caret-right').addClass('caret-left');
+    $('.left-panel').css({ left:0 });
+    resize();
+  });
+  
+
   if ($('body').hasClass('pages') || $('body').hasClass('galleries') || $('body').hasClass('sites')) {
 
     //PJAX INIT
@@ -54,7 +68,16 @@ $(document).ready(function(){
   }
 
   if ($('body').hasClass('templates')) {
+
+       // WINDOW BIND RESIZE AND FIRE
+    windowInit();
+
+    // Modal behavior
+    modalInit();
+
     templateInit();
+
+    accordionInit();
   }
 
 });
@@ -70,7 +93,8 @@ function windowInit() {
 
 function resize() {
   var primary_nav_height = $('#primary-navbar').height();
-  var secondary_nav_height = $('#secondary-navbar').height();
+  var secondary_nav_height = 32;
+  //var secondary_nav_height = $('#secondary-navbar').height();
   var tertiary_nav_height = $('#tertiary-navbar').height();
   var left_menu_pos, left_menu_width;
   if ($('.left-panel').length > 0 ) {
@@ -92,6 +116,10 @@ function resize() {
     left: left_menu_pos + left_menu_width,
     width: $(window).width() - left_menu_width - left_menu_pos
   });
+
+  if ($('#accordion').length > 0) {
+    $('#accordion').accordion( "resize" );
+  }
 }
 
 function galleryInit() {
@@ -146,18 +174,6 @@ function galleryInit() {
       }
       appended = false  
     }
-  });
-
-  // SLIDING PANEL CODE
-
-  $('#caret').toggle(function(){
-    $('.left-panel').css({ left:-220 });
-    $('#caret .icon').removeClass('caret-left').addClass('caret-right');
-    resize();
-  }, function(){
-    $('#caret .icon').removeClass('caret-right').addClass('caret-left');
-    $('.left-panel').css({ left:0 });
-    resize();
   });
 
   // Click off thumbnail to deselect
@@ -776,6 +792,12 @@ function templateInit() {
         template: $(this).attr('id'),
       }
     });
+  });
+}
+
+function accordionInit() {
+  $('#accordion').accordion({
+    fillSpace: true
   });
 }
 

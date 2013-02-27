@@ -1,0 +1,23 @@
+<div id="header" style="width: <%= @site.header.width %>px; height: <%= @site.header.height %>px;">
+  <div class="container">
+
+    <% @site.header.elements.each do |element| %>
+    <% e = element.child %>
+    <div id="element_<%= element.id %>" class="element" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
+      <div class="element-container">
+        <% if e.class.name == "Image" %>
+        <div class="image-holder">
+          <div class="image-container" style="width:<%= element.image_width %>px; height:<%= element.image_height %>px; left:<%= element.image_left %>px; top:<%= element.image_top %>px;">
+            <%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+          </div>
+        </div>
+        <% elsif e.class.name == "PageText" %>
+        <div class="text-container" style="<%= e.style %>"><%= e.content.html_safe %></div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+

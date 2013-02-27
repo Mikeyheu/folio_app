@@ -45,6 +45,7 @@ FolioApp::Application.routes.draw do
           post 'update_template'
         end
       end
+      resources :layouts
     end
   end
 

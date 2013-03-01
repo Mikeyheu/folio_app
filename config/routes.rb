@@ -6,6 +6,7 @@ FolioApp::Application.routes.draw do
         post 'sort'
         post 'update_elements'
       end
+      resources :previews
       resources :images do
         collection do
           post 'sort'
@@ -15,6 +16,7 @@ FolioApp::Application.routes.draw do
           post 'remove'
         end
       end
+      
       resources :galleries do
         collection do
           post 'sort'

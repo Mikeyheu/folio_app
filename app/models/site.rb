@@ -26,6 +26,7 @@ class Site < ActiveRecord::Base
   has_one :site_template
   has_one :template, :through => :site_template
   has_many :site_layouts
+  has_many :previews
 
   
   extend FriendlyId

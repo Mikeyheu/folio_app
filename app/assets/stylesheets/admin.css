@@ -12,5 +12,6 @@
  *= require reset
  *= require_self
  *= require layout-default-latest
+ *= require colorpicker
  *= require_tree ./admin
  */

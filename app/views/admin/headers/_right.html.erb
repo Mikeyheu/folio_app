@@ -1,0 +1,174 @@
+<div class ="right-panel">
+	<div id="secondary-navbar" class="navbar secondary-navbar links">
+		<ul class="nav">
+			<li class="icon_button">
+				<a href="#" id="caret">
+					<div>
+						<div class="icon caret-left"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+		</ul>
+
+		<ul class="nav pull-right">
+			<li class="divider-vertical"></li>
+			<li  class="dropdown icon_button">
+				<a href="#" id="add_element" class="dropdown-toggle" data-toggle="dropdown" rel="tooltip" data-original-title="Add Element"><div class="icon add"></div> </a>
+				<ul class="dropdown-menu">
+					<li><%= link_to "Text Element", add_text_element_admin_site_header_path(@site), method: :post, remote: true %></li>
+					<li><%= link_to 'Image Element', {controller: 'admin/images', action:'new', header_id:@header.id}, {:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal" } %></li> 
+				</ul>
+
+			</li>   
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<%= link_to site_path(@site),{:target => "_blank"} do %>
+				<div id="view" class="" rel="tooltip" data-original-title="View Site">
+					<div class="icon view"></div>
+				</div>
+				<% end %>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<a href="#" class="save-button" rel="tooltip" rel="tooltip" data-original-title="Save">
+					<div id="save" class="" >
+						<div class="icon save"></div>
+					</div>
+				</a>
+			</li>
+			<li class="divider-vertical"></li>
+			<li class="icon_button">
+				<a href="#" class="" rel="tooltip" data-original-title="Trash" >
+					<div id="trash" class="">
+						<div class="icon trash"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+
+	<div id="tertiary-navbar" class="navbar tertiary-navbar">
+		<div class="nav nav-text">
+			<form id="object_form" name="object_form">
+				<div class="element-input">
+
+					X: <input type="text" value ="0" id="x" name="x" maxlength="5" size="4">
+					Y: <input type="text" value ="0" id="y" name="y" maxlength="5" size="4">
+					W: <input type="text" value ="0" id="width" name="width" maxlength="5" size="4">
+					H: <input type="text" value ="0" id="height" name="height" maxlength="5" size="4">
+				</div>
+				<button id="update" class="btn myButton" type="button">Update</button>
+			</form>
+
+		</div>
+		<ul class="nav">
+			<li class="divider-vertical divider-gray"></li>
+			<li class="dropdown nav-button">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><div class="icon settings"></div> </a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Move to top</a></li>
+					<li><a href="#">Move to bottom</a></li>
+				</ul>
+			</li>   
+			<li class="divider-vertical divider-gray"></li>
+		</ul>
+		<div class="options">
+			<input type="checkbox" id="show-grid" class="largerCheckbox" name="option1" value="true" checked> Show Grid
+			<input type="checkbox" id="snap-grid" class="largerCheckbox" name="option1" value="true" checked> Snap to Grid
+		</div>
+	</div>
+
+	<div id="text-toolbar" class="navbar tertiary-navbar cirkuitSkin hide" style="z-index:100">
+		<!-- <div id="myNicPanel" style="width: 625px;" unselectable="on"></div> -->
+	</div>
+
+
+	<div class="right-inner">
+
+		<div class="canvas-background"></div>
+		<!-- <div class="wrap">
+	 <iframe src="<%= site_path(@site) %>" class="frame"></iframe>
+	</div> -->
+
+		<div class="canvas" style="width:<%= @header.width %>px; height:<%= @header.height %>px;">
+			<div class="grid-background"></div>
+
+
+
+			<div id="elements" data-elements-url="<%= update_elements_admin_site_path(@site) %>">
+				<% @header.elements.each do |element| %>
+				<% e = element.child %>
+
+				<div id="element_<%= element.id %>" class="element <%= e.class.name %>" style="width:<%= element.width %>px; height:<%= element.height %>px; left:<%= element.left %>px; top:<%= element.top %>px; z-index:<%= element.z_index %>;">
+
+
+					<% if e.class.name == "Image" %>
+					<div class="image-holder">
+						<div class="image-container" style="width:<%= element.image_width %>px; height:<%= element.image_height %>px; left:<%= element.image_left %>px; top:<%= element.image_top %>px;">
+
+
+							<%= image_tag e.image_file_url(:medium).to_s, alt: "Test Image" %>
+
+							<div class="image-resize-border" style="display:none;">
+								<div class="lines red hline"></div>
+								<div class="lines red hline bottom"></div>
+								<div class="lines red vline"></div>
+								<div class="lines red vline right"></div>
+							</div>
+
+							<div class='image-resize-handles' style="display:none;">
+								<div class="ise red ui-resizable-handle handle ui-resizable-se"></div>
+								<div class="isw red ui-resizable-handle handle ui-resizable-sw"></div>
+								<div class="ine red ui-resizable-handle handle ui-resizable-ne"></div>
+								<div class="inw red ui-resizable-handle handle ui-resizable-nw"></div>
+							</div>
+						</div>
+					</div>
+					<% elsif e.class.name == "PageText" %>
+					<div class="text-container editable" id="text_container_<%= e.id %>" style="<%= e.style %>">
+
+						<textarea class="mce_textarea" id="textarea_<%= e.id %>"><%= e.content.html_safe %></textarea></div>
+						<div class="grab"></div>
+
+						<% end %>
+
+
+						<div class="resize-border" style="display:none;">
+							<div class="lines hline"></div>
+							<div class="lines hline bottom"></div>
+							<div class="lines vline"></div>
+							<div class="lines vline right"></div>
+						</div>
+
+						<div class="resizing-box" style="display:none;">	
+							<div class="sw ui-resizable-handle handle ui-resizable-sw"></div>
+							<div class="ne ui-resizable-handle handle ui-resizable-ne"></div>
+							<div class="nw ui-resizable-handle handle ui-resizable-nw"></div>
+							<div class="se ui-resizable-handle handle ui-resizable-se"></div>
+
+						</div>
+
+						<% if e.class.name == "Image" %>
+						<div class="element_icons">
+							<a href="#" class="crop-button"><i class="icon-nav crop"></i></a>
+							<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe, edit_admin_site_image_path(@site, e),:remote => true, 'data-toggle' => 'modal', 'data-target' => "#myModal" %>
+							<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
+						</div>
+						<% elsif e.class.name == "PageText" %>
+						<div class="element_icons">
+							<!-- <%= link_to '<i class="icon-nav pencil"></i>'.html_safe, '#', class: "edit-text-button" %> -->
+							<%= link_to '<i class="icon-nav menu-settings"></i>'.html_safe %>
+							<%= link_to '<i class="icon-nav menu-close"></i>'.html_safe, remove_admin_site_element_path(@site, element), method: :post, :remote => true %>
+						</div>
+						<% end %>
+					</div>
+					
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -21,6 +21,7 @@
 //= require jquery.pjax
 //= require jquery.multisortable
 //= require jquery.mjs.nestedSortable
+//= require colorpicker
 //= require_tree ./admin
 
 

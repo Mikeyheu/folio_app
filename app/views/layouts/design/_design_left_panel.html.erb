@@ -2,25 +2,45 @@
 <div class="left-panel">
   <div class="accordion-divider-vertical"></div>
   <div id="accordion" >
-    <h3 class="accordion"><%= link_to 'Template', admin_site_template_path(@site)%></h3>
+    <h3 class="accordion"><%= link_to 'Template', admin_site_template_path(@site), class: "ajax" %></h3>
     <div>
       <p>
-        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-      </p>
+        Select a template from the right to prepopulate your website.
+        </p>
+        Choose your layout
+        <select style="width:180px">
+          <option value="fixed">Fixed</option>
+          <option value="fullscreen">Fullscreen</option>
+        </select>
+
+        <form>
+          <input type="radio" name="sex" value="male">Male<br>
+          <input type="radio" name="sex" value="female">Female
+        </form>
+
+       <div id="colorselector2">
+        <div style="background-color: rgb(122, 26, 122);">
+        </div>
+      </div>
+      
     </div>
-    <h3 class="accordion"><%= link_to 'Layout', admin_site_header_path(@site) %></h3>
+    <h3 class="accordion"><%= link_to 'Layout', admin_site_preview_path(@site, @site.previews.first), class: "ajax" %></h3>
     <div>
       <p>
-        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+        Fullscreen or fixed?
+        <select style="width:180px">
+          <option value="fixed">Fixed</option>
+          <option value="fullscreen">Fullscreen</option>
+        </select>
+
+        Another dropdown
+        <select style="width:180px">
+          <option value="fixed">Fixed</option>
+          <option value="fullscreen">Fullscreen</option>
+        </select>
       </p>
     </div>
-    <h3 class="accordion"><%= link_to 'Header', admin_site_header_path(@site) %></h3>
+    <h3 class="accordion"><%= link_to 'Header', admin_site_header_path(@site), class: "ajax" %></h3>
     <div>
       <p>
         Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer

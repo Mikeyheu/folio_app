@@ -5,7 +5,15 @@ class Admin::TemplatesController < ApplicationController
 	def show
 		@templates = Template.all
 		@template = @site.template
-		render layout: 'admin_design'
+		
+		if request.headers['X-PJAX']
+      render :layout => false
+    else 
+      respond_to do |format| 
+        format.html { render layout: 'admin_design' }
+        format.js {}
+      end
+    end
 	end
 
 	def update_template

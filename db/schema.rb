@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227152909) do
+ActiveRecord::Schema.define(:version => 20130301152928) do
 
   create_table "elements", :force => true do |t|
     t.integer  "parent_id"
@@ -139,6 +139,14 @@ ActiveRecord::Schema.define(:version => 20130227152909) do
     t.string   "name"
     t.integer  "site_id"
     t.string   "slug"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "previews", :force => true do |t|
+    t.integer  "site_id"
+    t.integer  "layout_id"
+    t.text     "settings"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

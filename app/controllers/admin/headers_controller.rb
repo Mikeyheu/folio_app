@@ -5,7 +5,15 @@ class Admin::HeadersController < ApplicationController
 
   def show
     @header = @site.header
-    render layout: 'admin_header'
+    
+    if request.headers['X-PJAX']
+      render :layout => false
+    else 
+      respond_to do |format| 
+        format.html { render layout: 'admin_design' }
+        format.js {}
+      end
+    end
   end
 
   def add_text_element

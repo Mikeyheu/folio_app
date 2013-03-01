@@ -65,15 +65,23 @@ $(document).ready(function(){
 
     // Text Editor Init
     textEditorInit();
+
+    //PJAX INIT
+    pjaxInit();
+
+    accordionInit();
   }
 
   if ($('body').hasClass('templates')) {
 
-       // WINDOW BIND RESIZE AND FIRE
+    // WINDOW BIND RESIZE AND FIRE
     windowInit();
 
     // Modal behavior
     modalInit();
+
+    //PJAX INIT
+    pjaxInit();
 
     templateInit();
 
@@ -237,14 +245,13 @@ function pjaxInit() {
   $(document).on('pjax:complete', function() {
     
     if ($('body').hasClass('admin')) {
-      console.log('bdaslfhajdahjkfhdajs')
       resize();
       galleryInit();
       elementInit();
       uploadInit();
-
       tinyMCEInit();
     }
+
   });
   $.pjax.defaults.timeout = false;
 }
@@ -797,7 +804,31 @@ function templateInit() {
 
 function accordionInit() {
   $('#accordion').accordion({
+    // header: "a.accordion-label",
     fillSpace: true
   });
+
+  $("#accordion h3 a").click(function() {
+    // window.location = $(this).attr('href');
+    console.log("a clicked");
+    // return false;
+   });
+
+  $('#colorselector2').ColorPicker({
+        color: '#EFEFEF',
+        onShow: function (colpkr) {
+            $(colpkr).fadeIn(500);
+            return false;
+        },
+        onHide: function (colpkr) {
+            $(colpkr).fadeOut(500);
+            return false;
+        },
+        onChange: function (hsb, hex, rgb) {
+            $('#colorSelector div').css('backgroundColor', '#' + hex);
+        }
+    });
 }
+
+
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clickbooq Frontend Test</title>
+	<script></script>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/test.css">
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.9.2.js"></script>
+	
+	<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+	<div id="container">
+    <div id="controls">
+        <select id="vertical_alignment">
+            <option value="top">Top</option>
+            <option value="bottom">Bottom</option>
+            <option value="center">Center</option>
+        </select>
+        <select id="horizontal_alignment">
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+            <option value="center">Center</option>
+        </select>
+        <label for="x">X:</label>
+        <input id="x" type="text" name="x" size="5" value="0"></input>
+        <label for="y">Y:</label>
+        <input id="y" type="text" name="y" size="5" value="0"></input>
+    </div>
+    <div id="panel">
+        <div class="v_line"></div>
+        <div class="h_line"></div>
+        <div class="outer">
+            <div id="box">
+                <div class="v_line"></div>
+                <div class="h_line"></div>
+            </div>
+        </div>
+    </div>
+</div>
+	<script type="text/javascript" src="js/test.js"></script>
+</body>
+</html>

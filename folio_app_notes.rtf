@@ -1,0 +1,193 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fmodern\fcharset0 Courier-Bold;\f1\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid301\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid401\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid501\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid6}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}}
+\margl1440\margr1440\vieww12240\viewh9640\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\b\fs28 \cf0 class Template\
+  # name: string\
+  # settings: text # serialized to a Hash\
+end\
+\
+class SiteLayout\
+  belongs_to :site\
+  has_one :header\
+  has_one :footer\
+  has_one :background\
+\
+  # name\
+  # settings\
+  # \
+end\
+\
+class Background\
+  belongs_to :site_layout\
+end\
+\
+class Header\
+  belongs_to :site_layout\
+end\
+\
+class Footer\
+  belongs_to :site_layout\
+end\
+
+\f1\b0\fs24 \
+  \
+  \
+\
+I need to make decision whether the header, footer, etc are similar to pages or if every layout has individual header, footer, etc objects.\
+\
+If every layout shares the header, footer, etc then the issue is if the user picks a new template (switches from left to top) what happens to the elements that are associated with the header? Do they shift? Or do they just remain where they are and the user needs to reposition them?\
+\
+The alternative is that if the user switches to a new template, the new layout does not have the old header, footer, etc elements. Maybe the user has the option to copy all the old elements into the new template.\
+\
+Templates will probably require some pre-populated background elements, etc so we need to figure out how this would work if all the header elements, etc are shared. \
+\
+How to do deal with tiles, patterns, background images, etc????\
+\
+Maybe we create different scenarios:\
+\
+User chooses a template and saves a layout (with a name). The template settings are copied into the new layout settings and saved. The user then goes through and configures the layout settings. When the new layout is created, default header, footer, background, etc objects are created and pre-populated. \
+\
+Brainstorm:\
+\
+Dropdowns for tile selection\
+Dropdown for uploaded logos and images???\
+\
+\
+Header Uploads\
+Footer Uploads\
+Backgrounds\
+\
+Design Section\
+\
+I have an application that I am trying to build which is essentially a portfolio website builder for photographers.\
+\
+One of the challenges I am having is a user feature where the user can select a template from a number of pre-designed templates, and then further customize each template with their own settings.\
+\
+So I need a Template model which I use to create the base templates and I also need Site_Layout model which initially copies the base template settings as a starting point  but then can overwrite them later.\
+\
+The issue I am having is what to do when the user decides to change his or her template. If the user has uploaded images and text elements to the header or footer areas \
+\
+Scenario 1:\
+\
+User selects Template and then saves the template as a new Layout.\
+Template settings get copied as SiteLayout.\
+User then makes changes to the SiteLayout.\
+If the user decides to switch the Template, the current SiteLayout gets over-written with the new Template settings.\
+\
+Header, footer, settings all get updated.\
+\
+Redo settings \
+\
+\
+\
+Scenario 2:\
+\
+\
+\
+
+\f0\b\fs28 SCENARIO 1: Header, Background and Footer are associated with SiteLayout\
+\
+First time site creation:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls1\ilvl0
+\f1\b0 \cf0 {\listtext	1.	}Template is selected.\
+{\listtext	2.	}Template settings are copied into the new SiteLayout created. \
+{\listtext	3.	}Header and Footer objects are also created and associated to the new SiteLayout.\
+{\listtext	4.	}User then edits the SiteLayout further.\
+{\listtext	5.	}User adds some elements to the header (i.e logo and text) and positions them.\
+{\listtext	6.	}User edits some text in the footer.
+\f0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+If the user decides to switch their current template:\
+\
+If new SiteLayout:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls2\ilvl0
+\f1\b0 \cf0 {\listtext	1.	}Template settings are copied into the new SiteLayout. \
+{\listtext	2.	}Header and footer elements are set to the default. This means no logos, text elements or anything is preserved from the previous SiteLayout. 
+\f0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+If editing current SiteLayout: \
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls3\ilvl0
+\f1\b0 \cf0 {\listtext	1.	}Template settings overwrite the current SiteLayout.\
+{\listtext	2.	}Existing header and footer elements are kept but may be out of ideal position.\
+{\listtext	3.	}Not sure how to handle other elements that are part of the new Template look and feel.\
+{\listtext	4.	}User must create a new SiteLayout.\
+{\listtext	5.	}User must make that new SiteLayout active.
+\f0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+SCENARIO 2: Header, Background and Footer are not associated with SiteLayout\
+\
+First time site creation:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls4\ilvl0
+\f1\b0 \cf0 {\listtext	1.	}When a user creates a new Site, Header and Footer objects are also created.\
+{\listtext	2.	}Template is selected.\
+{\listtext	3.	}Template settings are copied into the new SiteLayout created. \
+{\listtext	4.	}User then edits the SiteLayout further.\
+{\listtext	5.	}User adds some elements to the header (i.e logo and text) and positions them. This updates the Header object.\
+{\listtext	6.	}User edits some text in the footer. This updates the Footer object.
+\f0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+If the user decides to switch their current template:\
+\
+If new SiteLayout:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls5\ilvl0
+\f1\b0 \cf0 {\listtext	1.	}Template settings are copied into the new SiteLayout. \
+{\listtext	2.	}Header and footer elements are reset to default configurations but the current elements are preserved. In other words, they are not associated to the SiteLayout file. 
+\f0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+If editing current SiteLayout: \
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls6\ilvl0
+\f1\b0 \cf0 {\listtext	1.	}Template settings overwrite the current SiteLayout.\
+{\listtext	2.	}Existing header and footer elements are kept but may be out of ideal position.\
+{\listtext	3.	}User must reposition the elements for the new SiteLayout\
+{\listtext	4.	}SiteLayout contains current layout\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+positions of header and footer objects are saved from layout to layout. If an element is deleted, however, it is deleted from all layouts?\
+\
+What about templates? Do they have specific elements that they are associated with?\
+\
+Header\
+  Text\
+  Image\
+  Buttons\
+\
+Navigation\
+  Links\
+\
+Footer\
+  Text\
+  Image\
+\
+Background Images\
+  Global\
+  User\
+\
+Background Tiles\
+  Global\
+  User\
+
+\fs24 \
+\
+\
+}

@@ -3,7 +3,7 @@
   <h3 id="myModalLabel">Page</h3>
 </div>
 
-<%= form_for [:admin, @site, @page] do |f| %>
+<%= form_for [:admin, @site, @page], :html => { :class => "form-bootstrap-modal" } do |f| %>
 <div class="modal-body">
   <% if @page.errors.any? %>
   <div id="error_explanation">

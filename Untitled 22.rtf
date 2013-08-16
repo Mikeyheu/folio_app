@@ -1,0 +1,141 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww11960\viewh11920\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 templates\
+\
+sitelayout\
+\
+can we keep the header and footer as seperate models?\
+\
+or combine them with a sitelayout?\
+\
+we could store the element positions with the site layout specifically.\
+\
+in other words we could have the site layout keep the positions of each element in the header and the footer objects\
+\
+template \
+  \
+layout\
+  \
+header\
+  \
+footer\
+  \
+background \
+  image\
+  tile\
+  \
+User selects the template and creates a new layout\
+\
+1. Header, footer and background are created for each site_layout. \
+\
+Elements are not shared between layouts. \
+\
+If you delete an element from one site_layout it still exists in the other site_layout.\
+\
+\
+2. Header, footer and background are seperate from site_layout. \
+\
+Site_layout controls the size and behavior of the header/footer/background but not the contents. \
+\
+If you delete an element from the header or footer then it is deleted for all the site_layouts you have saved. The elements exist across all the different site_layouts. This is great for users switching between templates.\
+If a user switches from one template to another, the elements in the header and the footer are preserved, however, the positions will need to be adjusted and the containers resized so they make sense for the new layout. This is not an issue if we only have left and top settings as the header area would stay the same.\
+\
+Maybe we need to take another look at the way the header and navigation areas interact.\
+\
+Maybe navigation is an object that is placed in a header area? But what about left navigation? Or maybe we choose a format first, i.e. a structure. And then we add elements to the structure. In other words, navigation is an element. Logo is an element. Logo image is an element. And by associating the elements to the each "area" they can be resized and repositioned between templates.\
+\
+The biggest issue is the shifting between templates. Let's say I have a logo placed into my header and then I need to switch to a different structure template. In such a case what happens to the logo position and size? Maybe the size stays the same but what happens if it falls outside of the header area? We will then need to resize and reposition the elements for that specific layout.\
+\
+Is my ideal behavior something smart enough to resize and reposition the logo element?\
+\
+If I am clicking on the previews, are they showing me the different site possibilities based on the original template or my current version as I've set it up?\
+\
+Maybe the easiest thing is to actually just force the users to recreate a layout from scratch each time. In other words, if they want to switch their tempalte they have to reupload their logo and other content. Or the have the option to somehow copy their elements to the new layout\'85\
+\
+If this is the case their elements may look terrible.\
+\
+The user expectation from the way we have set things up is that they would be able to quickly switch between layouts. So what would we need to do in order for this to happen easily? \
+\
+We would need elements that persist throughout templates.\
+  Logo Image\
+  Logo Text\
+  Social Buttons - maybe grouping?\
+  Copyright info\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 Social Icon Module\
+Navigation Module\
+Text Module\
+Image Module\
+HTML Module\
+Logo Module\
+Logotext Module\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0  \
+What about other elements they placed on the page?\
+\
+\
+3. We have a logo text and logo image models that accepts an image upload and text for the logo.\
+\
+Header\
+\
+Logo Text    [ ] Hide   [ ] Show\
+Logo Image    [ ] Hide   [ ] Show\
+\
+User can resize and reposition the logo elements but can not delete them. This way they can persist on all site_layouts, similar to pages.\
+\
+option to persist an element?\
+\
+Select template.\
+Once selected the user must create a new layout in order to chaneg the template. This means they need to upload logos, etc again. Not the end of the world. This actually solves a lot of issues for us as we can prepopulate the sites to looks great no matter what.\
+\
+We can give them the option to copy an existing layout to further tweak.\
+\
+\
+
+\b Typography and colors
+\b0 \
+We switch the Typography from individual control in the toolbar to global styles and simply set them to title, body, h1, etc.\
+\
+\
+The decision I have made is this:\
+\
+User can not change a template once they have selected it. They can create another layout and upload additional elements to their site if they need to. After the layout is created they can further customize the typography, colors, gallery settings, background, etc for that particular layout. They can also copy a layout if they want to and switch between layouts they have created.\
+\
+If we are feeling nice we could give them the option to create a new template and keep their uploaded objects as well.\
+\
+We could also have specific ways to add images from Library vs desktop.\
+\
+Page flow mechanism would be better in terms of autolayout if they did change dimensions but to be honest, it's too complicated and edge case.\
+\
+\
+We can give them the ability to copy elements from another layout: \
+- header elements\
+- footer elements\
+- background\
+- All elements\
+\
+Please note that some repositioning and sizing may be required for these elements when copied into the new template.\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

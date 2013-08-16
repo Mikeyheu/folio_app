@@ -5,8 +5,6 @@ class SitesController < ApplicationController
   	@nav_items = @site.nav_items.includes(:navable).nav_scope
   	@page = @nav_items.first.navable
     render layout: 'site'
-
-
   end
 end
 

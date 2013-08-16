@@ -11,12 +11,13 @@ gem 'jbuilder'
 gem 'acts_as_list'
 gem 'fog'
 gem 'tinymce-rails'
+gem "json"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  # gem 'jquery-fileupload-rails'
+  gem 'jquery-fileupload-rails'
   gem 'bootstrap-sass', '~> 2.2.1.1' 
 end
 
